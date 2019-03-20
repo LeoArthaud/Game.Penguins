@@ -38,13 +38,14 @@ namespace Game.Penguins.AI
         public event EventHandler StateChanged;
 
         /// <summary>
-        /// 
+        /// Add a player to the list Players
         /// </summary>
-        /// <param name="playerName"></param>
-        /// <param name="playerType"></param>
+        /// <param name="playerName">name of the player</param>
+        /// <param name="playerType">type of the player</param>
         public void AddPlayer(string playerName, PlayerType playerType)
         {
-            throw new NotImplementedException();
+            Player player = new Player(playerName, playerType, (PlayerColor)Players.Count);
+            Players.Add(player);
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace Game.Penguins.AI
         /// </summary>
         public void StartGame()
         {
-            throw new NotImplementedException();
+
         }
 
         /// <summary>
