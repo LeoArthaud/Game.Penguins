@@ -12,6 +12,21 @@ namespace Game.Penguins.AI
         public GameBoard()
         {
             Board = new ICell[8,8];
+            List<ICell> listCells = new List<ICell>();
+
+            for (int i = 0; i < 34; i++)
+            {
+                listCells.Add(new Cell(1));
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                listCells.Add(new Cell(2));
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                listCells.Add(new Cell(3));
+            }
+
         }
     }
 }
