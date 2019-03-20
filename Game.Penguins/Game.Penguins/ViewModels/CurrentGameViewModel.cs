@@ -5,6 +5,7 @@ using Game.Penguins.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Game.Penguins.AI;
 
 namespace Game.Penguins.ViewModels
 {
@@ -95,6 +96,7 @@ namespace Game.Penguins.ViewModels
         {
             // TODO : Initialize with the right implementation
             game = (IGame)null;
+            game = new CustomGame();
             
             game.StateChanged += Game_StateChanged;
 
