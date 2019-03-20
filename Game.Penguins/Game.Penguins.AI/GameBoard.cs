@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
@@ -26,7 +27,7 @@ namespace Game.Penguins.AI
             {
                 listCells.Add(new Cell(3));
             }
-
+            var randomListCells = listCells.OrderBy(a => Guid.NewGuid()).ToList();
         }
     }
 }
