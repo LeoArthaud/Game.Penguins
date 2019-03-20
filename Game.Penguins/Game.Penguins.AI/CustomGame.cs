@@ -30,12 +30,19 @@ namespace Game.Penguins.AI
         /// <summary>
         /// 
         /// </summary>
-        public IList<IPlayer> Players { get; }
+        public IList<IPlayer> Players { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public event EventHandler StateChanged;
+
+        public int CountPlayers = 0;
+
+        public CustomGame()
+        {
+            Players = new List<IPlayer>();
+        }
 
         /// <summary>
         /// Add a player to the list Players
@@ -44,8 +51,9 @@ namespace Game.Penguins.AI
         /// <param name="playerType">type of the player</param>
         public void AddPlayer(string playerName, PlayerType playerType)
         {
-            Player player = new Player(playerName, playerType, (PlayerColor)Players.Count);
+            Player player = new Player(playerName, playerType, (PlayerColor)CountPlayers);
             Players.Add(player);
+            CountPlayers++;
         }
 
         /// <summary>
@@ -53,7 +61,7 @@ namespace Game.Penguins.AI
         /// </summary>
         public void StartGame()
         {
-
+            
         }
 
         /// <summary>
