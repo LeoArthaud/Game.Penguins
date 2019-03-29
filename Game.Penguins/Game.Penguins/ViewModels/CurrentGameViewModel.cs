@@ -228,7 +228,7 @@ namespace Game.Penguins.ViewModels
         }
 
         #endregion
-
+        
         public CurrentGameViewModel(IList<ConfigurationPlayer> players)
             : base()
         {
