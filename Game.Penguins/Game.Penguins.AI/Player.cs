@@ -17,6 +17,7 @@ namespace Game.Penguins.AI
 
         public Player(string playerName, PlayerType playerType, PlayerColor playerColor)
         {
+            Identifier = Guid.NewGuid();
             Name = playerName;
             PlayerType = playerType;
             Color = playerColor;

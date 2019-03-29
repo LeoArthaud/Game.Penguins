@@ -42,6 +42,7 @@ namespace Game.Penguins.AI
         public CustomGame()
         {
             Players = new List<IPlayer>();
+            Board = new GameBoard();
         }
 
         /// <summary>
@@ -61,7 +62,24 @@ namespace Game.Penguins.AI
         /// </summary>
         public void StartGame()
         {
-            
+            int numberPenguins = 0;
+            if (CountPlayers == 2)
+            {
+                numberPenguins = 4;
+            }
+            else if (CountPlayers == 3)
+            {
+                numberPenguins = 3;
+            }
+            else if (CountPlayers == 4)
+            {
+                numberPenguins = 2;
+            }
+
+            foreach (Player player in Players)
+            {
+                player.Penguins = numberPenguins;
+            }
         }
 
         /// <summary>
