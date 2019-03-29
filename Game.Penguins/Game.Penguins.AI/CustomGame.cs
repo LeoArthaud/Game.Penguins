@@ -37,6 +37,9 @@ namespace Game.Penguins.AI
         /// </summary>
         public event EventHandler StateChanged;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int CountPlayers = 0;
 
         public CustomGame()
@@ -44,21 +47,23 @@ namespace Game.Penguins.AI
             Players = new List<IPlayer>();
             Board = new GameBoard();
         }
-
+        
         /// <summary>
-        /// Add a player to the list Players
+        /// Add player to list Players
         /// </summary>
-        /// <param name="playerName">name of the player</param>
-        /// <param name="playerType">type of the player</param>
-        public void AddPlayer(string playerName, PlayerType playerType)
+        /// <param name="playerName"></param>
+        /// <param name="playerType"></param>
+        /// <returns>return player which is add</returns>
+        IPlayer IGame.AddPlayer(string playerName, PlayerType playerType)
         {
             Player player = new Player(playerName, playerType, (PlayerColor)CountPlayers);
             Players.Add(player);
             CountPlayers++;
+            return player;
         }
 
         /// <summary>
-        /// 
+        /// COunt the number of penguin of each player
         /// </summary>
         public void StartGame()
         {
@@ -82,33 +87,21 @@ namespace Game.Penguins.AI
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void PlacePinguinManual(int x, int y)
+        public void PlacePenguinManual(int x, int y)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void PlacePinguin()
+        public void PlacePenguin()
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="action"></param>
-        public void MoveManual(IMove action)
+        public void MoveManual(ICell origin, ICell destination)
         {
             throw new NotImplementedException();
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
