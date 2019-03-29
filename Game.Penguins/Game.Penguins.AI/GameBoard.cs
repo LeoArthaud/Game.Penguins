@@ -12,9 +12,13 @@ namespace Game.Penguins.AI
 
         public GameBoard()
         {
+            // Initialisation du tableau
             Board = new ICell[8,8];
+
+            // Initialisation de la liste qui va permettre de mélanger les cases
             List<ICell> listCells = new List<ICell>();
 
+            //Envoie dans la liste des 3 types de cases (1 poisson, 2 poissons et 3 poissons)
             for (int i = 0; i < 34; i++)
             {
                 listCells.Add(new Cell(1));
@@ -27,7 +31,20 @@ namespace Game.Penguins.AI
             {
                 listCells.Add(new Cell(3));
             }
+
+            // Mélange de la liste
             var randomListCells = listCells.OrderBy(a => Guid.NewGuid()).ToList();
+
+            // Envoie des 64 cases dans le tableau
+            int index = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Board[i, j] = randomListCells[index];
+                    index++;
+                }
+            }
         }
     }
 }
