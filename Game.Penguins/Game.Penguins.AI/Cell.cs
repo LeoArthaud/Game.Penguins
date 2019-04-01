@@ -14,12 +14,8 @@ namespace Game.Penguins.AI
 
         public Cell(int fishCount)
         {
-            //Random random = new Random();
-            //CellType = (CellType)random.Next(0, 4);
             FishCount = fishCount;
-            //34 pour 1
-            //20 pour 2
-            //10 pour 3
+            CellType = CellType.Fish;
         }
     }
 }
