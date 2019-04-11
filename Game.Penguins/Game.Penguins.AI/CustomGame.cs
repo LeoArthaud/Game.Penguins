@@ -15,17 +15,17 @@ namespace Game.Penguins.AI
         /// <summary>
         /// 
         /// </summary>
-        public IBoard Board { get; }
+        public IBoard Board { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public NextActionType NextAction { get; }
+        public NextActionType NextAction { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public IPlayer CurrentPlayer { get; }
+        public IPlayer CurrentPlayer { get; set; }
 
         /// <summary>
         /// 
@@ -85,6 +85,14 @@ namespace Game.Penguins.AI
             {
                 player.Penguins = numberPenguins;
             }
+            
+            CurrentPlayer = Players[0];
+            Console.WriteLine("il y a " + Players.Count + "joueurs");
+            NextAction = NextActionType.PlacePenguin;
+
+            EventArgs e = new EventArgs();
+            StateChanged(NextAction, e);
+
         }
 
         public void PlacePenguinManual(int x, int y)

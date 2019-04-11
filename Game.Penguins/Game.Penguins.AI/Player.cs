@@ -10,7 +10,7 @@ namespace Game.Penguins.AI
         public Guid Identifier { get; }
         public PlayerType PlayerType { get; }
         public PlayerColor Color { get; }
-        public string Name { get; }
+        public string Name { get; set; }
         public int Points { get; set; }
         public int Penguins { get; set; }
         public event EventHandler StateChanged;
