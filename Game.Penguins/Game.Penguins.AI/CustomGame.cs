@@ -15,17 +15,17 @@ namespace Game.Penguins.AI
         /// <summary>
         /// 
         /// </summary>
-        public IBoard Board { get; }
+        public IBoard Board { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public NextActionType NextAction { get; }
+        public NextActionType NextAction { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public IPlayer CurrentPlayer { get; }
+        public IPlayer CurrentPlayer { get; set; }
 
         /// <summary>
         /// 
@@ -56,7 +56,7 @@ namespace Game.Penguins.AI
         /// <returns>return player which is add</returns>
         IPlayer IGame.AddPlayer(string playerName, PlayerType playerType)
         {
-            Player player = new Player(playerName, playerType, (PlayerColor)CountPlayers);
+            IPlayer player = new Player(playerName, playerType, (PlayerColor)CountPlayers);
             Players.Add(player);
             CountPlayers++;
             return player;
@@ -85,11 +85,17 @@ namespace Game.Penguins.AI
             {
                 player.Penguins = numberPenguins;
             }
+
+            CurrentPlayer = Players[0];
+            NextAction = NextActionType.PlacePenguin;
         }
 
         public void PlacePenguinManual(int x, int y)
         {
-            throw new NotImplementedException();
+            if (Board.Board[x, y].FishCount == 1)
+            {
+                Board.Board[x, y] = new Cell(1, CellType.FishWithPenguin, new Penguin(CurrentPlayer));
+            }
         }
 
         public void PlacePenguin()
@@ -102,9 +108,6 @@ namespace Game.Penguins.AI
             throw new NotImplementedException();
         }
         
-        /// <summary>
-        /// 
-        /// </summary>
         public void Move()
         {
             throw new NotImplementedException();
