@@ -13,7 +13,7 @@ namespace Game.Penguins.AI
         public GameBoard()
         {
             // Initialisation du tableau
-            Board = new ICell[8,8];
+            Board = new Cell[8,8];
 
             // Initialisation de la liste qui va permettre de mélanger les cases
             List<Cell> listCells = new List<Cell>();

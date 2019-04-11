@@ -63,7 +63,7 @@ namespace Game.Penguins.AI
         }
 
         /// <summary>
-        /// COunt the number of penguin of each player
+        /// Count the number of penguin of each player
         /// </summary>
         public void StartGame()
         {
@@ -81,23 +81,38 @@ namespace Game.Penguins.AI
                 numberPenguins = 2;
             }
 
+            //Attribut à chaque joueur le nombre de penguins et sa couleur
             foreach (Player player in Players)
             {
                 player.Penguins = numberPenguins;
+                player.Color = PlayerColor.Blue;
             }
-            
             CurrentPlayer = Players[0];
-            Console.WriteLine("il y a " + Players.Count + "joueurs");
+
+            //On défini la nouvelle action à faire
             NextAction = NextActionType.PlacePenguin;
-
-            EventArgs e = new EventArgs();
-            StateChanged(NextAction, e);
-
+            StateChanged(this, null);
         }
 
         public void PlacePenguinManual(int x, int y)
         {
-            throw new NotImplementedException();
+            //on rentre dans la boucle si le joueur se place sur 1 seul poisson
+            if (Board.Board[x, y].FishCount == 1)
+            {
+                //On change le type de la cellule choisi
+                Cell cell = (Cell)Board.Board[x, y];
+                cell.CurrentPenguin = new Penguin(CurrentPlayer);
+                cell.CellType = CellType.FishWithPenguin;
+                
+                //On défini la nouvelle action à faire
+                NextAction = NextActionType.MovePenguin;
+
+                //On déclare le changement d'état de la cellule
+                cell.ChangeState();
+            }
+            else {
+                throw new NotImplementedException();
+            }
         }
 
         public void PlacePenguin()

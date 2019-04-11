@@ -8,7 +8,7 @@ namespace Game.Penguins.AI
     public class Cell : ICell
     {
         public CellType CellType { get; set; }
-        public int FishCount { get; }
+        public int FishCount { get; set; }
         public IPenguin CurrentPenguin { get; set; }
         public event EventHandler StateChanged;
 
@@ -23,6 +23,10 @@ namespace Game.Penguins.AI
             FishCount = fishCount;
             CellType = cellType;
             CurrentPenguin = currentPenguin;
+        }
+        public void ChangeState()
+        {
+            StateChanged(this, null);
         }
     }
 }
