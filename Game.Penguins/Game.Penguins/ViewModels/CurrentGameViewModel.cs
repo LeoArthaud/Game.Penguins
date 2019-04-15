@@ -1,13 +1,11 @@
 ﻿using Game.Penguins.Commands;
-using Game.Penguins.Core.Interfaces.Game.Actions;
+using Game.Penguins.Core.CustomGame;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 using Game.Penguins.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using Game.Penguins.AI;
 
 namespace Game.Penguins.ViewModels
 {
