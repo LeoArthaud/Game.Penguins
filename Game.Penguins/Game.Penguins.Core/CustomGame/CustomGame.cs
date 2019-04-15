@@ -108,9 +108,6 @@ namespace Game.Penguins.Core.CustomGame
                 //On déclare le changement d'état de la cellule
                 cell.ChangeState();
             }
-            else {
-                throw new NotImplementedException();
-            }
         }
 
         public void PlacePenguin()
