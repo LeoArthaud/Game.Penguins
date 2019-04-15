@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Game.Penguins.AI;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
-namespace Game.Penguins.AI
+namespace Game.Penguins.Core.CustomGame
 {
     public class GameBoard : IBoard
     {

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
-namespace Game.Penguins.AI
+namespace Game.Penguins.Core.CustomGame
 {
     public class Cell : ICell
     {
@@ -17,13 +15,7 @@ namespace Game.Penguins.AI
             FishCount = fishCount;
             CellType = CellType.Fish;
         }
-
-        public Cell(int fishCount, CellType cellType, IPenguin currentPenguin)
-        {
-            FishCount = fishCount;
-            CellType = cellType;
-            CurrentPenguin = currentPenguin;
-        }
+        
         public void ChangeState()
         {
             StateChanged(this, null);

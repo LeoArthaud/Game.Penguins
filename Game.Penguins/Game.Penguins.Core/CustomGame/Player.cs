@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Game.Penguins.Core.Interfaces.Game.Players;
 
-namespace Game.Penguins.AI
+namespace Game.Penguins.Core.CustomGame
 {
     public class Player : IPlayer
     {

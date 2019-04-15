@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Game.Penguins.Core.Interfaces.Game.Actions;
+using Game.Penguins.AI;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 
-namespace Game.Penguins.AI
+namespace Game.Penguins.Core.CustomGame
 {
     /// <summary>
     /// 
