@@ -106,7 +106,7 @@ namespace Game.Penguins.Core.CustomGame
         public void PlacePenguinManual(int x, int y)
         {
             //on rentre dans la boucle si le joueur se place sur 1 seul poisson
-            if (Board.Board[x, y].FishCount == 1)
+            if (Board.Board[x, y].FishCount == 1 && Board.Board[x,y].CellType != CellType.FishWithPenguin)
             {
                 //On change le type de la cellule choisi
                 Cell cell = (Cell)Board.Board[x, y];
@@ -159,7 +159,7 @@ namespace Game.Penguins.Core.CustomGame
 
         public void MoveManual(ICell origin, ICell destination)
         {
-            if (origin.CellType == CellType.FishWithPenguin && destination.CellType != CellType.Empty)
+            if (origin.CellType == CellType.FishWithPenguin && destination.CellType != CellType.Water)
             {
                 if (origin.CurrentPenguin.Player == CurrentPlayer)
                 {
@@ -173,13 +173,26 @@ namespace Game.Penguins.Core.CustomGame
                     Console.WriteLine(CurrentPlayer.Points);
 
                     //On modifie la cellule d'origine en cellule vide
-                    cellOrigine.CellType = CellType.Empty;
+                    cellOrigine.CellType = CellType.Water;
                     cellOrigine.FishCount = 0;
                     cellOrigine.CurrentPenguin = null;
 
                     //On modifie la cellule de destination en cellule avec un pingouins
                     cellDestination.CellType = CellType.FishWithPenguin;
                     cellDestination.CurrentPenguin = new Penguin(CurrentPlayer);
+
+
+                    // Lorsque le penguin a été déplacé, on change de CurrentPlayer
+                    if (IdPlayer + 1 < CountPlayers)
+                    {
+                        IdPlayer = IdPlayer + 1;
+                        CurrentPlayer = Players[IdPlayer];
+                    }
+                    else
+                    {
+                        IdPlayer = 0;
+                        CurrentPlayer = Players[IdPlayer];
+                    }
 
                     //On actualise tout
                     cellOrigine.ChangeState();
