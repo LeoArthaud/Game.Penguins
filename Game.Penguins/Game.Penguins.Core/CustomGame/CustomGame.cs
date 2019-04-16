@@ -168,8 +168,8 @@ namespace Game.Penguins.Core.CustomGame
                     Cell cellDestination = (Cell)destination;
 
                     //On donne les points au Joueur
-                    Player PlayerCurent = (Player)CurrentPlayer;
-                    PlayerCurent.Points += cellOrigine.FishCount;
+                    Player PlayerCurrent = (Player)CurrentPlayer;
+                    PlayerCurrent.Points += cellOrigine.FishCount;
                     Console.WriteLine(CurrentPlayer.Points);
 
                     //On modifie la cellule d'origine en cellule vide
@@ -197,7 +197,7 @@ namespace Game.Penguins.Core.CustomGame
                     //On actualise tout
                     cellOrigine.ChangeState();
                     cellDestination.ChangeState();
-                    PlayerCurent.ChangeState();
+                    PlayerCurrent.ChangeState();
                     NextAction = NextActionType.MovePenguin;
                 }
             }
