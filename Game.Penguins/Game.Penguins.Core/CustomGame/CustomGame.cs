@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 
@@ -69,17 +70,40 @@ namespace Game.Penguins.Core.CustomGame
             return coordonees;
         }
 
-        public bool CheckDeplacement(Dictionary<string, Coordonees> coordonees)
+        public IList<Coordonees> CheckDeplacement(Dictionary<string, Coordonees> coordonees)
         {
             //get origin
+            int originX = coordonees["origin"].X;
+            int originY = coordonees["origin"].Y;
+
 
             //check angle
+            //if ()
+            //{
+            //}
+            //else if ()
+            //{
+            //}
+            //else if ()
+            //{
+            //}
+            //else if ()
+            //{
+            //}
+            //else if ()
+            //{
+            //}
+            //else if ()
+            //{
+            //}
+
+
 
             //verif pingouins
 
             //
 
-            return true;
+            return null;
         }
 
         /// <summary>
@@ -197,12 +221,17 @@ namespace Game.Penguins.Core.CustomGame
             {
                 if (origin.CurrentPenguin.Player == CurrentPlayer)
                 {
-
                     Dictionary<string, Coordonees> result = GetCoordonees(origin, destination);
                     Console.WriteLine(result["origin"].X + "," + result["origin"].Y);
                     Console.WriteLine(result["destination"].X + "," + result["destination"].Y);
+                    
+                    //
+                    int numberOfResults = CheckDeplacement(result)
+                                            .Where((element) => element.X == result["destination"].X && element.Y == result["destination"].Y)
+                                            .Count();
 
-                    if (CheckDeplacement(result))
+                    //
+                    if (numberOfResults != 0)
                     {
                         //On définit les cellules
                         Cell cellOrigine = (Cell)origin;
