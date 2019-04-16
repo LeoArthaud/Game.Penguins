@@ -40,6 +40,8 @@ namespace Game.Penguins.Core.CustomGame
         /// </summary>
         public int CountPlayers = 0;
 
+        public int IdPlayer;
+
         public CustomGame()
         {
             Players = new List<IPlayer>();
@@ -49,8 +51,8 @@ namespace Game.Penguins.Core.CustomGame
         /// <summary>
         /// Add player to list Players
         /// </summary>
-        /// <param name="playerName"></param>
-        /// <param name="playerType"></param>
+        /// <param name="playerName">Nom du joueur</param>
+        /// <param name="playerType">Type du joueur (human ou AI)</param>
         /// <returns>return player which is add</returns>
         IPlayer IGame.AddPlayer(string playerName, PlayerType playerType)
         {
@@ -65,6 +67,7 @@ namespace Game.Penguins.Core.CustomGame
         /// </summary>
         public void StartGame()
         {
+            // On détermine le nombre de penguin par joueur
             int numberPenguins = 0;
             if (CountPlayers == 2)
             {
@@ -83,15 +86,23 @@ namespace Game.Penguins.Core.CustomGame
             foreach (Player player in Players)
             {
                 player.Penguins = numberPenguins;
-                player.Color = PlayerColor.Blue;
             }
-            CurrentPlayer = Players[0];
+
+            // Le premier joueur est choisi aléatoirement
+            Random random = new Random();
+            IdPlayer = random.Next(0, Players.Count);
+            CurrentPlayer = Players[IdPlayer];
 
             //On défini la nouvelle action à faire
             NextAction = NextActionType.PlacePenguin;
             StateChanged(this, null);
         }
 
+        /// <summary>
+        /// Le joueur place un penguin manuellement sur le plateau
+        /// </summary>
+        /// <param name="x">La position x de la case choisie</param>
+        /// <param name="y">La position y de la case choisie</param>
         public void PlacePenguinManual(int x, int y)
         {
             //on rentre dans la boucle si le joueur se place sur 1 seul poisson
@@ -107,6 +118,37 @@ namespace Game.Penguins.Core.CustomGame
 
                 //On déclare le changement d'état de la cellule
                 cell.ChangeState();
+
+                foreach (Player player in Players)
+                {
+                    if (player == CurrentPlayer)
+                    {
+                        player.Penguins = player.Penguins - 1;
+                    }
+                }
+
+                // Lorsque le penguin a été posé, on change de CurrentPlayer
+                if (IdPlayer + 1 < CountPlayers)
+                {
+                    IdPlayer = IdPlayer + 1;
+                    CurrentPlayer = Players[IdPlayer];
+                }
+                else
+                {
+                    IdPlayer = 0;
+                    CurrentPlayer = Players[IdPlayer];
+                }
+
+                // On défini la nouvelle action à faire
+                if (CurrentPlayer.Penguins == 0)
+                {
+                    NextAction = NextActionType.MovePenguin;
+                }
+                else
+                {
+                    NextAction = NextActionType.PlacePenguin;
+                }
+                StateChanged(this, null);
             }
         }
 
