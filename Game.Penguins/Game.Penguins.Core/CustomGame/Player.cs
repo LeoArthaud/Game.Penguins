@@ -20,6 +20,11 @@ namespace Game.Penguins.Core.CustomGame
             PlayerType = playerType;
             Color = playerColor;
         }
-        
+
+        public void ChangeState()
+        {
+            StateChanged(this, null);
+        }
+
     }
 }

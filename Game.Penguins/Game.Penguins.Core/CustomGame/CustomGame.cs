@@ -117,7 +117,35 @@ namespace Game.Penguins.Core.CustomGame
 
         public void MoveManual(ICell origin, ICell destination)
         {
-            throw new NotImplementedException();
+            if (origin.CellType == CellType.FishWithPenguin && destination.CellType != CellType.Empty)
+            {
+                if (origin.CurrentPenguin.Player == CurrentPlayer)
+                {
+                    //On définit les cellules
+                    Cell cellOrigine = (Cell)origin;
+                    Cell cellDestination = (Cell)destination;
+
+                    //On donne les points au Joueur
+                    Player PlayerCurent = (Player)CurrentPlayer;
+                    PlayerCurent.Points += cellOrigine.FishCount;
+                    Console.WriteLine(CurrentPlayer.Points);
+
+                    //On modifie la cellule d'origine en cellule vide
+                    cellOrigine.CellType = CellType.Empty;
+                    cellOrigine.FishCount = 0;
+                    cellOrigine.CurrentPenguin = null;
+
+                    //On modifie la cellule de destination en cellule avec un pingouins
+                    cellDestination.CellType = CellType.FishWithPenguin;
+                    cellDestination.CurrentPenguin = new Penguin(CurrentPlayer);
+
+                    //On actualise tout
+                    cellOrigine.ChangeState();
+                    cellDestination.ChangeState();
+                    PlayerCurent.ChangeState();
+                    NextAction = NextActionType.MovePenguin;
+                }
+            }
         }
         
         /// <summary>
