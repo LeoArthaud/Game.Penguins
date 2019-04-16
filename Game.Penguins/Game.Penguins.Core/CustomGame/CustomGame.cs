@@ -47,7 +47,41 @@ namespace Game.Penguins.Core.CustomGame
             Players = new List<IPlayer>();
             Board = new GameBoard();
         }
-        
+
+        public Dictionary<string, Coordonees> GetCoordonees(ICell origin, ICell destination)
+        {
+            Dictionary<string, Coordonees> coordonees = new Dictionary<string, Coordonees>();
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (origin == Board.Board[i, j])
+                    {
+
+                        coordonees.Add("origin", new Coordonees(j,i) );
+                    }
+                    if (destination == Board.Board[i, j])
+                    {
+                        coordonees.Add("destination", new Coordonees(j, i));
+                    }
+                }
+            }
+            return coordonees;
+        }
+
+        public bool CheckDeplacement(Dictionary<string, Coordonees> coordonees)
+        {
+            //get origin
+
+            //check angle
+
+            //verif pingouins
+
+            //
+
+            return true;
+        }
+
         /// <summary>
         /// Add player to list Players
         /// </summary>
@@ -163,42 +197,50 @@ namespace Game.Penguins.Core.CustomGame
             {
                 if (origin.CurrentPenguin.Player == CurrentPlayer)
                 {
-                    //On définit les cellules
-                    Cell cellOrigine = (Cell)origin;
-                    Cell cellDestination = (Cell)destination;
 
-                    //On donne les points au Joueur
-                    Player PlayerCurrent = (Player)CurrentPlayer;
-                    PlayerCurrent.Points += cellOrigine.FishCount;
-                    Console.WriteLine(CurrentPlayer.Points);
+                    Dictionary<string, Coordonees> result = GetCoordonees(origin, destination);
+                    Console.WriteLine(result["origin"].X + "," + result["origin"].Y);
+                    Console.WriteLine(result["destination"].X + "," + result["destination"].Y);
 
-                    //On modifie la cellule d'origine en cellule vide
-                    cellOrigine.CellType = CellType.Water;
-                    cellOrigine.FishCount = 0;
-                    cellOrigine.CurrentPenguin = null;
-
-                    //On modifie la cellule de destination en cellule avec un pingouins
-                    cellDestination.CellType = CellType.FishWithPenguin;
-                    cellDestination.CurrentPenguin = new Penguin(CurrentPlayer);
-
-
-                    // Lorsque le penguin a été déplacé, on change de CurrentPlayer
-                    if (IdPlayer + 1 < CountPlayers)
+                    if (CheckDeplacement(result))
                     {
-                        IdPlayer = IdPlayer + 1;
-                        CurrentPlayer = Players[IdPlayer];
-                    }
-                    else
-                    {
-                        IdPlayer = 0;
-                        CurrentPlayer = Players[IdPlayer];
-                    }
+                        //On définit les cellules
+                        Cell cellOrigine = (Cell)origin;
+                        Cell cellDestination = (Cell)destination;
 
-                    //On actualise tout
-                    cellOrigine.ChangeState();
-                    cellDestination.ChangeState();
-                    PlayerCurrent.ChangeState();
-                    NextAction = NextActionType.MovePenguin;
+                        //On donne les points au Joueur
+                        Player PlayerCurrent = (Player)CurrentPlayer;
+                        PlayerCurrent.Points += cellOrigine.FishCount;
+                        Console.WriteLine(CurrentPlayer.Points);
+
+                        //On modifie la cellule d'origine en cellule vide
+                        cellOrigine.CellType = CellType.Water;
+                        cellOrigine.FishCount = 0;
+                        cellOrigine.CurrentPenguin = null;
+
+                        //On modifie la cellule de destination en cellule avec un pingouins
+                        cellDestination.CellType = CellType.FishWithPenguin;
+                        cellDestination.CurrentPenguin = new Penguin(CurrentPlayer);
+
+
+                        // Lorsque le penguin a été déplacé, on change de CurrentPlayer
+                        if (IdPlayer + 1 < CountPlayers)
+                        {
+                            IdPlayer = IdPlayer + 1;
+                            CurrentPlayer = Players[IdPlayer];
+                        }
+                        else
+                        {
+                            IdPlayer = 0;
+                            CurrentPlayer = Players[IdPlayer];
+                        }
+
+                        //On actualise tout
+                        cellOrigine.ChangeState();
+                        cellDestination.ChangeState();
+                        PlayerCurrent.ChangeState();
+                        NextAction = NextActionType.MovePenguin;
+                    }
                 }
             }
         }
