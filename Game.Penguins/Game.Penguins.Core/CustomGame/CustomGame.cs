@@ -72,40 +72,78 @@ namespace Game.Penguins.Core.CustomGame
 
         public IList<Coordonees> CheckDeplacement(Dictionary<string, Coordonees> coordonees)
         {
-            //get origin
-            int originX = coordonees["origin"].X;
-            int originY = coordonees["origin"].Y;
-
-
-            //check angle
-            //if ()
-            //{
-            //}
-            //else if ()
-            //{
-            //}
-            //else if ()
-            //{
-            //}
-            //else if ()
-            //{
-            //}
-            //else if ()
-            //{
-            //}
-            //else if ()
-            //{
-            //}
-
-
-
-            //verif pingouins
-
-            //
-
-            return null;
+            IList<Coordonees> result = new List<Coordonees>();
+            for (int i = 0; i < 6; i++)
+            {
+                var list = CheckCase((DirectionType)i, coordonees);
+                if (list != null)
+                {
+                    foreach (var element in list)
+                    {
+                        result.Add(element);
+                    }
+                }
+                
+            }
+            
+            return result;
         }
 
+        public IList<Coordonees> CheckCase(DirectionType directionType, Dictionary<string, Coordonees> coordonees)
+        {
+            IList<Coordonees> result = new List<Coordonees>();
+            if (directionType == DirectionType.Droite)
+            {
+                Console.WriteLine("Droite");
+                int count = coordonees["destination"].Y - coordonees["origin"].Y;
+                int increment = 1;
+                while (increment <= count)
+                {
+                    Console.WriteLine("***");
+                    Console.WriteLine("Y : " + (coordonees["origin"].X) + ", X : " + (coordonees["origin"].Y + increment));
+                    Console.WriteLine(Board.Board[coordonees["origin"].X, coordonees["origin"].Y + increment].CellType);
+                    Console.WriteLine("***");
+                    if (Board.Board[coordonees["origin"].X, coordonees["origin"].Y + increment].CellType == CellType.Fish)
+                    {
+                        result.Add(new Coordonees(coordonees["origin"].X, coordonees["origin"].Y + increment));
+                        Console.WriteLine("Y : " + (coordonees["origin"].X) + ", X : " + (coordonees["origin"].Y + increment));
+                    }
+                    increment++;
+                }
+            }else if (directionType == DirectionType.Gauche)
+            {
+                Console.WriteLine("Gauche");
+                int count = coordonees["origin"].Y - coordonees["destination"].Y;
+                int increment = 1;
+                while (increment <= count)
+                {
+                    Console.WriteLine("***");
+                    Console.WriteLine("Y : " + (coordonees["origin"].X) + ", X : " + (coordonees["origin"].Y - increment));
+                    Console.WriteLine(Board.Board[coordonees["origin"].X, coordonees["origin"].Y - increment].CellType);
+                    Console.WriteLine("***");
+                    if (Board.Board[coordonees["origin"].X, coordonees["origin"].Y - increment].CellType == CellType.Fish)
+                    {
+                        result.Add(new Coordonees(coordonees["origin"].X, coordonees["origin"].Y - increment));
+                        Console.WriteLine("Y : " + (coordonees["origin"].X) + ", X : " + (coordonees["origin"].Y - increment));
+                    }
+                    increment++;
+                }
+            }
+            else if (directionType == DirectionType.BasGauche)
+            {
+                
+            }else if (directionType == DirectionType.BasDroite)
+            {
+                
+            }else if (directionType == DirectionType.HautGauche)
+            {
+                
+            }else if (directionType == DirectionType.HautDroite)
+            {
+                
+            }
+            return result;
+        }
         /// <summary>
         /// Add player to list Players
         /// </summary>
@@ -224,14 +262,14 @@ namespace Game.Penguins.Core.CustomGame
                     Dictionary<string, Coordonees> result = GetCoordonees(origin, destination);
                     Console.WriteLine(result["origin"].X + "," + result["origin"].Y);
                     Console.WriteLine(result["destination"].X + "," + result["destination"].Y);
-                    
-                    //
-                    int numberOfResults = CheckDeplacement(result)
-                                            .Where((element) => element.X == result["destination"].X && element.Y == result["destination"].Y)
-                                            .Count();
+                    Console.WriteLine("-----------------");
 
-                    //
-                    if (numberOfResults != 0)
+                    int numberOfResults = CheckDeplacement(result)
+                                            .Count(element => element.X == result["destination"].X && element.Y == result["destination"].Y);
+
+                    Console.WriteLine("numberOfResults : " + numberOfResults);
+
+                    if (numberOfResults == 1)
                     {
                         //On définit les cellules
                         Cell cellOrigine = (Cell)origin;
@@ -240,7 +278,7 @@ namespace Game.Penguins.Core.CustomGame
                         //On donne les points au Joueur
                         Player PlayerCurrent = (Player)CurrentPlayer;
                         PlayerCurrent.Points += cellOrigine.FishCount;
-                        Console.WriteLine(CurrentPlayer.Points);
+                        //Console.WriteLine(CurrentPlayer.Points);
 
                         //On modifie la cellule d'origine en cellule vide
                         cellOrigine.CellType = CellType.Water;
