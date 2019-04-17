@@ -250,7 +250,62 @@ namespace Game.Penguins.Core.CustomGame
 
         public void PlacePenguin()
         {
-            throw new NotImplementedException();
+            Random rnd = new Random();
+            int randomX;
+            int randomY;
+
+            randomX = rnd.Next(0, 8); //7
+            randomY = rnd.Next(0, 8); //5
+            // 7, 5
+
+            while (Board.Board[randomX, randomY].FishCount != 1 || Board.Board[randomX, randomY].CellType == CellType.FishWithPenguin)
+            {
+                randomX = rnd.Next(0, 8); //7
+                randomY = rnd.Next(0, 8); //5
+            }
+
+            //On change le type de la cellule choisi
+            Cell cell = (Cell)Board.Board[randomX, randomY];
+            cell.CurrentPenguin = new Penguin(CurrentPlayer);
+            cell.CellType = CellType.FishWithPenguin;
+
+            //On défini la nouvelle action à faire
+            NextAction = NextActionType.MovePenguin;
+
+            //On déclare le changement d'état de la cellule
+            cell.ChangeState();
+
+            foreach (Player player in Players)
+            {
+                if (player == CurrentPlayer)
+                {
+                    player.Penguins = player.Penguins - 1;
+                }
+            }
+
+            // Lorsque le penguin a été posé, on change de CurrentPlayer
+            if (IdPlayer + 1 < CountPlayers)
+            {
+                IdPlayer = IdPlayer + 1;
+                CurrentPlayer = Players[IdPlayer];
+            }
+            else
+            {
+                IdPlayer = 0;
+                CurrentPlayer = Players[IdPlayer];
+            }
+
+            // On défini la nouvelle action à faire
+            if (CurrentPlayer.Penguins == 0)
+            {
+                NextAction = NextActionType.MovePenguin;
+            }
+            else
+            {
+                NextAction = NextActionType.PlacePenguin;
+            }
+            StateChanged(this, null);
+
         }
 
         public void MoveManual(ICell origin, ICell destination)
