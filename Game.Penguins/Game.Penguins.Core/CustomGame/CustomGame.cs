@@ -81,15 +81,14 @@ namespace Game.Penguins.Core.CustomGame
             for (int i = 0; i < 6; i++)
             {
                 IList<Coordonees> list;
-                if (i >= 0 && i < 2)
-                {
-                    list = CheckCaseRightLeft((DirectionType)i, coordonees);
-                }
-                else
-                {
-                    list = CheckCaseDiago((DirectionType)i, coordonees);
-                }
                 
+                
+                list = i >= 0 && i < 2
+                    // Appelle la fonction CheckCaseRightLeft avec DirectionType.Droite puis DirectionType.Gauche
+                    ? CheckCaseRightLeft((DirectionType) i, coordonees)
+                    // Appelle la fonction CheckCaseDiago avec DirectionType.BasGauche puis DirectionType.BasDroite, puis DirectionType.HautDroite, puis DirectionType.HautGauche
+                    : CheckCaseDiago((DirectionType) i, coordonees);
+
                 if (list != null)
                 {
                     foreach (var element in list)
