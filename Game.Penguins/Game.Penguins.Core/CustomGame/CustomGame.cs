@@ -94,8 +94,7 @@ namespace Game.Penguins.Core.CustomGame
                     }
                 }
             }
-
-            Console.WriteLine("--------");
+            
             return result;
         }
 
@@ -115,8 +114,6 @@ namespace Game.Penguins.Core.CustomGame
 
             if (x < 0 && y > 0 && directionType == DirectionType.BasGauche || x > 0 && y > 0 && directionType == DirectionType.BasDroite || x < 0 && y < 0 && directionType == DirectionType.HautGauche || x > 0 && y < 0 && directionType == DirectionType.HautDroite)
             {
-                Console.WriteLine(directionType);
-
                 // si x ou y est négatif alors on les transforme en positif
                 x = x < 0 ? x * -1 : x;
                 y = y < 0 ? y * -1 : y;
@@ -146,7 +143,6 @@ namespace Game.Penguins.Core.CustomGame
                         yDest = coordonees["origin"].Y + incrementY;
                         xDest = coordonees["origin"].X - incrementX;
                         result.Add(new Coordonees(xDest, yDest));
-                        Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
                     }
                     // si le penguin veut aller en BasDroite et qu'il n'y a pas d'obstacle
                     else if (directionType == DirectionType.BasDroite && Board.Board[coordonees["origin"].X + incrementX, coordonees["origin"].Y + incrementY].CellType == CellType.Fish)
@@ -155,7 +151,6 @@ namespace Game.Penguins.Core.CustomGame
                         yDest = coordonees["origin"].Y + incrementY;
                         xDest = coordonees["origin"].X + incrementX;
                         result.Add(new Coordonees(xDest, yDest));
-                        Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
                     }
                     // si le penguin veut aller en HautGauche et qu'il n'y a pas d'obstacle
                     else if (directionType == DirectionType.HautGauche && Board.Board[coordonees["origin"].X - incrementX, coordonees["origin"].Y - incrementY].CellType == CellType.Fish)
@@ -164,7 +159,6 @@ namespace Game.Penguins.Core.CustomGame
                         yDest = coordonees["origin"].Y - incrementY;
                         xDest = coordonees["origin"].X - incrementX;
                         result.Add(new Coordonees(xDest, yDest));
-                        Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
                     }
                     // si le penguin veut aller en HautDroite et qu'il n'y a pas d'obstacle
                     else if (directionType == DirectionType.HautDroite && Board.Board[coordonees["origin"].X + incrementX, coordonees["origin"].Y - incrementY].CellType == CellType.Fish)
@@ -173,7 +167,6 @@ namespace Game.Penguins.Core.CustomGame
                         yDest = coordonees["origin"].Y - incrementY;
                         xDest = coordonees["origin"].X + incrementX;
                         result.Add(new Coordonees(xDest, yDest));
-                        Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
                     }
                     // si un obstacle se trouve sur le chemin du penguin
                     else
@@ -205,8 +198,6 @@ namespace Game.Penguins.Core.CustomGame
             //si elle est positive alors le penguin veut aller à droite sinon il veut aller à gauche
             if (x > 0 && directionType == DirectionType.Droite || x < 0 && directionType == DirectionType.Gauche)
             {
-                Console.WriteLine(directionType);
-
                 // si la distance est négative alors on la met en positive
                 if (x < 0)
                 {
@@ -222,14 +213,12 @@ namespace Game.Penguins.Core.CustomGame
                     {
                         // alors on ajoute la case possible au résultat
                         result.Add(new Coordonees(coordonees["origin"].X + increment, coordonees["origin"].Y));
-                        Console.WriteLine("Y : " + (coordonees["origin"].X + increment) + ", X : " + (coordonees["origin"].Y));
                     }
                     // si le penguin veut aller à gauche et qu'il n'y a pas d'obstacle
                     else if (directionType == DirectionType.Gauche && Board.Board[coordonees["origin"].X - increment, coordonees["origin"].Y].CellType == CellType.Fish)
                     {
                         // alors on ajoute la case possible au résultat
                         result.Add(new Coordonees(coordonees["origin"].X - increment, coordonees["origin"].Y));
-                        Console.WriteLine("Y : " + (coordonees["origin"].X - increment) + ", X : " + (coordonees["origin"].Y));
                     }
                     // si un obstacle se trouve sur le chemin du penguin
                     else
@@ -428,16 +417,10 @@ namespace Game.Penguins.Core.CustomGame
                 {
                     Dictionary<string, Coordonees> result = GetCoordonees(origin, destination);
 
-                    Console.WriteLine("-----------------");
-                    Console.WriteLine("ORIGIN = Y : " + result["origin"].X + ", X : " + result["origin"].Y);
-                    Console.WriteLine("DESTINATION = Y : " + result["destination"].X + ", X : " + result["destination"].Y);
-                    Console.WriteLine("-----------------");
-
+                    // Vérifie qu'il n'y a pas d'obstacles entre la case destination et origine
                     int numberOfResults = CheckDeplacement(result)
                                             .Count(element => element.X == result["destination"].X && element.Y == result["destination"].Y);
                     
-                    Console.WriteLine("numberOfResults : " + numberOfResults);
-
                     if (numberOfResults == 1)
                     {
                         //On définit les cellules
@@ -447,7 +430,6 @@ namespace Game.Penguins.Core.CustomGame
                         //On donne les points au Joueur
                         Player PlayerCurrent = (Player)CurrentPlayer;
                         PlayerCurrent.Points += cellOrigine.FishCount;
-                        //Console.WriteLine(CurrentPlayer.Points);
 
                         //On modifie la cellule d'origine en cellule vide
                         cellOrigine.CellType = CellType.Water;
