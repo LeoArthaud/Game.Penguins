@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
@@ -75,7 +76,16 @@ namespace Game.Penguins.Core.CustomGame
             IList<Coordonees> result = new List<Coordonees>();
             for (int i = 0; i < 6; i++)
             {
-                var list = CheckCase((DirectionType)i, coordonees);
+                IList<Coordonees> list;
+                if (i >= 0 && i < 2)
+                {
+                    list = CheckCaseRightLeft((DirectionType)i, coordonees);
+                }
+                else
+                {
+                    list = CheckCaseDiago((DirectionType)i, coordonees);
+                }
+                
                 if (list != null)
                 {
                     foreach (var element in list)
@@ -83,100 +93,105 @@ namespace Game.Penguins.Core.CustomGame
                         result.Add(element);
                     }
                 }
-                
             }
+
             Console.WriteLine("--------");
             return result;
         }
 
-        public IList<Coordonees> CheckCase(DirectionType directionType, Dictionary<string, Coordonees> coordonees)
+        public IList<Coordonees> CheckCaseDiago(DirectionType directionType, Dictionary<string, Coordonees> coordonees)
         {
             IList<Coordonees> result = new List<Coordonees>();
-            if (directionType == DirectionType.Droite)
+            var x = coordonees["destination"].X - coordonees["origin"].X;
+            var y = coordonees["destination"].Y - coordonees["origin"].Y;
+            if (x < 0 && y > 0 && directionType == DirectionType.BasGauche || x > 0 && y > 0 && directionType == DirectionType.BasDroite || x < 0 && y < 0 && directionType == DirectionType.HautGauche || x > 0 && y < 0 && directionType == DirectionType.HautDroite)
             {
-                var x = coordonees["destination"].X - coordonees["origin"].X;
-                if (x > 0)
-                {
-                    Console.WriteLine("Droite");
-                    int increment = 1;
-                    while (increment <= x)
-                    {
-                        if (Board.Board[coordonees["origin"].X + increment, coordonees["origin"].Y].CellType == CellType.Fish)
-                        {
-                            result.Add(new Coordonees(coordonees["origin"].X + increment, coordonees["origin"].Y));
-                            Console.WriteLine("Y : " + (coordonees["origin"].X + increment) + ", X : " + (coordonees["origin"].Y));
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                        increment++;
-                    }
-                }
-                
-            }else if (directionType == DirectionType.Gauche)
-            {
+                Console.WriteLine(directionType);
 
-                var x = coordonees["destination"].X - coordonees["origin"].X;
+                x = x < 0 ? x * -1 : x;
+                y = y < 0 ? y * -1 : y;
+
+                int count = x - y > 0 ? x : y;
+                
+                int incrementX = 0;
+                int incrementY = 1;
+
+                int xDest = coordonees["origin"].X;
+                int yDest = coordonees["origin"].Y;
+                while (incrementY <= count)
+                {
+                    if (yDest % 2 == 0)
+                    {
+                        incrementX++;
+                    }
+
+                    if (directionType == DirectionType.BasGauche && Board.Board[coordonees["origin"].X - incrementX, coordonees["origin"].Y + incrementY].CellType == CellType.Fish)
+                    {
+                        yDest = coordonees["origin"].Y + incrementY;
+                        xDest = coordonees["origin"].X - incrementX;
+                        result.Add(new Coordonees(xDest, yDest));
+                        Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
+                    }else if (directionType == DirectionType.BasDroite && Board.Board[coordonees["origin"].X + incrementX, coordonees["origin"].Y + incrementY].CellType == CellType.Fish)
+                    {
+                        yDest = coordonees["origin"].Y + incrementY;
+                        xDest = coordonees["origin"].X + incrementX;
+                        result.Add(new Coordonees(xDest, yDest));
+                        Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
+                    }
+                    else if (directionType == DirectionType.HautGauche && Board.Board[coordonees["origin"].X - incrementX, coordonees["origin"].Y - incrementY].CellType == CellType.Fish)
+                    {
+                        yDest = coordonees["origin"].Y - incrementY;
+                        xDest = coordonees["origin"].X - incrementX;
+                        result.Add(new Coordonees(xDest, yDest));
+                        Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
+                    }
+                    else if (directionType == DirectionType.HautDroite && Board.Board[coordonees["origin"].X + incrementX, coordonees["origin"].Y - incrementY].CellType == CellType.Fish)
+                    {
+                        yDest = coordonees["origin"].Y - incrementY;
+                        xDest = coordonees["origin"].X + incrementX;
+                        result.Add(new Coordonees(xDest, yDest));
+                        Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                    incrementY++;
+                }
+            }
+
+            return result;
+        }
+        public IList<Coordonees> CheckCaseRightLeft(DirectionType directionType, Dictionary<string, Coordonees> coordonees)
+        {
+            IList<Coordonees> result = new List<Coordonees>();
+            var x = coordonees["destination"].X - coordonees["origin"].X;
+            if (x > 0 && directionType == DirectionType.Droite || x < 0 && directionType == DirectionType.Gauche)
+            {
+                Console.WriteLine(directionType);
+                int increment = 1;
                 if (x < 0)
                 {
-                    Console.WriteLine("Gauche");
-                    int increment = 1;
-                    while (increment <= (x*-1))
+                    x = x * -1;
+                }
+                while (increment <= x)
+                {
+                    if (directionType == DirectionType.Droite && Board.Board[coordonees["origin"].X + increment, coordonees["origin"].Y].CellType == CellType.Fish)
                     {
-                        if (Board.Board[coordonees["origin"].X - increment, coordonees["origin"].Y].CellType == CellType.Fish)
-                        {
-                            result.Add(new Coordonees(coordonees["origin"].X - increment, coordonees["origin"].Y));
-                            Console.WriteLine("Y : " + (coordonees["origin"].X - increment) + ", X : " + (coordonees["origin"].Y));
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                        increment++;
+                        result.Add(new Coordonees(coordonees["origin"].X + increment, coordonees["origin"].Y));
+                        Console.WriteLine("Y : " + (coordonees["origin"].X + increment) + ", X : " + (coordonees["origin"].Y));
+                    }else if (directionType == DirectionType.Gauche && Board.Board[coordonees["origin"].X - increment, coordonees["origin"].Y].CellType == CellType.Fish)
+                    {
+                        result.Add(new Coordonees(coordonees["origin"].X - increment, coordonees["origin"].Y));
+                        Console.WriteLine("Y : " + (coordonees["origin"].X - increment) + ", X : " + (coordonees["origin"].Y));
                     }
+                    else
+                    {
+                        return null;
+                    }
+                    increment++;
                 }
-                
-            }
-            else if (directionType == DirectionType.BasGauche)
-            {
-                var x = coordonees["destination"].X - coordonees["origin"].X;
-                var y = coordonees["destination"].Y - coordonees["origin"].Y;
-                if (x > 0 && y < 0)
-                {
-                    Console.WriteLine("BasGauche");
-                }
-            }
-            else if (directionType == DirectionType.BasDroite)
-            {
-                
-                var x = coordonees["destination"].X - coordonees["origin"].X;
-                var y = coordonees["destination"].Y - coordonees["origin"].Y;
-                if (x > 0 && y > 0)
-                {
-                    Console.WriteLine("BasDroite");
-                }
-            }
-            else if (directionType == DirectionType.HautGauche)
-            {
-                
-                var x = coordonees["destination"].X - coordonees["origin"].X;
-                var y = coordonees["destination"].Y - coordonees["origin"].Y;
-                if (x < 0 && y < 0)
-                {
-                    Console.WriteLine("HautGauche");
-                }
-            }
-            else if (directionType == DirectionType.HautDroite)
-            {
-                
-                var x = coordonees["destination"].X - coordonees["origin"].X;
-                var y = coordonees["destination"].Y - coordonees["origin"].Y;
-                if (x < 0 && y > 0)
-                {
-                    Console.WriteLine("HautDroite");
-                }
-
             }
             return result;
         }
