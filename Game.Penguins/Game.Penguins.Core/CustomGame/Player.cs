@@ -13,12 +13,11 @@ namespace Game.Penguins.Core.CustomGame
         public int Penguins { get; set; }
         public event EventHandler StateChanged;
 
-        public Player(string playerName, PlayerType playerType, PlayerColor playerColor)
+        public Player(string playerName, PlayerType playerType)
         {
             Identifier = Guid.NewGuid();
             Name = playerName;
             PlayerType = playerType;
-            Color = playerColor;
         }
 
         public void ChangeState()

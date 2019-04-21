@@ -80,10 +80,7 @@ namespace Game.Penguins.Core.CustomGame
             IList<Coordonees> result = new List<Coordonees>();
             for (int i = 0; i < 6; i++)
             {
-                IList<Coordonees> list;
-                
-                
-                list = i >= 0 && i < 2
+                IList<Coordonees> list = i >= 0 && i < 2
                     // Appelle la fonction CheckCaseRightLeft avec DirectionType.Droite puis DirectionType.Gauche
                     ? CheckCaseRightLeft((DirectionType) i, coordonees)
                     // Appelle la fonction CheckCaseDiago avec DirectionType.BasGauche puis DirectionType.BasDroite, puis DirectionType.HautDroite, puis DirectionType.HautGauche
@@ -254,7 +251,7 @@ namespace Game.Penguins.Core.CustomGame
         /// <returns>return player which is add</returns>
         IPlayer IGame.AddPlayer(string playerName, PlayerType playerType)
         {
-            Player player = new Player(playerName, playerType, (PlayerColor)CountPlayers);
+            Player player = new Player(playerName, playerType);
             Players.Add(player);
             CountPlayers++;
             return player;
@@ -280,14 +277,27 @@ namespace Game.Penguins.Core.CustomGame
                 numberPenguins = 2;
             }
 
+            Random random = new Random();
+            List<int> colorOfPlayer = new List<int>();
+
             //Attribut à chaque joueur le nombre de penguins et sa couleur
             foreach (Player player in Players)
             {
+                //number of penguin
                 player.Penguins = numberPenguins;
+
+                //color of player
+                int color = random.Next(0, 4);
+                while (colorOfPlayer.Contains(color))
+                {
+                    color = random.Next(0, 4);
+                }
+                
+                player.Color = (PlayerColor)color;
+                colorOfPlayer.Add(color);
             }
 
             // Le premier joueur est choisi aléatoirement
-            Random random = new Random();
             IdPlayer = random.Next(0, Players.Count);
             CurrentPlayer = Players[IdPlayer];
 
