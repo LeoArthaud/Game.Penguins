@@ -70,7 +70,11 @@ namespace Game.Penguins.Core.CustomGame
             }
             return coordonees;
         }
-
+        /// <summary>
+        /// Check move of the penguin
+        /// </summary>
+        /// <param name="coordonees"></param>
+        /// <returns></returns>
         public IList<Coordonees> CheckDeplacement(Dictionary<string, Coordonees> coordonees)
         {
             IList<Coordonees> result = new List<Coordonees>();
@@ -99,18 +103,29 @@ namespace Game.Penguins.Core.CustomGame
             return result;
         }
 
+        /// <summary>
+        /// Check if the penguin can move in diago
+        /// </summary>
+        /// <param name="directionType"></param>
+        /// <param name="coordonees"></param>
+        /// <returns></returns>
         public IList<Coordonees> CheckCaseDiago(DirectionType directionType, Dictionary<string, Coordonees> coordonees)
         {
             IList<Coordonees> result = new List<Coordonees>();
+
+            // on vérifie que le penguin veut bien aller en diagonale
             var x = coordonees["destination"].X - coordonees["origin"].X;
             var y = coordonees["destination"].Y - coordonees["origin"].Y;
+
             if (x < 0 && y > 0 && directionType == DirectionType.BasGauche || x > 0 && y > 0 && directionType == DirectionType.BasDroite || x < 0 && y < 0 && directionType == DirectionType.HautGauche || x > 0 && y < 0 && directionType == DirectionType.HautDroite)
             {
                 Console.WriteLine(directionType);
 
+                // si x ou y est négatif alors on les transforme en positif
                 x = x < 0 ? x * -1 : x;
                 y = y < 0 ? y * -1 : y;
 
+                // on récupère la distance entre la case d'origine et de destination
                 int count = x - y > 0 ? x : y;
                 
                 int incrementX = 0;
@@ -118,42 +133,56 @@ namespace Game.Penguins.Core.CustomGame
 
                 int xDest = coordonees["origin"].X;
                 int yDest = coordonees["origin"].Y;
+
+                // on va récupérer toutes les cases entre l'origine et la destination si il n'y a pas d'obstacles
                 while (incrementY <= count)
                 {
+                    // si y est un modulo 2 alors on incrémente de 1
                     if (yDest % 2 == 0)
                     {
                         incrementX++;
                     }
 
+                    // si le penguin veut aller en BasGauche et qu'il n'y a pas d'obstacle
                     if (directionType == DirectionType.BasGauche && Board.Board[coordonees["origin"].X - incrementX, coordonees["origin"].Y + incrementY].CellType == CellType.Fish)
                     {
+                        // alors on ajoute la case possible au résultat
                         yDest = coordonees["origin"].Y + incrementY;
                         xDest = coordonees["origin"].X - incrementX;
                         result.Add(new Coordonees(xDest, yDest));
                         Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
-                    }else if (directionType == DirectionType.BasDroite && Board.Board[coordonees["origin"].X + incrementX, coordonees["origin"].Y + incrementY].CellType == CellType.Fish)
+                    }
+                    // si le penguin veut aller en BasDroite et qu'il n'y a pas d'obstacle
+                    else if (directionType == DirectionType.BasDroite && Board.Board[coordonees["origin"].X + incrementX, coordonees["origin"].Y + incrementY].CellType == CellType.Fish)
                     {
+                        // alors on ajoute la case possible au résultat
                         yDest = coordonees["origin"].Y + incrementY;
                         xDest = coordonees["origin"].X + incrementX;
                         result.Add(new Coordonees(xDest, yDest));
                         Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
                     }
+                    // si le penguin veut aller en HautGauche et qu'il n'y a pas d'obstacle
                     else if (directionType == DirectionType.HautGauche && Board.Board[coordonees["origin"].X - incrementX, coordonees["origin"].Y - incrementY].CellType == CellType.Fish)
                     {
+                        // alors on ajoute la case possible au résultat
                         yDest = coordonees["origin"].Y - incrementY;
                         xDest = coordonees["origin"].X - incrementX;
                         result.Add(new Coordonees(xDest, yDest));
                         Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
                     }
+                    // si le penguin veut aller en HautDroite et qu'il n'y a pas d'obstacle
                     else if (directionType == DirectionType.HautDroite && Board.Board[coordonees["origin"].X + incrementX, coordonees["origin"].Y - incrementY].CellType == CellType.Fish)
                     {
+                        // alors on ajoute la case possible au résultat
                         yDest = coordonees["origin"].Y - incrementY;
                         xDest = coordonees["origin"].X + incrementX;
                         result.Add(new Coordonees(xDest, yDest));
                         Console.WriteLine("Y : " + (xDest) + ", X : " + (yDest));
                     }
+                    // si un obstacle se trouve sur le chemin du penguin
                     else
                     {
+                        // alors le penguin ne peut pas continuer sa course et doit choisir une autre case pour se déplacer
                         return null;
                     }
 
@@ -163,31 +192,53 @@ namespace Game.Penguins.Core.CustomGame
 
             return result;
         }
+
+        /// <summary>
+        /// Check if the penguin can move left/right
+        /// </summary>
+        /// <param name="directionType"></param>
+        /// <param name="coordonees"></param>
+        /// <returns></returns>
         public IList<Coordonees> CheckCaseRightLeft(DirectionType directionType, Dictionary<string, Coordonees> coordonees)
         {
             IList<Coordonees> result = new List<Coordonees>();
+
+            //récupère la distance entre l'origine et la destination
             var x = coordonees["destination"].X - coordonees["origin"].X;
+
+            //si elle est positive alors le penguin veut aller à droite sinon il veut aller à gauche
             if (x > 0 && directionType == DirectionType.Droite || x < 0 && directionType == DirectionType.Gauche)
             {
                 Console.WriteLine(directionType);
-                int increment = 1;
+
+                // si la distance est négative alors on la met en positive
                 if (x < 0)
                 {
                     x = x * -1;
                 }
+
+                // on va récupérer toutes les cases entre l'origine et la destination si il n'y a pas d'obstacle
+                int increment = 1;
                 while (increment <= x)
                 {
+                    // si le penguin veut aller à droite et qu'il n'y a pas d'obstacle
                     if (directionType == DirectionType.Droite && Board.Board[coordonees["origin"].X + increment, coordonees["origin"].Y].CellType == CellType.Fish)
                     {
+                        // alors on ajoute la case possible au résultat
                         result.Add(new Coordonees(coordonees["origin"].X + increment, coordonees["origin"].Y));
                         Console.WriteLine("Y : " + (coordonees["origin"].X + increment) + ", X : " + (coordonees["origin"].Y));
-                    }else if (directionType == DirectionType.Gauche && Board.Board[coordonees["origin"].X - increment, coordonees["origin"].Y].CellType == CellType.Fish)
+                    }
+                    // si le penguin veut aller à gauche et qu'il n'y a pas d'obstacle
+                    else if (directionType == DirectionType.Gauche && Board.Board[coordonees["origin"].X - increment, coordonees["origin"].Y].CellType == CellType.Fish)
                     {
+                        // alors on ajoute la case possible au résultat
                         result.Add(new Coordonees(coordonees["origin"].X - increment, coordonees["origin"].Y));
                         Console.WriteLine("Y : " + (coordonees["origin"].X - increment) + ", X : " + (coordonees["origin"].Y));
                     }
+                    // si un obstacle se trouve sur le chemin du penguin
                     else
                     {
+                        // alors le penguin ne peut pas continuer sa course et doit choisir une autre case pour se déplacer
                         return null;
                     }
                     increment++;
