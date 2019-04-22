@@ -9,48 +9,53 @@ using Game.Penguins.Core.Interfaces.Game.Players;
 namespace Game.Penguins.Core.CustomGame
 {
     /// <summary>
-    /// 
+    /// Instance du jeu
     /// </summary>
     public class CustomGame : IGame
     {
         /// <summary>
-        /// 
+        /// Plateau
         /// </summary>
         public IBoard Board { get; set; }
 
         /// <summary>
-        /// 
+        /// L'action qui va suivre
         /// </summary>
         public NextActionType NextAction { get; set; }
 
         /// <summary>
-        /// 
+        /// Le joueur actuel
         /// </summary>
         public IPlayer CurrentPlayer { get; set; }
 
         /// <summary>
-        /// 
+        /// La liste des joueurs
         /// </summary>
         public IList<IPlayer> Players { get; set; }
 
         /// <summary>
-        /// 
+        /// Active les changements apportés
         /// </summary>
         public event EventHandler StateChanged;
 
         /// <summary>
-        /// 
+        /// Nombres de joueurs
         /// </summary>
         public int CountPlayers;
-
+        
+        /// <summary>
+        /// Id qui va servir à déterminer l'ordre des joueurs
+        /// </summary>
         public int IdPlayer;
 
+        /// <summary>
+        /// Constructeur
+        /// </summary>
         public CustomGame()
         {
             Players = new List<IPlayer>();
             Board = new GameBoard();
         }
-
 
         /// <summary>
         /// Add player to list Players
@@ -171,67 +176,90 @@ namespace Game.Penguins.Core.CustomGame
             }
         }
 
+        /// <summary>
+        /// Place penguin for AI
+        /// </summary>
         public void PlacePenguin()
         {
-            Random rnd = new Random();
-            int randomX;
-            int randomY;
-
-            randomX = rnd.Next(0, 8); //7
-            randomY = rnd.Next(0, 8); //5
-            // 7, 5
-
-            while (Board.Board[randomX, randomY].FishCount != 1 || Board.Board[randomX, randomY].CellType == CellType.FishWithPenguin)
+            // if AI is easy
+            if (CurrentPlayer.PlayerType == PlayerType.AIEasy)
             {
+                Random rnd = new Random();
+                int randomX;
+                int randomY;
+
                 randomX = rnd.Next(0, 8); //7
                 randomY = rnd.Next(0, 8); //5
-            }
+                // 7, 5
 
-            //On change le type de la cellule choisi
-            Cell cell = (Cell)Board.Board[randomX, randomY];
-            cell.CurrentPenguin = new Penguin(CurrentPlayer);
-            cell.CellType = CellType.FishWithPenguin;
-
-            //On défini la nouvelle action à faire
-            NextAction = NextActionType.MovePenguin;
-
-            //On déclare le changement d'état de la cellule
-            cell.ChangeState();
-
-            foreach (var player1 in Players)
-            {
-                var player = (Player) player1;
-                if (player == CurrentPlayer)
+                while (Board.Board[randomX, randomY].FishCount != 1 || Board.Board[randomX, randomY].CellType == CellType.FishWithPenguin)
                 {
-                    player.Penguins = player.Penguins - 1;
+                    randomX = rnd.Next(0, 8); //7
+                    randomY = rnd.Next(0, 8); //5
+                }
+
+                //On change le type de la cellule choisi
+                Cell cell = (Cell)Board.Board[randomX, randomY];
+                cell.CurrentPenguin = new Penguin(CurrentPlayer);
+                cell.CellType = CellType.FishWithPenguin;
+
+                //On défini la nouvelle action à faire
+                NextAction = NextActionType.MovePenguin;
+
+                //On déclare le changement d'état de la cellule
+                cell.ChangeState();
+
+                foreach (var player1 in Players)
+                {
+                    var player = (Player)player1;
+                    if (player == CurrentPlayer)
+                    {
+                        player.Penguins = player.Penguins - 1;
+                    }
+                }
+
+                // Lorsque le penguin a été posé, on change de CurrentPlayer
+                if (IdPlayer + 1 < CountPlayers)
+                {
+                    IdPlayer = IdPlayer + 1;
+                    CurrentPlayer = Players[IdPlayer];
+                }
+                else
+                {
+                    IdPlayer = 0;
+                    CurrentPlayer = Players[IdPlayer];
+                }
+
+                // On défini la nouvelle action à faire
+                if (CurrentPlayer.Penguins == 0)
+                {
+                    NextAction = NextActionType.MovePenguin;
+                }
+                else
+                {
+                    NextAction = NextActionType.PlacePenguin;
                 }
             }
-
-            // Lorsque le penguin a été posé, on change de CurrentPlayer
-            if (IdPlayer + 1 < CountPlayers)
+            // if AI is medium
+            else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
             {
-                IdPlayer = IdPlayer + 1;
-                CurrentPlayer = Players[IdPlayer];
+                throw new NotImplementedException();
             }
-            else
+            // if AI is hard
+            else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
             {
-                IdPlayer = 0;
-                CurrentPlayer = Players[IdPlayer];
+                throw new NotImplementedException();
             }
 
-            // On défini la nouvelle action à faire
-            if (CurrentPlayer.Penguins == 0)
-            {
-                NextAction = NextActionType.MovePenguin;
-            }
-            else
-            {
-                NextAction = NextActionType.PlacePenguin;
-            }
             StateChanged?.Invoke(this, null);
 
         }
 
+        /// <summary>
+        /// Move penguin for human
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
         public void MoveManual(ICell origin, ICell destination)
         {
             if (origin.CellType == CellType.FishWithPenguin && destination.CellType != CellType.Water)
@@ -294,11 +322,25 @@ namespace Game.Penguins.Core.CustomGame
         }
 
         /// <summary>
-        /// 
+        /// Move penguin for AI
         /// </summary>
         public void Move()
         {
-            throw new NotImplementedException();
+            // if AI is easy
+            if (CurrentPlayer.PlayerType == PlayerType.AIEasy)
+            {
+                throw new NotImplementedException();
+            }
+            // if AI is medium
+            else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
+            {
+                throw new NotImplementedException();
+            }
+            // if AI is hard
+            else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
