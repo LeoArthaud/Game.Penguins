@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Game.Penguins.Core.CustomGame
+﻿namespace Game.Penguins.Core.CustomGame
 {
     public class Coordinates
     {
