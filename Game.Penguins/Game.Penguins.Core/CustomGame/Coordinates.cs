@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Game.Penguins.Core.CustomGame
 {
-    public class Coordonees
+    public class Coordinates
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public Coordonees(int x, int y) {
+        public Coordinates(int x, int y) {
             X = x;
             Y = y;
         }

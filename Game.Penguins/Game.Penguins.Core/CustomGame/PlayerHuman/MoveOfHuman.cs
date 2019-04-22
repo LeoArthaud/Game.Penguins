@@ -21,9 +21,9 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
         /// Get coordinate of the origin and destination
         /// </summary>
         /// <returns>coordinate</returns>
-        public Dictionary<string, Coordonees> GetCoordonees()
+        public Dictionary<string, Coordinates> GetCoordinates()
         {
-            Dictionary<string, Coordonees> coordonees = new Dictionary<string, Coordonees>();
+            Dictionary<string, Coordinates> coordinates = new Dictionary<string, Coordinates>();
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -31,32 +31,32 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
                     if (Origin == Board.Board[i, j])
                     {
 
-                        coordonees.Add("origin", new Coordonees(i, j));
+                        coordinates.Add("origin", new Coordinates(i, j));
                     }
                     if (Destination == Board.Board[i, j])
                     {
-                        coordonees.Add("destination", new Coordonees(i, j));
+                        coordinates.Add("destination", new Coordinates(i, j));
                     }
                 }
             }
-            return coordonees;
+            return coordinates;
         }
 
         /// <summary>
         /// Check move of the penguin
         /// </summary>
-        /// <param name="coordonees">coordinates origin and destination</param>
+        /// <param name="coordinates">coordinates origin and destination</param>
         /// <returns>list of coordinates of cells where the penguin can move</returns>
-        public IList<Coordonees> CheckDeplacement(Dictionary<string, Coordonees> coordonees)
+        public IList<Coordinates> CheckDeplacement(Dictionary<string, Coordinates> coordinates)
         {
-            IList<Coordonees> result = new List<Coordonees>();
+            IList<Coordinates> result = new List<Coordinates>();
             for (int i = 0; i < 6; i++)
             {
-                IList<Coordonees> list = i >= 0 && i < 2
+                IList<Coordinates> list = i >= 0 && i < 2
                     // Appelle la fonction CheckCaseRightLeft avec DirectionType.Droite puis DirectionType.Gauche
-                    ? CheckCaseRightLeft((DirectionType)i, coordonees)
+                    ? CheckCaseRightLeft((DirectionType)i, coordinates)
                     // Appelle la fonction CheckCaseDiago avec DirectionType.BasGauche puis DirectionType.BasDroite, puis DirectionType.HautDroite, puis DirectionType.HautGauche
-                    : CheckCaseDiago((DirectionType)i, coordonees);
+                    : CheckCaseDiago((DirectionType)i, coordinates);
 
                 if (list != null)
                 {
@@ -74,15 +74,15 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
         /// Check if the penguin can move in diago
         /// </summary>
         /// <param name="directionType">direction check</param>
-        /// <param name="coordonees">coordinates origin and destination</param>
+        /// <param name="coordinates">coordinates origin and destination</param>
         /// <returns></returns>
-        public IList<Coordonees> CheckCaseDiago(DirectionType directionType, Dictionary<string, Coordonees> coordonees)
+        public IList<Coordinates> CheckCaseDiago(DirectionType directionType, Dictionary<string, Coordinates> coordinates)
         {
-            IList<Coordonees> result = new List<Coordonees>();
+            IList<Coordinates> result = new List<Coordinates>();
 
             // on vérifie que le penguin veut bien aller en diagonale
-            var x = coordonees["destination"].X - coordonees["origin"].X;
-            var y = coordonees["destination"].Y - coordonees["origin"].Y;
+            var x = coordinates["destination"].X - coordinates["origin"].X;
+            var y = coordinates["destination"].Y - coordinates["origin"].Y;
             Console.WriteLine("distance => X : " + x +", Y : "+ y);
 
             if (x < 0 && y >= 0 && directionType == DirectionType.BasGauche || x >= 0 && y >= 0 && directionType == DirectionType.BasDroite || (x < 0 || x == 0) && y < 0 && directionType == DirectionType.HautGauche || x >= 0 && y < 0 && directionType == DirectionType.HautDroite)
@@ -98,8 +98,8 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
                 int incrementX = 0;
                 int incrementY = 1;
 
-                int xDest = coordonees["origin"].X;
-                int yDest = coordonees["origin"].Y;
+                int xDest = coordinates["origin"].X;
+                int yDest = coordinates["origin"].Y;
 
                 // on va récupérer toutes les cases entre l'origine et la destination si il n'y a pas d'obstacles
                 while (incrementY <= count)
@@ -118,16 +118,16 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
                     }
                     
                     // si le penguin veut aller en BasGauche et qu'il n'y a pas d'obstacle
-                    if (directionType == DirectionType.BasGauche && coordonees["origin"].X - incrementX >= 0 && coordonees["origin"].Y + incrementY <= 7)
+                    if (directionType == DirectionType.BasGauche && coordinates["origin"].X - incrementX >= 0 && coordinates["origin"].Y + incrementY <= 7)
                     {
-                        Console.WriteLine("(depassement) => X : " + (coordonees["origin"].Y + incrementY) + ", Y : " + (coordonees["origin"].X - incrementX));
-                        if (Board.Board[coordonees["origin"].X - incrementX, coordonees["origin"].Y + incrementY].CellType == CellType.Fish)
+                        Console.WriteLine("(depassement) => X : " + (coordinates["origin"].Y + incrementY) + ", Y : " + (coordinates["origin"].X - incrementX));
+                        if (Board.Board[coordinates["origin"].X - incrementX, coordinates["origin"].Y + incrementY].CellType == CellType.Fish)
                         {
                             // alors on ajoute la case possible au résultat
-                            yDest = coordonees["origin"].Y + incrementY;
-                            xDest = coordonees["origin"].X - incrementX;
+                            yDest = coordinates["origin"].Y + incrementY;
+                            xDest = coordinates["origin"].X - incrementX;
                             Console.WriteLine("X : " + yDest + ", Y : " + xDest);
-                            result.Add(new Coordonees(xDest, yDest));
+                            result.Add(new Coordinates(xDest, yDest));
                         }
                         else
                         {
@@ -135,16 +135,16 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
                         }
                     }
                     // si le penguin veut aller en BasDroite et qu'il n'y a pas d'obstacle
-                    else if (directionType == DirectionType.BasDroite && coordonees["origin"].X + incrementX <= 7 && coordonees["origin"].Y + incrementY <= 7)
+                    else if (directionType == DirectionType.BasDroite && coordinates["origin"].X + incrementX <= 7 && coordinates["origin"].Y + incrementY <= 7)
                     {
-                        Console.WriteLine("(depassement) => X : " + (coordonees["origin"].Y + incrementY) + ", Y : " + (coordonees["origin"].X + incrementX));
-                        if (Board.Board[coordonees["origin"].X + incrementX, coordonees["origin"].Y + incrementY].CellType == CellType.Fish)
+                        Console.WriteLine("(depassement) => X : " + (coordinates["origin"].Y + incrementY) + ", Y : " + (coordinates["origin"].X + incrementX));
+                        if (Board.Board[coordinates["origin"].X + incrementX, coordinates["origin"].Y + incrementY].CellType == CellType.Fish)
                         {
                             // alors on ajoute la case possible au résultat
-                            yDest = coordonees["origin"].Y + incrementY;
-                            xDest = coordonees["origin"].X + incrementX;
+                            yDest = coordinates["origin"].Y + incrementY;
+                            xDest = coordinates["origin"].X + incrementX;
                             Console.WriteLine("X : " + yDest + ", Y : " + xDest);
-                            result.Add(new Coordonees(xDest, yDest));
+                            result.Add(new Coordinates(xDest, yDest));
                         }
                         else
                         {
@@ -152,16 +152,16 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
                         }
                     }
                     // si le penguin veut aller en HautGauche et qu'il n'y a pas d'obstacle
-                    else if (directionType == DirectionType.HautGauche && coordonees["origin"].X - incrementX >= 0 && coordonees["origin"].Y - incrementY >= 0)
+                    else if (directionType == DirectionType.HautGauche && coordinates["origin"].X - incrementX >= 0 && coordinates["origin"].Y - incrementY >= 0)
                     {
-                        Console.WriteLine("(depassement) => X : " + (coordonees["origin"].Y - incrementY) + ", Y : " + (coordonees["origin"].X - incrementX));
-                        if (Board.Board[coordonees["origin"].X - incrementX, coordonees["origin"].Y - incrementY].CellType == CellType.Fish)
+                        Console.WriteLine("(depassement) => X : " + (coordinates["origin"].Y - incrementY) + ", Y : " + (coordinates["origin"].X - incrementX));
+                        if (Board.Board[coordinates["origin"].X - incrementX, coordinates["origin"].Y - incrementY].CellType == CellType.Fish)
                         {
                             // alors on ajoute la case possible au résultat
-                            yDest = coordonees["origin"].Y - incrementY;
-                            xDest = coordonees["origin"].X - incrementX;
+                            yDest = coordinates["origin"].Y - incrementY;
+                            xDest = coordinates["origin"].X - incrementX;
                             Console.WriteLine("X : " + yDest + ", Y : " + xDest);
-                            result.Add(new Coordonees(xDest, yDest));
+                            result.Add(new Coordinates(xDest, yDest));
                         }
                         else
                         {
@@ -169,16 +169,16 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
                         }
                     }
                     // si le penguin veut aller en HautDroite et qu'il n'y a pas d'obstacle
-                    else if (directionType == DirectionType.HautDroite && coordonees["origin"].X + incrementX <= 7 && coordonees["origin"].Y - incrementY >= 0)
+                    else if (directionType == DirectionType.HautDroite && coordinates["origin"].X + incrementX <= 7 && coordinates["origin"].Y - incrementY >= 0)
                     {
-                        Console.WriteLine("(depassement) => X : " + (coordonees["origin"].Y - incrementY) + ", Y : " + (coordonees["origin"].X + incrementX));
-                        if (Board.Board[coordonees["origin"].X + incrementX, coordonees["origin"].Y - incrementY].CellType == CellType.Fish)
+                        Console.WriteLine("(depassement) => X : " + (coordinates["origin"].Y - incrementY) + ", Y : " + (coordinates["origin"].X + incrementX));
+                        if (Board.Board[coordinates["origin"].X + incrementX, coordinates["origin"].Y - incrementY].CellType == CellType.Fish)
                         {
                             // alors on ajoute la case possible au résultat
-                            yDest = coordonees["origin"].Y - incrementY;
-                            xDest = coordonees["origin"].X + incrementX;
+                            yDest = coordinates["origin"].Y - incrementY;
+                            xDest = coordinates["origin"].X + incrementX;
                             Console.WriteLine("X : " + yDest + ", Y : " + xDest);
-                            result.Add(new Coordonees(xDest, yDest));
+                            result.Add(new Coordinates(xDest, yDest));
                         }
                         else
                         {
@@ -203,14 +203,14 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
         /// Check if the penguin can move left/right
         /// </summary>
         /// <param name="directionType">direction check</param>
-        /// <param name="coordonees">coordinates origin and destination</param>
+        /// <param name="coordinates">coordinates origin and destination</param>
         /// <returns></returns>
-        public IList<Coordonees> CheckCaseRightLeft(DirectionType directionType, Dictionary<string, Coordonees> coordonees)
+        public IList<Coordinates> CheckCaseRightLeft(DirectionType directionType, Dictionary<string, Coordinates> coordinates)
         {
-            IList<Coordonees> result = new List<Coordonees>();
+            IList<Coordinates> result = new List<Coordinates>();
 
             //récupère la distance entre l'origine et la destination
-            var x = coordonees["destination"].X - coordonees["origin"].X;
+            var x = coordinates["destination"].X - coordinates["origin"].X;
 
             //si elle est positive alors le penguin veut aller à droite sinon il veut aller à gauche
             if (x > 0 && directionType == DirectionType.Droite || x < 0 && directionType == DirectionType.Gauche)
@@ -227,16 +227,16 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
                 while (increment <= x)
                 {
                     // si le penguin veut aller à droite et qu'il n'y a pas d'obstacle
-                    if (directionType == DirectionType.Droite && Board.Board[coordonees["origin"].X + increment, coordonees["origin"].Y].CellType == CellType.Fish)
+                    if (directionType == DirectionType.Droite && Board.Board[coordinates["origin"].X + increment, coordinates["origin"].Y].CellType == CellType.Fish)
                     {
                         // alors on ajoute la case possible au résultat
-                        result.Add(new Coordonees(coordonees["origin"].X + increment, coordonees["origin"].Y));
+                        result.Add(new Coordinates(coordinates["origin"].X + increment, coordinates["origin"].Y));
                     }
                     // si le penguin veut aller à gauche et qu'il n'y a pas d'obstacle
-                    else if (directionType == DirectionType.Gauche && Board.Board[coordonees["origin"].X - increment, coordonees["origin"].Y].CellType == CellType.Fish)
+                    else if (directionType == DirectionType.Gauche && Board.Board[coordinates["origin"].X - increment, coordinates["origin"].Y].CellType == CellType.Fish)
                     {
                         // alors on ajoute la case possible au résultat
-                        result.Add(new Coordonees(coordonees["origin"].X - increment, coordonees["origin"].Y));
+                        result.Add(new Coordinates(coordinates["origin"].X - increment, coordinates["origin"].Y));
                     }
                     // si un obstacle se trouve sur le chemin du penguin
                     else

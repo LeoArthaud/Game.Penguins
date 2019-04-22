@@ -40,7 +40,7 @@ namespace Game.Penguins.Core.CustomGame
         /// <summary>
         /// 
         /// </summary>
-        public int CountPlayers = 0;
+        public int CountPlayers;
 
         public int IdPlayer;
 
@@ -89,8 +89,9 @@ namespace Game.Penguins.Core.CustomGame
             List<int> colorOfPlayer = new List<int>();
 
             //Attribut à chaque joueur le nombre de penguins et sa couleur
-            foreach (Player player in Players)
+            foreach (var player1 in Players)
             {
+                var player = (Player) player1;
                 //number of penguin
                 player.Penguins = numberPenguins;
 
@@ -111,7 +112,7 @@ namespace Game.Penguins.Core.CustomGame
 
             //On défini la nouvelle action à faire
             NextAction = NextActionType.PlacePenguin;
-            StateChanged(this, null);
+            StateChanged?.Invoke(this, null);
         }
 
         /// <summary>
@@ -135,8 +136,9 @@ namespace Game.Penguins.Core.CustomGame
                 //On déclare le changement d'état de la cellule
                 cell.ChangeState();
 
-                foreach (Player player in Players)
+                foreach (var player1 in Players)
                 {
+                    var player = (Player) player1;
                     if (player == CurrentPlayer)
                     {
                         player.Penguins = player.Penguins - 1;
@@ -164,7 +166,7 @@ namespace Game.Penguins.Core.CustomGame
                 {
                     NextAction = NextActionType.PlacePenguin;
                 }
-                StateChanged(this, null);
+                StateChanged?.Invoke(this, null);
             }
         }
 
@@ -195,8 +197,9 @@ namespace Game.Penguins.Core.CustomGame
             //On déclare le changement d'état de la cellule
             cell.ChangeState();
 
-            foreach (Player player in Players)
+            foreach (var player1 in Players)
             {
+                var player = (Player) player1;
                 if (player == CurrentPlayer)
                 {
                     player.Penguins = player.Penguins - 1;
@@ -224,7 +227,7 @@ namespace Game.Penguins.Core.CustomGame
             {
                 NextAction = NextActionType.PlacePenguin;
             }
-            StateChanged(this, null);
+            StateChanged?.Invoke(this, null);
 
         }
 
@@ -235,7 +238,7 @@ namespace Game.Penguins.Core.CustomGame
                 if (origin.CurrentPenguin.Player == CurrentPlayer)
                 {
                     MoveOfHuman moveOfHuman = new MoveOfHuman(origin, destination,Board);
-                    Dictionary<string, Coordonees> result = moveOfHuman.GetCoordonees();
+                    Dictionary<string, Coordinates> result = moveOfHuman.GetCoordinates();
 
                     Console.WriteLine("ORIGIN => X : "+result["origin"].Y+", Y : "+result["origin"].X);
                     Console.WriteLine("DESTINATION => X : "+result["destination"].Y+", Y : "+result["destination"].X);
@@ -254,8 +257,8 @@ namespace Game.Penguins.Core.CustomGame
                         Cell cellDestination = (Cell)destination;
 
                         //On donne les points au Joueur
-                        Player PlayerCurrent = (Player)CurrentPlayer;
-                        PlayerCurrent.Points += cellOrigine.FishCount;
+                        Player playerCurrent = (Player)CurrentPlayer;
+                        playerCurrent.Points += cellOrigine.FishCount;
 
                         //On modifie la cellule d'origine en cellule vide
                         cellOrigine.CellType = CellType.Water;
@@ -282,14 +285,12 @@ namespace Game.Penguins.Core.CustomGame
                         //On actualise tout
                         cellOrigine.ChangeState();
                         cellDestination.ChangeState();
-                        PlayerCurrent.ChangeState();
+                        playerCurrent.ChangeState();
                         NextAction = NextActionType.MovePenguin;
                     }
                 }
             }
         }
-
-
 
         /// <summary>
         /// 
