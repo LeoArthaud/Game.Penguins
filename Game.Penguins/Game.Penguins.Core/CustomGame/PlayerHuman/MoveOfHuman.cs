@@ -107,11 +107,14 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
                 while (incrementY <= count)
                 {
                     Console.WriteLine("(pot) => X : " + yDest + ", Y : " + xDest);
-                    // si la derniere case vérifiée n'est pas un modulo de 2 alors on incrémente de 1 (sauf si c'est le premier tour)
+
+                    // si on veut aller vers la gauche et que la derniere case vérifiée et impaire alors on incrémente
                     if (yDest % 2 != 0 && x < 0)
                     {
                         incrementX++;
-                    }else if (yDest % 2 == 0 && x >= 0)
+                    }
+                    // si on veut aller vers la droite et que la derniere case vérifiée et paire alors on incrémente
+                    else if (yDest % 2 == 0 && x >= 0)
                     {
                         incrementX++;
                     }
