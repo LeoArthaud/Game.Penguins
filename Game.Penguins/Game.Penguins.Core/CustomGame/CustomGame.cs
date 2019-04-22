@@ -132,7 +132,7 @@ namespace Game.Penguins.Core.CustomGame
                 // on va récupérer toutes les cases entre l'origine et la destination si il n'y a pas d'obstacles
                 while (incrementY <= count)
                 {
-                    // si y est un modulo 2 alors on incrémente de 1
+                    // si la derniere case vérifiée n'est pas un modulo de 2 alors on incrémente de 1 (sauf si c'est le premier tour)
                     if (yDest % 2 != 0 || yDest % 2 == 0 && firstTurn)
                     {
                         incrementX++;
