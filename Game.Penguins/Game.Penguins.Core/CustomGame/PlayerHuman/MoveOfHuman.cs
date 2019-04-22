@@ -87,7 +87,7 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
             var y = coordonees["destination"].Y - coordonees["origin"].Y;
             Console.WriteLine("distance => X : " + x +", Y : "+ y);
 
-            if (x < 0 && y >= 0 && directionType == DirectionType.BasGauche || x >= 0 && y >= 0 && directionType == DirectionType.BasDroite || x < 0 && y < 0 && directionType == DirectionType.HautGauche || x >= 0 && y < 0 && directionType == DirectionType.HautDroite)
+            if (x < 0 && y >= 0 && directionType == DirectionType.BasGauche || x >= 0 && y >= 0 && directionType == DirectionType.BasDroite || (x < 0 || x == 0) && y < 0 && directionType == DirectionType.HautGauche || x >= 0 && y < 0 && directionType == DirectionType.HautDroite)
             {
                 Console.WriteLine("directionType : "+ directionType);
                 // si x ou y est négatif alors on les transforme en positif
@@ -108,10 +108,12 @@ namespace Game.Penguins.Core.CustomGame.PlayerHuman
                 {
                     Console.WriteLine("(pot) => X : " + yDest + ", Y : " + xDest);
                     // si la derniere case vérifiée n'est pas un modulo de 2 alors on incrémente de 1 (sauf si c'est le premier tour)
-                    if (yDest % 2 != 0)
+                    if (yDest % 2 != 0 && x < 0)
                     {
                         incrementX++;
-
+                    }else if (yDest % 2 == 0 && x >= 0)
+                    {
+                        incrementX++;
                     }
                     
                     // si le penguin veut aller en BasGauche et qu'il n'y a pas d'obstacle

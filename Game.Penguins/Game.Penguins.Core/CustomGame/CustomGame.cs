@@ -247,7 +247,7 @@ namespace Game.Penguins.Core.CustomGame
                     
                     Console.WriteLine("numberOfResults : "+ numberOfResults);
 
-                    if (numberOfResults == 1)
+                    if (numberOfResults > 0)
                     {
                         //On définit les cellules
                         Cell cellOrigine = (Cell)origin;
