@@ -1,7 +1,7 @@
 ﻿using System;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
-namespace Game.Penguins.Core.CustomGame
+namespace Game.Penguins.Core.CustomGame.Board
 {
     public class Cell : ICell
     {
@@ -18,7 +18,7 @@ namespace Game.Penguins.Core.CustomGame
         
         public void ChangeState()
         {
-            StateChanged(this, null);
+            StateChanged?.Invoke(this, null);
         }
     }
 }

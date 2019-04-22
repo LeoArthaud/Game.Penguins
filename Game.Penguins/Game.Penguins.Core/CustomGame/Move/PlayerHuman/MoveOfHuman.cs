@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Penguins.Core.CustomGame.Board;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
-namespace Game.Penguins.Core.CustomGame.PlayerHuman
+namespace Game.Penguins.Core.CustomGame.Move.PlayerHuman
 {
     public class MoveOfHuman
     {

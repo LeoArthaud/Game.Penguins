@@ -22,7 +22,7 @@ namespace Game.Penguins.Core.CustomGame
 
         public void ChangeState()
         {
-            StateChanged(this, null);
+            StateChanged?.Invoke(this, null);
         }
 
     }

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Penguins.Core.CustomGame.PlayerHuman;
+using Game.Penguins.Core.CustomGame.Board;
+using Game.Penguins.Core.CustomGame.Move.PlayerHuman;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 

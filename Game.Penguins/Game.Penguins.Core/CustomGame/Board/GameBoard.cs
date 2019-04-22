@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
-namespace Game.Penguins.Core.CustomGame
+namespace Game.Penguins.Core.CustomGame.Board
 {
     public class GameBoard : IBoard
     {
@@ -12,7 +12,7 @@ namespace Game.Penguins.Core.CustomGame
         public GameBoard()
         {
             // Initialisation du tableau
-            Board = new Cell[8,8];
+            Board = new ICell[8,8];
 
             // Initialisation de la liste qui va permettre de mélanger les cases
             List<Cell> listCells = new List<Cell>();
