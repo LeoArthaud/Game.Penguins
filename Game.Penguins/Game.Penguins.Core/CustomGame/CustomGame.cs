@@ -112,8 +112,9 @@ namespace Game.Penguins.Core.CustomGame
             var x = coordonees["destination"].X - coordonees["origin"].X;
             var y = coordonees["destination"].Y - coordonees["origin"].Y;
 
-            if (x < 0 && y > 0 && directionType == DirectionType.BasGauche || x > 0 && y > 0 && directionType == DirectionType.BasDroite || x < 0 && y < 0 && directionType == DirectionType.HautGauche || x > 0 && y < 0 && directionType == DirectionType.HautDroite)
+            if (x < 0 && y >= 0 && directionType == DirectionType.BasGauche || x >= 0 && y >= 0 && directionType == DirectionType.BasDroite || x < 0 && y < 0 && directionType == DirectionType.HautGauche || x >= 0 && y < 0 && directionType == DirectionType.HautDroite)
             {
+
                 // si x ou y est négatif alors on les transforme en positif
                 x = x < 0 ? x * -1 : x;
                 y = y < 0 ? y * -1 : y;
@@ -126,12 +127,13 @@ namespace Game.Penguins.Core.CustomGame
 
                 int xDest = coordonees["origin"].X;
                 int yDest = coordonees["origin"].Y;
+                bool firstTurn = true;
 
                 // on va récupérer toutes les cases entre l'origine et la destination si il n'y a pas d'obstacles
                 while (incrementY <= count)
                 {
                     // si y est un modulo 2 alors on incrémente de 1
-                    if (yDest % 2 == 0)
+                    if (yDest % 2 != 0 || yDest % 2 == 0 && firstTurn)
                     {
                         incrementX++;
                     }
@@ -175,6 +177,7 @@ namespace Game.Penguins.Core.CustomGame
                         return null;
                     }
 
+                    firstTurn = false;
                     incrementY++;
                 }
             }
