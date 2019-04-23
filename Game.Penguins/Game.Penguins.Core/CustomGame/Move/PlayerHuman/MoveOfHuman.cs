@@ -90,11 +90,11 @@ namespace Game.Penguins.Core.CustomGame.Move.PlayerHuman
             {
                 Console.WriteLine("directionType : "+ directionType);
                 // si x ou y est négatif alors on les transforme en positif
-                x = x < 0 ? x * -1 : x;
-                y = y < 0 ? y * -1 : y;
+                var countX = x < 0 ? x * -1 : x;
+                var countY = y < 0 ? y * -1 : y;
 
                 // on récupère la distance entre la case d'origine et de destination
-                int count = x - y > 0 ? x : y;
+                int count = countX - countY > 0 ? countX : countY;
 
                 int incrementX = 0;
                 int incrementY = 1;
@@ -106,14 +106,16 @@ namespace Game.Penguins.Core.CustomGame.Move.PlayerHuman
                 while (incrementY <= count)
                 {
                     Console.WriteLine("(pot) => X : " + yDest + ", Y : " + xDest);
+                    Console.WriteLine("yDest % 2 : " + (yDest % 2));
+                    Console.WriteLine("directionType : " + directionType);
 
-                    // si on veut aller vers la gauche et que la derniere case vérifiée et impaire alors on incrémente
-                    if (yDest % 2 != 0 && x < 0)
+                    // si on veut aller vers la gauche et que la derniere case vérifiée et paire alors on incrémente
+                    if (yDest % 2 == 0 && (directionType == DirectionType.HautGauche || directionType == DirectionType.BasGauche))
                     {
                         incrementX++;
                     }
-                    // si on veut aller vers la droite et que la derniere case vérifiée et paire alors on incrémente
-                    else if (yDest % 2 == 0 && x >= 0)
+                    // si on veut aller vers la droite et que la derniere case vérifiée et impaire alors on incrémente
+                    else if (yDest % 2 != 0 && (directionType == DirectionType.BasDroite || directionType == DirectionType.HautDroite))
                     {
                         incrementX++;
                     }
