@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Penguins.Core.CustomGame.Board;
 using Game.Penguins.Core.CustomGame.Move.PlayerHuman;
+using Game.Penguins.Core.Interfaces;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 
@@ -48,13 +49,16 @@ namespace Game.Penguins.Core.CustomGame
         /// </summary>
         public int IdPlayer;
 
+        private IRandom random;
+
         /// <summary>
         /// Constructeur
         /// </summary>
-        public CustomGame()
+        public CustomGame(IRandom random)
         {
             Players = new List<IPlayer>();
             Board = new GameBoard();
+            this.random = random;
         }
 
         /// <summary>
@@ -91,7 +95,7 @@ namespace Game.Penguins.Core.CustomGame
                 numberPenguins = 2;
             }
 
-            Random random = new Random();
+            Random rdm = new Random();
             List<int> colorOfPlayer = new List<int>();
 
             //Attribut à chaque joueur le nombre de penguins et sa couleur
@@ -102,10 +106,10 @@ namespace Game.Penguins.Core.CustomGame
                 player.Penguins = numberPenguins;
 
                 //color of player
-                int color = random.Next(0, 4);
+                int color = rdm.Next(0, 4);
                 while (colorOfPlayer.Contains(color))
                 {
-                    color = random.Next(0, 4);
+                    color = rdm.Next(0, 4);
                 }
                 
                 player.Color = (PlayerColor)color;
@@ -118,7 +122,7 @@ namespace Game.Penguins.Core.CustomGame
 
             //On défini la nouvelle action à faire
             NextAction = NextActionType.PlacePenguin;
-            StateChanged?.Invoke(this, null);
+            //StateChanged?.Invoke(this, null);
         }
 
         /// <summary>
@@ -140,7 +144,7 @@ namespace Game.Penguins.Core.CustomGame
                 NextAction = NextActionType.MovePenguin;
 
                 //On déclare le changement d'état de la cellule
-                cell.ChangeState();
+                //cell.ChangeState();
 
                 foreach (var player1 in Players)
                 {
@@ -172,7 +176,7 @@ namespace Game.Penguins.Core.CustomGame
                 {
                     NextAction = NextActionType.PlacePenguin;
                 }
-                StateChanged?.Invoke(this, null);
+                //StateChanged?.Invoke(this, null);
             }
         }
 
@@ -184,18 +188,18 @@ namespace Game.Penguins.Core.CustomGame
             // if AI is easy
             if (CurrentPlayer.PlayerType == PlayerType.AIEasy)
             {
-                Random rnd = new Random();
+                //Random rnd = new Random();
                 int randomX;
                 int randomY;
 
-                randomX = rnd.Next(0, 8); //7
-                randomY = rnd.Next(0, 8); //5
+                randomX = random.Next(0, 8); //7
+                randomY = random.Next(0, 8); //5
                 // 7, 5
 
                 while (Board.Board[randomX, randomY].FishCount != 1 || Board.Board[randomX, randomY].CellType == CellType.FishWithPenguin)
                 {
-                    randomX = rnd.Next(0, 8); //7
-                    randomY = rnd.Next(0, 8); //5
+                    randomX = random.Next(0, 8); //7
+                    randomY = random.Next(0, 8); //5
                 }
 
                 //On change le type de la cellule choisi
@@ -207,7 +211,7 @@ namespace Game.Penguins.Core.CustomGame
                 NextAction = NextActionType.MovePenguin;
 
                 //On déclare le changement d'état de la cellule
-                cell.ChangeState();
+                //cell.ChangeState();
 
                 foreach (var player1 in Players)
                 {
@@ -251,7 +255,7 @@ namespace Game.Penguins.Core.CustomGame
                 throw new NotImplementedException();
             }
 
-            StateChanged?.Invoke(this, null);
+            //StateChanged?.Invoke(this, null);
 
         }
 

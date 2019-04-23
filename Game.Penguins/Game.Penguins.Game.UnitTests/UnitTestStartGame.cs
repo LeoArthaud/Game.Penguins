@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Game.Penguins.Core.CustomGame;
+using Game.Penguins.Core.CustomGame.App;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -19,11 +20,11 @@ namespace Game.Penguins.Game.UnitTests
         public void Test_StartGame_NumberPenguins2Players()
         {
             // Init game
-            CustomGame customGame = new CustomGame();
+            CustomGame customGame = new CustomGame(new AppRandom());
 
             // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.Human, (PlayerColor)0);
-            Player player2 = new Player("Player2", PlayerType.Human, (PlayerColor)1);
+            Player player1 = new Player("Player1", PlayerType.Human);
+            Player player2 = new Player("Player2", PlayerType.Human);
             customGame.Players.Add(player1);
             customGame.Players.Add(player2);
 
@@ -45,12 +46,12 @@ namespace Game.Penguins.Game.UnitTests
         public void Test_StartGame_NumberPenguins3Players()
         {
             // Init game
-            CustomGame customGame = new CustomGame();
+            CustomGame customGame = new CustomGame(new AppRandom());
 
             // Add 3 players
-            Player player1 = new Player("Player1", PlayerType.Human, (PlayerColor)0);
-            Player player2 = new Player("Player2", PlayerType.Human, (PlayerColor)1);
-            Player player3 = new Player("Player3", PlayerType.Human, (PlayerColor)2);
+            Player player1 = new Player("Player1", PlayerType.Human);
+            Player player2 = new Player("Player2", PlayerType.Human);
+            Player player3 = new Player("Player3", PlayerType.Human);
             customGame.Players.Add(player1);
             customGame.Players.Add(player2);
             customGame.Players.Add(player3);
@@ -73,13 +74,13 @@ namespace Game.Penguins.Game.UnitTests
         public void Test_StartGame_NumberPenguins4Players()
         {
             // Init game
-            CustomGame customGame = new CustomGame();
+            CustomGame customGame = new CustomGame(new AppRandom());
 
             // Add 4 players
-            Player player1 = new Player("Player1", PlayerType.Human, (PlayerColor)0);
-            Player player2 = new Player("Player2", PlayerType.Human, (PlayerColor)1);
-            Player player3 = new Player("Player3", PlayerType.Human, (PlayerColor)2);
-            Player player4 = new Player("Player4", PlayerType.Human, (PlayerColor)3);
+            Player player1 = new Player("Player1", PlayerType.Human);
+            Player player2 = new Player("Player2", PlayerType.Human);
+            Player player3 = new Player("Player3", PlayerType.Human);
+            Player player4 = new Player("Player4", PlayerType.Human);
             customGame.Players.Add(player1);
             customGame.Players.Add(player2);
             customGame.Players.Add(player3);
@@ -104,11 +105,11 @@ namespace Game.Penguins.Game.UnitTests
         public void Test_StartGame_CurrentPlayer()
         {
             // Init game
-            CustomGame customGame = new CustomGame();
+            CustomGame customGame = new CustomGame(new AppRandom());
 
             // Add  players
-            Player player1 = new Player("Player1", PlayerType.Human, (PlayerColor)0);
-            Player player2 = new Player("Player2", PlayerType.Human, (PlayerColor)1);
+            Player player1 = new Player("Player1", PlayerType.Human);
+            Player player2 = new Player("Player2", PlayerType.Human);
             customGame.Players.Add(player1);
             customGame.Players.Add(player2);
 
@@ -128,13 +129,13 @@ namespace Game.Penguins.Game.UnitTests
         public void Test_StartGame_NextActionPlacePenguin()
         {
             // Init game
-            CustomGame customGame = new CustomGame();
+            CustomGame customGame = new CustomGame(new AppRandom());
 
             // Add 4 players
-            Player player1 = new Player("Player1", PlayerType.Human, (PlayerColor)0);
-            Player player2 = new Player("Player2", PlayerType.Human, (PlayerColor)1);
-            Player player3 = new Player("Player3", PlayerType.Human, (PlayerColor)2);
-            Player player4 = new Player("Player4", PlayerType.Human, (PlayerColor)3);
+            Player player1 = new Player("Player1", PlayerType.Human);
+            Player player2 = new Player("Player2", PlayerType.Human);
+            Player player3 = new Player("Player3", PlayerType.Human);
+            Player player4 = new Player("Player4", PlayerType.Human);
             customGame.Players.Add(player1);
             customGame.Players.Add(player2);
             customGame.Players.Add(player3);
