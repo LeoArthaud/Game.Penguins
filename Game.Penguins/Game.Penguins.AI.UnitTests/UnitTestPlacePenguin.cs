@@ -26,19 +26,9 @@ namespace Game.Penguins.AI.UnitTests
             Mock<IRandom> randomMock = new Mock<IRandom>();
             randomMock.SetupSequence(e => e.Next(0, 8)).Returns(0);
             randomMock.SetupSequence(e => e.Next(0, 4)).Returns(0).Returns(1);
-            CustomGame customGame = new CustomGame(randomMock.Object);
 
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.AIEasy);
-            Player player2 = new Player("Player2", PlayerType.AIEasy);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
+            CustomGame customGame = InitGame(randomMock);
 
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
             var playerInitial = customGame.Players[0];
 
             // Position of cell
@@ -51,8 +41,9 @@ namespace Game.Penguins.AI.UnitTests
             // Launch function
             customGame.PlacePenguin();
 
-            // Test si le penguin a bien été placé sur la cellule
+            // Tests si le penguin a bien été placé sur la cellule
             Assert.IsTrue(customGame.Board.Board[x, y].CellType == CellType.FishWithPenguin);
+            Assert.IsTrue(customGame.Board.Board[x, y].FishCount == 1);
             Assert.IsTrue(customGame.Board.Board[x, y].CurrentPenguin.Player == playerInitial);
         }
 
@@ -66,19 +57,7 @@ namespace Game.Penguins.AI.UnitTests
             Mock<IRandom> randomMock = new Mock<IRandom>();
             randomMock.SetupSequence(e => e.Next(0, 8)).Returns(0);
             randomMock.SetupSequence(e => e.Next(0, 4)).Returns(0).Returns(1);
-            CustomGame customGame = new CustomGame(randomMock.Object);
-
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.AIEasy);
-            Player player2 = new Player("Player2", PlayerType.AIEasy);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
+            CustomGame customGame = InitGame(randomMock);
 
             // Position of cell
             int x = 0;
@@ -104,19 +83,7 @@ namespace Game.Penguins.AI.UnitTests
             Mock<IRandom> randomMock = new Mock<IRandom>();
             randomMock.SetupSequence(e => e.Next(0, 8)).Returns(0);
             randomMock.SetupSequence(e => e.Next(0, 4)).Returns(0).Returns(1);
-            CustomGame customGame = new CustomGame(randomMock.Object);
-
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.AIEasy);
-            Player player2 = new Player("Player2", PlayerType.AIEasy);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
+            CustomGame customGame = InitGame(randomMock);
 
             // Position of cell
             int x = 0;
@@ -142,20 +109,8 @@ namespace Game.Penguins.AI.UnitTests
             Mock<IRandom> randomMock = new Mock<IRandom>();
             randomMock.SetupSequence(e => e.Next(0, 8)).Returns(0);
             randomMock.SetupSequence(e => e.Next(0, 4)).Returns(0).Returns(1);
-            CustomGame customGame = new CustomGame(randomMock.Object);
 
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.AIEasy);
-            Player player2 = new Player("Player2", PlayerType.AIEasy);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
+            CustomGame customGame = InitGame(randomMock);
 
             // Position of cell
             int x = 0;
@@ -196,19 +151,7 @@ namespace Game.Penguins.AI.UnitTests
                         .Returns(7)
                         .Returns(7);
             randomMock.SetupSequence(e => e.Next(0, 4)).Returns(0).Returns(1);
-            CustomGame customGame = new CustomGame(randomMock.Object);
-
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.AIEasy);
-            Player player2 = new Player("Player2", PlayerType.AIEasy);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
+            CustomGame customGame = InitGame(randomMock);
 
             // Position of cell
             for (int i = 0; i < 8; i++)
@@ -228,5 +171,29 @@ namespace Game.Penguins.AI.UnitTests
             Assert.IsTrue(customGame.CurrentPlayer.Penguins == 0);
             Assert.IsTrue(customGame.NextAction == NextActionType.MovePenguin);
         }
+
+        #region Private Functions
+
+        public CustomGame InitGame(Mock<IRandom> randomMock)
+        {
+            CustomGame customGame = new CustomGame(randomMock.Object);
+
+            // Add 2 players
+            Player player1 = new Player("Player1", PlayerType.AIEasy);
+            Player player2 = new Player("Player2", PlayerType.AIEasy);
+            customGame.Players.Add(player1);
+            customGame.Players.Add(player2);
+
+
+            customGame.CountPlayers = 2;
+
+            customGame.StartGame();
+            customGame.CurrentPlayer = customGame.Players[0];
+            customGame.IdPlayer = 0;
+
+            return customGame;
+        }
+
+        #endregion
     }
 }

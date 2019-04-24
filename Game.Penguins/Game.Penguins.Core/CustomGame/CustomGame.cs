@@ -188,21 +188,16 @@ namespace Game.Penguins.Core.CustomGame
             // if AI is easy
             if (CurrentPlayer.PlayerType == PlayerType.AIEasy)
             {
-                //Random rnd = new Random();
-                int randomX;
-                int randomY;
-
-                randomX = random.Next(0, 8); //7
-                randomY = random.Next(0, 8); //5
-                // 7, 5
-
+                // Test si la cellule de destination est libre
+                int randomX = random.Next(0, 8);
+                int randomY = random.Next(0, 8);
                 while (Board.Board[randomX, randomY].FishCount != 1 || Board.Board[randomX, randomY].CellType == CellType.FishWithPenguin)
                 {
-                    randomX = random.Next(0, 8); //7
-                    randomY = random.Next(0, 8); //5
+                    randomX = random.Next(0, 8);
+                    randomY = random.Next(0, 8);
                 }
 
-                //On change le type de la cellule choisi
+                //On change le type de la cellule de destination
                 Cell cell = (Cell)Board.Board[randomX, randomY];
                 cell.CurrentPenguin = new Penguin(CurrentPlayer);
                 cell.CellType = CellType.FishWithPenguin;
