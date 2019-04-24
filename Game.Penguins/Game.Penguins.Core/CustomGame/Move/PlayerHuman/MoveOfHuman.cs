@@ -31,7 +31,6 @@ namespace Game.Penguins.Core.CustomGame.Move.PlayerHuman
                 {
                     if (Origin == Board.Board[i, j])
                     {
-
                         coordinates.Add("origin", new Coordinates(i, j));
                     }
                     if (Destination == Board.Board[i, j])
@@ -189,11 +188,11 @@ namespace Game.Penguins.Core.CustomGame.Move.PlayerHuman
                         }
                     }
                     // si un obstacle se trouve sur le chemin du penguin
-                    else
-                    {
-                        // alors le penguin ne peut pas continuer sa course et doit choisir une autre case pour se déplacer
-                        return null;
-                    }
+                    //else
+                    //{
+                    //    // alors le penguin ne peut pas continuer sa course et doit choisir une autre case pour se déplacer
+                    //    return null;
+                    //}
                     Console.WriteLine("***");
                     incrementY++;
                 }

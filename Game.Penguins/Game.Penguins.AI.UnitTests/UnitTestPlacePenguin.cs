@@ -7,7 +7,7 @@ using Game.Penguins.Core.Interfaces.Game.Players;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Game.Penguins.Game.UnitTests
+namespace Game.Penguins.AI.UnitTests
 {
     /// <summary>
     /// Test the function PlacePenguin()
@@ -24,7 +24,8 @@ namespace Game.Penguins.Game.UnitTests
         {
             // Init game
             Mock<IRandom> randomMock = new Mock<IRandom>();
-            randomMock.Setup(e => e.Next(0, 8)).Returns(0);
+            randomMock.SetupSequence(e => e.Next(0, 8)).Returns(0);
+            randomMock.SetupSequence(e => e.Next(0, 4)).Returns(0).Returns(1);
             CustomGame customGame = new CustomGame(randomMock.Object);
 
             // Add 2 players
@@ -63,7 +64,8 @@ namespace Game.Penguins.Game.UnitTests
         {
             // Init game
             Mock<IRandom> randomMock = new Mock<IRandom>();
-            randomMock.Setup(e => e.Next(0, 8)).Returns(0);
+            randomMock.SetupSequence(e => e.Next(0, 8)).Returns(0);
+            randomMock.SetupSequence(e => e.Next(0, 4)).Returns(0).Returns(1);
             CustomGame customGame = new CustomGame(randomMock.Object);
 
             // Add 2 players
@@ -100,7 +102,8 @@ namespace Game.Penguins.Game.UnitTests
         {
             // Init game
             Mock<IRandom> randomMock = new Mock<IRandom>();
-            randomMock.Setup(e => e.Next(0, 8)).Returns(0);
+            randomMock.SetupSequence(e => e.Next(0, 8)).Returns(0);
+            randomMock.SetupSequence(e => e.Next(0, 4)).Returns(0).Returns(1);
             CustomGame customGame = new CustomGame(randomMock.Object);
 
             // Add 2 players
@@ -137,7 +140,8 @@ namespace Game.Penguins.Game.UnitTests
         {
             // Init game
             Mock<IRandom> randomMock = new Mock<IRandom>();
-            randomMock.Setup(e => e.Next(0, 8)).Returns(0);
+            randomMock.SetupSequence(e => e.Next(0, 8)).Returns(0);
+            randomMock.SetupSequence(e => e.Next(0, 4)).Returns(0).Returns(1);
             CustomGame customGame = new CustomGame(randomMock.Object);
 
             // Add 2 players
@@ -191,6 +195,7 @@ namespace Game.Penguins.Game.UnitTests
                         .Returns(6)
                         .Returns(7)
                         .Returns(7);
+            randomMock.SetupSequence(e => e.Next(0, 4)).Returns(0).Returns(1);
             CustomGame customGame = new CustomGame(randomMock.Object);
 
             // Add 2 players

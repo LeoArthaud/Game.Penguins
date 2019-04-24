@@ -95,7 +95,7 @@ namespace Game.Penguins.Core.CustomGame
                 numberPenguins = 2;
             }
 
-            Random rdm = new Random();
+            //Random rdm = new Random();
             List<int> colorOfPlayer = new List<int>();
 
             //Attribut à chaque joueur le nombre de penguins et sa couleur
@@ -106,10 +106,10 @@ namespace Game.Penguins.Core.CustomGame
                 player.Penguins = numberPenguins;
 
                 //color of player
-                int color = rdm.Next(0, 4);
+                int color = random.Next(0, 4);
                 while (colorOfPlayer.Contains(color))
                 {
-                    color = rdm.Next(0, 4);
+                    color = random.Next(0, 4);
                 }
                 
                 player.Color = (PlayerColor)color;
@@ -266,7 +266,7 @@ namespace Game.Penguins.Core.CustomGame
         /// <param name="destination"></param>
         public void MoveManual(ICell origin, ICell destination)
         {
-            if (origin.CellType == CellType.FishWithPenguin && destination.CellType != CellType.Water)
+            if (origin.CellType == CellType.FishWithPenguin && destination.CellType != CellType.Water && destination.CellType != CellType.FishWithPenguin)
             {
                 if (origin.CurrentPenguin.Player == CurrentPlayer)
                 {
