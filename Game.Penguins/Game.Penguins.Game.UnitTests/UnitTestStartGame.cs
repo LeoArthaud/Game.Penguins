@@ -91,6 +91,11 @@ namespace Game.Penguins.Game.UnitTests
 
         #region Private Functions
 
+        /// <summary>
+        /// Init the game
+        /// </summary>
+        /// <param name="countPlayer">number of players</param>
+        /// <returns>game</returns>
         public CustomGame InitGame(int countPlayer)
         {
             // Init game

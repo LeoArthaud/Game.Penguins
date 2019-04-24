@@ -140,6 +140,10 @@ namespace Game.Penguins.Human.UnitTests
 
         #region Private Functions
 
+        /// <summary>
+        /// Init the game
+        /// </summary>
+        /// <returns>game</returns>
         private CustomGame InitGame()
         {
             // Init game
