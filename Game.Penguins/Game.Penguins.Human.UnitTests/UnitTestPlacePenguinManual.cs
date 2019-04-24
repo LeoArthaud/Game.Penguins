@@ -6,13 +6,13 @@ using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Game.Penguins.Game.UnitTests
+namespace Game.Penguins.Human.UnitTests
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
     public class UnitTestPlacePenguinManual
     {
-        #region Function PlacePenguinManual
+        #region Public Functions
 
         /// <summary>
         /// Test, in the function PlacePenguinManual(), if the type of the cell and the current penguin on the cell is change
@@ -20,20 +20,8 @@ namespace Game.Penguins.Game.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_CellStatus()
         {
-            // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
+            CustomGame customGame = InitGame();
 
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
             var playerInitial = customGame.Players[0];
 
             // Position of cell
@@ -57,20 +45,7 @@ namespace Game.Penguins.Game.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_NumberPenguinDecrease()
         {
-            // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
+            CustomGame customGame = InitGame();
 
             // Position of cell
             int x = 0;
@@ -92,20 +67,7 @@ namespace Game.Penguins.Game.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_ChangeCurrentPlayer()
         {
-            // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
+            CustomGame customGame = InitGame();
 
             // Position of cell
             int x = 0;
@@ -127,20 +89,7 @@ namespace Game.Penguins.Game.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_NextActionPlace()
         {
-            // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
+            CustomGame customGame = InitGame();
 
             // Position of cell
             int x = 0;
@@ -161,20 +110,7 @@ namespace Game.Penguins.Game.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_NextActionMove()
         {
-            // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
+            CustomGame customGame = InitGame();
 
             // Position of cells
             int[,] arrayCoordinates = new int[8,3];
@@ -202,5 +138,28 @@ namespace Game.Penguins.Game.UnitTests
 
         #endregion
 
+        #region Private Functions
+
+        private CustomGame InitGame()
+        {
+            // Init game
+            CustomGame customGame = new CustomGame(new AppRandom());
+
+            // Add 2 players
+            Player player1 = new Player("Player1", PlayerType.Human);
+            Player player2 = new Player("Player2", PlayerType.Human);
+            customGame.Players.Add(player1);
+            customGame.Players.Add(player2);
+
+            customGame.CountPlayers = 2;
+
+            customGame.StartGame();
+            customGame.CurrentPlayer = customGame.Players[0];
+            customGame.IdPlayer = 0;
+
+            return customGame;
+        }
+        
+        #endregion
     }
 }

@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F2DBCC4-46B8-4E79-8A96-B413770E09BC}</ProjectGuid>
+    <ProjectGuid>{74EFD5E1-E13D-4485-A8D9-7BA2C1A74C47}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game.Penguins.Game.UnitTests</RootNamespace>
-    <AssemblyName>Game.Penguins.Game.UnitTests</AssemblyName>
+    <RootNamespace>Game.Penguins.Human.UnitTests</RootNamespace>
+    <AssemblyName>Game.Penguins.Human.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,15 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTestCustomGameConstructor.cs" />
-    <Compile Include="UnitTestStartGame.cs" />
+    <Compile Include="UnitTestMovePenguinManual.cs" />
+    <Compile Include="UnitTestPlacePenguinManual.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Game.Penguins.Core\Game.Penguins.Core.csproj">
-      <Project>{80C125C4-2E4E-4AB0-A0A0-F084808683DD}</Project>
+      <Project>{80c125c4-2e4e-4ab0-a0a0-f084808683dd}</Project>
       <Name>Game.Penguins.Core</Name>
     </ProjectReference>
   </ItemGroup>

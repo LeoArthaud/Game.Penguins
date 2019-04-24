@@ -20,17 +20,7 @@ namespace Game.Penguins.Game.UnitTests
         public void Test_StartGame_NumberPenguins2Players()
         {
             // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
+            CustomGame customGame = InitGame(2);
 
             // Verify number of penguins foreach player 
             foreach (var player in customGame.Players)
@@ -46,19 +36,7 @@ namespace Game.Penguins.Game.UnitTests
         public void Test_StartGame_NumberPenguins3Players()
         {
             // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 3 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            Player player3 = new Player("Player3", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-            customGame.Players.Add(player3);
-
-            customGame.CountPlayers = 3;
-
-            customGame.StartGame();
+            CustomGame customGame = InitGame(3);
 
             // Verify number of penguins foreach player 
             foreach (var player in customGame.Players)
@@ -74,22 +52,7 @@ namespace Game.Penguins.Game.UnitTests
         public void Test_StartGame_NumberPenguins4Players()
         {
             // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 4 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            Player player3 = new Player("Player3", PlayerType.Human);
-            Player player4 = new Player("Player4", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-            customGame.Players.Add(player3);
-            customGame.Players.Add(player4);
-
-            customGame.CountPlayers = 4;
-
-            // Launch function
-            customGame.StartGame();
+            CustomGame customGame = InitGame(4);
 
             // Verify number of penguins foreach player 
             foreach (var player in customGame.Players)
@@ -105,21 +68,10 @@ namespace Game.Penguins.Game.UnitTests
         public void Test_StartGame_CurrentPlayer()
         {
             // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add  players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            // Launch function
-            customGame.StartGame();
+            CustomGame customGame = InitGame(2);
 
             // Verify if currentplayer is assign 
-            Assert.IsTrue(customGame.CurrentPlayer == player1 || customGame.CurrentPlayer == player2);
+            Assert.IsTrue(customGame.CurrentPlayer == customGame.Players[0] || customGame.CurrentPlayer == customGame.Players[1]);
         }
 
         /// <summary>
@@ -129,22 +81,7 @@ namespace Game.Penguins.Game.UnitTests
         public void Test_StartGame_NextActionPlacePenguin()
         {
             // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 4 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            Player player3 = new Player("Player3", PlayerType.Human);
-            Player player4 = new Player("Player4", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-            customGame.Players.Add(player3);
-            customGame.Players.Add(player4);
-
-            customGame.CountPlayers = 4;
-
-            // Launch function
-            customGame.StartGame();
+            CustomGame customGame = InitGame(2);
 
             // Verify that the action after StartGame() is PlacePenguin
             Assert.IsTrue(customGame.NextAction == NextActionType.PlacePenguin);
@@ -152,5 +89,27 @@ namespace Game.Penguins.Game.UnitTests
 
         #endregion
 
+        #region Private Functions
+
+        public CustomGame InitGame(int countPlayer)
+        {
+            // Init game
+            CustomGame customGame = new CustomGame(new AppRandom());
+
+            // Add players
+            for (int i = 0; i < countPlayer; i++)
+            {
+                Player player = new Player("Player"+countPlayer, PlayerType.Human);
+                customGame.Players.Add(player);
+            }
+            customGame.CountPlayers = countPlayer;
+
+            // Launch function
+            customGame.StartGame();
+
+            return customGame;
+        }
+
+        #endregion
     }
 }
