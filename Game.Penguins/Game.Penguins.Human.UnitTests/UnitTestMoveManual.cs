@@ -12,6 +12,9 @@ namespace Game.Penguins.Human.UnitTests
     [TestClass]
     public class UnitTestMoveManual
     {
+        /// <summary>
+        /// Test if the function MoveManual place the penguin at the new destination
+        /// </summary>
         [TestMethod]
         public void Test_MoveManual_CheckGood()
         {
@@ -45,6 +48,9 @@ namespace Game.Penguins.Human.UnitTests
             Assert.IsTrue(customGame.Board.Board[xDestination, yDestination].CellType == CellType.FishWithPenguin);
         }
 
+        /// <summary>
+        /// Test if the loop which change the current player work correctly
+        /// </summary>
         [TestMethod]
         public void Test_MoveManual_CheckGoodWithOtherCurrentPlayer()
         {

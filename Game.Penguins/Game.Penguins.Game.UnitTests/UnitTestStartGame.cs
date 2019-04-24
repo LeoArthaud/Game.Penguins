@@ -90,7 +90,7 @@ namespace Game.Penguins.Game.UnitTests
         }
 
         /// <summary>
-        /// Test, in the function StartGame(), if the NextAction is PlacePenguin
+        /// Test, in the function StartGame(), if the name is set correctly
         /// </summary>
         [TestMethod]
         public void Test_StartGame_Name()
@@ -104,7 +104,7 @@ namespace Game.Penguins.Game.UnitTests
         }
 
         /// <summary>
-        /// Test, in the function StartGame(), if the NextAction is PlacePenguin
+        /// Test, in the function StartGame(), if the identifier is not null
         /// </summary>
         [TestMethod]
         public void Test_StartGame_Identifier()
@@ -112,7 +112,7 @@ namespace Game.Penguins.Game.UnitTests
             // Init game
             CustomGame customGame = InitGame(2, null);
 
-            // Test Name of the players
+            // Test identifier of the players
             foreach (var player in customGame.Players)
             {
                 Assert.IsNotNull(player.Identifier);
