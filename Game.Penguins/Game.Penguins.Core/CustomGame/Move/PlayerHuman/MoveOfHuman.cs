@@ -86,7 +86,7 @@ namespace Game.Penguins.Core.CustomGame.Move.PlayerHuman
             var y = coordinates["destination"].Y - coordinates["origin"].Y;
             Console.WriteLine("distance => X : " + x +", Y : "+ y);
 
-            if (x < 0 && y >= 0 && directionType == DirectionType.BasGauche || x >= 0 && y >= 0 && directionType == DirectionType.BasDroite || (x < 0 || x == 0) && y < 0 && directionType == DirectionType.HautGauche || x >= 0 && y < 0 && directionType == DirectionType.HautDroite)
+            if ((x < 0 || x == 0) && y >= 0 && directionType == DirectionType.BasGauche || x >= 0 && y >= 0 && directionType == DirectionType.BasDroite || (x < 0 || x == 0) && y < 0 && directionType == DirectionType.HautGauche || x >= 0 && y < 0 && directionType == DirectionType.HautDroite)
             {
                 Console.WriteLine("directionType : "+ directionType);
                 // si x ou y est négatif alors on les transforme en positif

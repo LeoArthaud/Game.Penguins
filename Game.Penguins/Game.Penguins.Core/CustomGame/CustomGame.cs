@@ -122,7 +122,7 @@ namespace Game.Penguins.Core.CustomGame
 
             //On défini la nouvelle action à faire
             NextAction = NextActionType.PlacePenguin;
-            //StateChanged?.Invoke(this, null);
+            StateChanged?.Invoke(this, null);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Game.Penguins.Core.CustomGame
                 NextAction = NextActionType.MovePenguin;
 
                 //On déclare le changement d'état de la cellule
-                //cell.ChangeState();
+                cell.ChangeState();
 
                 foreach (var player1 in Players)
                 {
@@ -176,7 +176,7 @@ namespace Game.Penguins.Core.CustomGame
                 {
                     NextAction = NextActionType.PlacePenguin;
                 }
-                //StateChanged?.Invoke(this, null);
+                StateChanged?.Invoke(this, null);
             }
         }
 
@@ -211,7 +211,7 @@ namespace Game.Penguins.Core.CustomGame
                 NextAction = NextActionType.MovePenguin;
 
                 //On déclare le changement d'état de la cellule
-                //cell.ChangeState();
+                cell.ChangeState();
 
                 foreach (var player1 in Players)
                 {
@@ -255,7 +255,7 @@ namespace Game.Penguins.Core.CustomGame
                 throw new NotImplementedException();
             }
 
-            //StateChanged?.Invoke(this, null);
+            StateChanged?.Invoke(this, null);
 
         }
 
@@ -323,6 +323,7 @@ namespace Game.Penguins.Core.CustomGame
                     }
                 }
             }
+            StateChanged?.Invoke(this, null);
         }
 
         /// <summary>
