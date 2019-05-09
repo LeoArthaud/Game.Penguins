@@ -1,13 +1,12 @@
 ﻿using Game.Penguins.Commands;
-using Game.Penguins.Core.Interfaces.Game.Actions;
+using Game.Penguins.Core.CustomGame;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 using Game.Penguins.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using Game.Penguins.AI;
+using Game.Penguins.Core.CustomGame.App;
 
 namespace Game.Penguins.ViewModels
 {
@@ -234,8 +233,8 @@ namespace Game.Penguins.ViewModels
             : base()
         {
             // TODO : Initialize with the right implementation
-            game = (IGame)null;
-            game = new CustomGame();
+            //game = (IGame)null;
+            game = new CustomGame(new AppRandom());
             
             game.StateChanged += Game_StateChanged;
 

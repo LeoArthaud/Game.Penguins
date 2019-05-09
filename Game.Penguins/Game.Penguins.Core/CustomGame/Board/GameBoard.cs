@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
-namespace Game.Penguins.AI
+namespace Game.Penguins.Core.CustomGame.Board
 {
     public class GameBoard : IBoard
     {
-        public ICell[,] Board { get; }
+        public ICell[,] Board { get; set; }
 
         public GameBoard()
         {
@@ -16,7 +15,7 @@ namespace Game.Penguins.AI
             Board = new ICell[8,8];
 
             // Initialisation de la liste qui va permettre de mélanger les cases
-            List<ICell> listCells = new List<ICell>();
+            List<Cell> listCells = new List<Cell>();
 
             //Envoie dans la liste des 3 types de cases (1 poisson, 2 poissons et 3 poissons)
             for (int i = 0; i < 34; i++)
