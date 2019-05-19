@@ -1,7 +1,7 @@
 ﻿using System;
 using Game.Penguins.Core.Interfaces.Game.Players;
 
-namespace Game.Penguins.Core.CustomGame
+namespace Game.Penguins.Core.Classes
 {
     public class Player : IPlayer
     {

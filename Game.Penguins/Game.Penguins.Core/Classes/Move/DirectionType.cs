@@ -1,4 +1,4 @@
-﻿namespace Game.Penguins.Core.CustomGame.Move
+﻿namespace Game.Penguins.Core.Classes.Move
 {
     public enum DirectionType
     {

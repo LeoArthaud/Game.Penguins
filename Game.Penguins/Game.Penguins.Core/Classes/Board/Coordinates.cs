@@ -1,4 +1,4 @@
-﻿namespace Game.Penguins.Core.CustomGame.Board
+﻿namespace Game.Penguins.Core.Classes.Board
 {
     public class Coordinates
     {

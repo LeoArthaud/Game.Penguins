@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
-namespace Game.Penguins.Core.CustomGame.Board
+namespace Game.Penguins.Core.Classes.Board
 {
     public class GameBoard : IBoard
     {

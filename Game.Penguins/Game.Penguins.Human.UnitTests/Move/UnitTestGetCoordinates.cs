@@ -2,7 +2,7 @@
 using Game.Penguins.Core.CustomGame;
 using Game.Penguins.Core.CustomGame.App;
 using Game.Penguins.Core.CustomGame.Board;
-using Game.Penguins.Core.CustomGame.Move.PlayerHuman;
+using Game.Penguins.Core.CustomGame.Move;
 using Game.Penguins.Core.Interfaces.Game.Players;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -34,7 +34,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Cell cellDestination = (Cell)customGame.Board.Board[xDestination, yDestination];
             cellDestination.FishCount = 3;
 
-            MoveOfHuman moveOfHuman = new MoveOfHuman(cellOrigin, cellDestination, customGame.Board);
+            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
             Assert.IsTrue(result["origin"].X == xOrigin);

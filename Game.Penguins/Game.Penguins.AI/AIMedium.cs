@@ -8,7 +8,7 @@ using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
 namespace Game.Penguins.AI
 {
-    public class AIEasy
+    public class AIMedium
     {
         /// <summary>
         /// Plateau
@@ -17,7 +17,7 @@ namespace Game.Penguins.AI
 
         private IRandom random;
 
-        public AIEasy(IBoard board, IRandom random)
+        public AIMedium(IBoard board, IRandom random)
         {
             Board = board;
             this.random = random;
@@ -36,23 +36,7 @@ namespace Game.Penguins.AI
                 randomX = random.Next(0, 8);
                 randomY = random.Next(0, 8);
             }
-            return new Coordinates(randomX,randomY);
-        }
-
-        /// <summary>
-        /// Choisi aléatoirement la destination du penguin choisi par l'IA
-        /// </summary>
-        /// <param name="origin">L'origin du penguin choisi</param>
-        /// <returns>La destination</returns>
-        public Coordinates FindDestination(Coordinates origin)
-        {
-            Movements move = new Movements(null, null, Board);
-
-            IList<Coordinates> result = move.CheckDeplacement(origin);
-            
-            result = result.OrderBy(a => Guid.NewGuid()).ToList();
-
-            return result[0];
+            return new Coordinates(randomX, randomY);
         }
 
         /// <summary>
@@ -75,5 +59,31 @@ namespace Game.Penguins.AI
             return new Coordinates(-1, -1);
 
         }
+
+        /// <summary>
+        /// Choisi la cellule avec le plus de penguin pour la destination du penguin choisi par l'IA
+        /// </summary>
+        /// <param name="origin">L'origin du penguin choisi</param>
+        /// <returns>La destination</returns>
+        public Coordinates FindDestination(Coordinates origin)
+        {
+            Movements move = new Movements(null, null, Board);
+
+            IList<Coordinates> result = move.CheckDeplacement(origin); 
+
+            IList<ICell> resultCells = new List<ICell>();
+            foreach (var element in result)
+            {
+                resultCells.Add(Board.Board[element.X, element.Y]);
+            }
+
+            var resultOrderBy = resultCells.OrderByDescending(cell => cell.FishCount).ToList();
+
+            Movements getCells = new Movements(Board.Board[origin.X, origin.Y], resultOrderBy[0], Board);
+            var coordinates = getCells.GetCoordinates();
+
+            return coordinates["destination"];
+        }
+
     }
 }

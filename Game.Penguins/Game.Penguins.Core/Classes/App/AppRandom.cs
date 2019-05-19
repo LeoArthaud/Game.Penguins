@@ -1,7 +1,7 @@
 ﻿using System;
 using Game.Penguins.Core.Interfaces;
 
-namespace Game.Penguins.Core.CustomGame.App
+namespace Game.Penguins.Core.Classes.App
 {
     public class AppRandom : IRandom
     {
