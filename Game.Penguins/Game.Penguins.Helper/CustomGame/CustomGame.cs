@@ -12,56 +12,63 @@ using Game.Penguins.Core.Interfaces.Game.Players;
 namespace Game.Penguins.Helper.CustomGame
 {
     /// <summary>
-    /// Instance du jeu
+    /// Instance of the game
     /// </summary>
     public class CustomGame : IGame
     {
         /// <summary>
-        /// Plateau
+        /// Board
         /// </summary>
         public IBoard Board { get; set; }
 
         /// <summary>
-        /// L'action qui va suivre
+        /// Next action
         /// </summary>
         public NextActionType NextAction { get; set; }
 
         /// <summary>
-        /// Le joueur actuel
+        /// Current player
         /// </summary>
         public IPlayer CurrentPlayer { get; set; }
 
         /// <summary>
-        /// La liste des joueurs
+        /// List of players
         /// </summary>
         public IList<IPlayer> Players { get; set; }
 
         /// <summary>
-        /// Active les changements apportés
+        /// Apply changes
         /// </summary>
         public event EventHandler StateChanged;
         
         /// <summary>
-        /// Id qui va servir à déterminer l'ordre des joueurs
+        /// Id of current player
         /// </summary>
         public int IdPlayer { get; set; }
 
         /// <summary>
-        /// Positions des penguins du current player
+        /// Positions of penguins of current player
         /// </summary>
         public List<Coordinates> PossibilitiesOrigin { get; set; }
 
+        /// <summary>
+        /// Allow to generate random number
+        /// </summary>
         private IRandom random;
 
         /// <summary>
-        /// Constructeur
+        /// Constructor
         /// </summary>
         public CustomGame(IRandom random)
         {
+            // Initialize list of players
             Players = new List<IPlayer>();
+
+            // Create a random board
             Board = new GameBoard();
+
+            // Initialize the random function
             this.random = random;
-            PossibilitiesOrigin = new List<Coordinates>();
         }
 
         #region Public Functions
@@ -93,12 +100,15 @@ namespace Game.Penguins.Helper.CustomGame
             int numberPenguins = 0;
             switch (Players.Count)
             {
+                // If there are 2 players
                 case 2:
                     numberPenguins = 4;
                     break;
+                // If there are 3 players
                 case 3:
                     numberPenguins = 3;
                     break;
+                // If there are 4 players
                 case 4:
                     numberPenguins = 2;
                     break;
@@ -242,6 +252,7 @@ namespace Game.Penguins.Helper.CustomGame
                             }
                         }
 
+                        // If the player can't move his penguins, delete all his penguin
                         if (coordinates.Count == 0)
                         {
                             ChangeStateLastMovement();
@@ -356,7 +367,7 @@ namespace Game.Penguins.Helper.CustomGame
                 var player = (Player)player1;
                 if (player == CurrentPlayer)
                 {
-                    player.Penguins = player.Penguins - 1;
+                    player.Penguins -= 1;
                 }
             }
 
@@ -364,14 +375,7 @@ namespace Game.Penguins.Helper.CustomGame
             AffectedCurrentPlayer(ChangeType.Place);
 
             // Define next action
-            if (CurrentPlayer.Penguins == 0)
-            {
-                NextAction = NextActionType.MovePenguin;
-            }
-            else
-            {
-                NextAction = NextActionType.PlacePenguin;
-            }
+            NextAction = CurrentPlayer.Penguins == 0 ? NextActionType.MovePenguin : NextActionType.PlacePenguin;
 
             // Apply all changes
             StateChanged?.Invoke(this, null);
