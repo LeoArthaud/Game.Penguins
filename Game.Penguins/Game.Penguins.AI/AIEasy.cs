@@ -31,6 +31,7 @@ namespace Game.Penguins.AI
         /// </summary>
         /// <param name="board"></param>
         /// <param name="random"></param>
+        /// <param name="currentPlayer"></param>
         public AIEasy(IBoard board, IRandom random, IPlayer currentPlayer)
         {
             Board = board;

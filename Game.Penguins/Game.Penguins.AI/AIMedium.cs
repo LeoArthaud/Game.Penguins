@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Penguins.Core.Classes;
 using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Classes.Move;
 using Game.Penguins.Core.Interfaces;
@@ -36,6 +37,7 @@ namespace Game.Penguins.AI
         /// </summary>
         /// <param name="board"></param>
         /// <param name="random"></param>
+        /// <param name="currentPlayer"></param>
         public AIMedium(IBoard board, IRandom random, IPlayer currentPlayer)
         {
             Board = board;
@@ -70,6 +72,7 @@ namespace Game.Penguins.AI
         public Dictionary<string, Coordinates> FindOriginDestination()
         {
             Movements move = new Movements(null, null, Board);
+            Player playerCurrent = (Player)CurrentPlayer;
 
             PossibilitiesOfOrigin();
             Dictionary<Coordinates, ICell> bestCells = new Dictionary<Coordinates, ICell>();
@@ -83,9 +86,30 @@ namespace Game.Penguins.AI
                 {
                     resultCells.Add(Board.Board[element.X, element.Y]);
                 }
+                if (resultCells.Count != 0)
+                {
+                    var resultOrderBy = resultCells.OrderByDescending(cell => cell.FishCount).ToList();
+                    bestCells.Add(possibility, resultOrderBy[0]);
+                } else
+                {
+                    // Get cell
+                    Cell cell = (Cell)Board.Board[possibility.X, possibility.Y];
 
-                var resultOrderBy = resultCells.OrderByDescending(cell => cell.FishCount).ToList();
-                bestCells.Add(possibility, resultOrderBy[0]);
+                    // Add to the player number of point of the cell
+                    playerCurrent.Points += cell.FishCount;
+
+                    // Cell become water
+                    cell.CellType = CellType.Water;
+
+                    // Cell have no fish
+                    cell.FishCount = 0;
+
+                    // Cell have no penguin
+                    cell.CurrentPenguin = null;
+
+                    // Apply change
+                    cell.ChangeState();
+                }
             }
             
             
