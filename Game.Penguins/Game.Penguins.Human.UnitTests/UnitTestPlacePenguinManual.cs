@@ -137,6 +137,9 @@ namespace Game.Penguins.Human.UnitTests
             Assert.IsTrue(customGame.NextAction == NextActionType.MovePenguin);
         }
 
+        /// <summary>
+        /// Test, in the function PlacePenguinManual()
+        /// </summary>
         [TestMethod]
         public void Test_customgame_PlacePenguinManual_FishCount()
         {
