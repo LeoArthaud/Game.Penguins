@@ -154,7 +154,7 @@ namespace Game.Penguins.Helper.CustomGame
             StateChanged?.Invoke(this, null);
 
             // Logging test
-            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger("CustomGame.cs : StartGame()");
+            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
             log.Info("Game successfully started");
             // TODO: Add relevant logging in relevant places
         }
