@@ -5,10 +5,11 @@ using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Classes.Move;
 using Game.Penguins.Core.Interfaces;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
+using Game.Penguins.Core.Interfaces.Game.Players;
 
 namespace Game.Penguins.AI
 {
-    public class AIMedium
+    public class AIMedium : IAI
     {
         /// <summary>
         /// Plateau
@@ -20,15 +21,18 @@ namespace Game.Penguins.AI
         /// </summary>
         private IRandom random;
 
+        public IPlayer CurrentPlayer { get; set; }
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="board"></param>
         /// <param name="random"></param>
-        public AIMedium(IBoard board, IRandom random)
+        public AIMedium(IBoard board, IRandom random, IPlayer currentPlayer)
         {
             Board = board;
             this.random = random;
+            CurrentPlayer = currentPlayer;
         }
 
         /// <summary>
@@ -82,20 +86,58 @@ namespace Game.Penguins.AI
         {
             Movements move = new Movements(null, null, Board);
 
-            IList<Coordinates> result = move.CheckDeplacement(origin); 
+            IList<Coordinates> result = move.CheckDeplacement(origin); // Do 4 times
+            PossibilitiesOfOrigin();
+            IList<ICell> bestCells = new List<ICell>();
 
-            IList<ICell> resultCells = new List<ICell>();
-            foreach (var element in result)
+            foreach (var possibility in PossibilitiesOrigin)
             {
-                resultCells.Add(Board.Board[element.X, element.Y]);
+                var list = move.CheckDeplacement(possibility);
+                IList<ICell> resultCells = new List<ICell>();
+
+                foreach (var element in list)
+                {
+                    resultCells.Add(Board.Board[element.X, element.Y]);
+                }
+
+                var resultOrderBy = resultCells.OrderByDescending(cell => cell.FishCount).ToList();
+                bestCells.Add(resultOrderBy[0]);
             }
+            
+            var bestCellsOrderBy = bestCells.OrderByDescending(cell => cell.FishCount).ToList();
 
-            var resultOrderBy = resultCells.OrderByDescending(cell => cell.FishCount).ToList();
-
-            Movements getCells = new Movements(Board.Board[origin.X, origin.Y], resultOrderBy[0], Board);
+            // TODO: Get greatest result before
+            Movements getCells = new Movements(Board.Board[origin.X, origin.Y], bestCellsOrderBy[0], Board);
             var coordinates = getCells.GetCoordinates();
 
             return coordinates["destination"];
+        }
+
+        /// <summary>
+        /// Positions of penguins of current player
+        /// </summary>
+        public List<Coordinates> PossibilitiesOrigin { get; set; }
+
+        private void PossibilitiesOfOrigin()
+        {
+            PossibilitiesOrigin = new List<Coordinates>();
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    // If a penguin is on the cell
+                    if (Board.Board[i, j].CurrentPenguin != null)
+                    {
+                        // If the penguin belongs to the current player
+                        if (Board.Board[i, j].CurrentPenguin.Player == CurrentPlayer)
+                        {
+                            PossibilitiesOrigin.Add(new Coordinates(i, j));
+                        }
+                    }
+                }
+            }
+            // Mixed the list
+            PossibilitiesOrigin = PossibilitiesOrigin.OrderBy(a => Guid.NewGuid()).ToList();
         }
 
     }
