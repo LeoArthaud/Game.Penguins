@@ -216,7 +216,7 @@ namespace Game.Penguins.Helper.CustomGame
         public void MoveManual(ICell origin, ICell destination)
         {
             // If the selected origin cell has a penguin
-            // + If the selected destination cell has fish
+            // AND If the selected destination cell has fish
             if (origin.CellType == CellType.FishWithPenguin && destination.CellType == CellType.Fish)
             {
                 // If the selected origin cell has a penguin which belongs to current player
