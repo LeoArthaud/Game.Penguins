@@ -146,13 +146,15 @@ namespace Game.Penguins.Human.UnitTests
             int x = 0;
             int y = 0;
 
-            //mettre un for
+            for(int i = 2; i<4; i++)
+            {
             Cell cell = (Cell)customGame.Board.Board[x, y];
             cell.FishCount = 2;
 
             customGame.PlacePenguinManual(x, y);
 
             Assert.IsTrue(cell.CurrentPenguin == null);
+            }
 
 
         }
