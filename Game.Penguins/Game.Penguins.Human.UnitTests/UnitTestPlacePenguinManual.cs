@@ -168,12 +168,12 @@ namespace Game.Penguins.Human.UnitTests
             int x = 0;
             int y = 0;
 
-                Cell cell = (Cell)customGame.Board.Board[x, y];
-                cell.CellType = CellType.FishWithPenguin;
+            Cell cell = (Cell)customGame.Board.Board[x, y];
+            cell.CellType = CellType.FishWithPenguin;
 
-                customGame.PlacePenguinManual(x, y);
+            customGame.PlacePenguinManual(x, y);
 
-                Assert.IsTrue(cell.CurrentPenguin == null);
+            Assert.IsTrue(cell.CurrentPenguin == null);
 
 
         }
