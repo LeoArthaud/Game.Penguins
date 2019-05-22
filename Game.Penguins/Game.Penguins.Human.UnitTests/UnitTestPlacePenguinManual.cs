@@ -137,6 +137,25 @@ namespace Game.Penguins.Human.UnitTests
             Assert.IsTrue(customGame.NextAction == NextActionType.MovePenguin);
         }
 
+        [TestMethod]
+        public void Test_PlacePenguinManual_PlacePenguinManual()
+        {
+            CustomGame customGame = InitGame();
+
+            // Position of cell
+            int x = 0;
+            int y = 0;
+
+            //mettre un for
+            Cell cell = (Cell)customGame.Board.Board[x, y];
+            cell.FishCount = 2;
+
+            customGame.PlacePenguinManual(x, y);
+
+            Assert.IsTrue(cell.CurrentPenguin == null);
+
+
+        }
         #endregion
 
         #region Private Functions
