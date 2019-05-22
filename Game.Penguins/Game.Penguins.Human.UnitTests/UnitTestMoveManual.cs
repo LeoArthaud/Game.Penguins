@@ -211,6 +211,38 @@ namespace Game.Penguins.Human.UnitTests
             Assert.IsTrue(customGame.Board.Board[xDestination, yDestination].CellType == CellType.FishWithPenguin);
         }
 
+        [TestMethod]
+        public void Test_MoveManual_SupprPenguin()
+        {
+            CustomGame customGame = InitGame();
+
+            int xOrigin = 0;
+            int yOrigin = 0;
+
+            Cell cellOrigin = (Cell)customGame.Board.Board[xOrigin, yOrigin];
+            cellOrigin.FishCount = 1;
+            var penguinCurrentPlayer = new Penguin(customGame.CurrentPlayer);
+            cellOrigin.CurrentPenguin = penguinCurrentPlayer;
+            cellOrigin.CellType = CellType.FishWithPenguin;
+
+            Cell cell1 = (Cell)customGame.Board.Board[0,1];
+            cell1.CellType = CellType.Water;
+
+            Cell cell2 = (Cell)customGame.Board.Board[1,0];
+            cell2.CellType = CellType.Water;
+
+            Cell cellOri = (Cell)customGame.Board.Board[4, 0];
+            cellOri.CurrentPenguin = penguinCurrentPlayer;
+            cellOri.CellType = CellType.FishWithPenguin;
+
+            Cell cellDesti = (Cell)customGame.Board.Board[5, 0];
+            cellDesti.CellType = CellType.Fish;
+       
+            customGame.MoveManual(cellOri, cellDesti);
+
+            Assert.IsTrue(customGame.Board.Board[xOrigin, yOrigin].CellType == CellType.Water);
+        }
+
         #region Private Functions
 
         /// <summary>
