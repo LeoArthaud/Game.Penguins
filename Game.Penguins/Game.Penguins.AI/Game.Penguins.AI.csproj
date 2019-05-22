@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Common.Logging" Version="3.4.1" />
+    <PackageReference Include="Common.Logging.NLog41" Version="3.4.1" />
+    <PackageReference Include="NLog" Version="4.6.3" />
+    <PackageReference Include="NLog.Config" Version="4.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Game.Penguins.Core\Game.Penguins.Core.csproj" />
   </ItemGroup>
 
