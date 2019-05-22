@@ -15,14 +15,26 @@ namespace Game.Penguins.AI
         /// </summary>
         public IBoard Board { get; set; }
 
+        /// <summary>
+        /// Allow to generate random number
+        /// </summary>
         private IRandom random;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="board"></param>
+        /// <param name="random"></param>
         public AIEasy(IBoard board, IRandom random)
         {
             Board = board;
             this.random = random;
         }
 
+        /// <summary>
+        /// Get coordinates where to place the penguin
+        /// </summary>
+        /// <returns>coordinates</returns>
         public Coordinates PlacePenguin()
         {
             // Get random x and y
@@ -40,25 +52,27 @@ namespace Game.Penguins.AI
         }
 
         /// <summary>
-        /// Choisi aléatoirement la destination du penguin choisi par l'IA
+        /// Get randomly the destination of the penguin
         /// </summary>
-        /// <param name="origin">L'origin du penguin choisi</param>
-        /// <returns>La destination</returns>
+        /// <param name="origin">coordinates of the origin</param>
+        /// <returns>coordinates of the destination</returns>
         public Coordinates FindDestination(Coordinates origin)
         {
             Movements move = new Movements(null, null, Board);
 
             IList<Coordinates> result = move.CheckDeplacement(origin);
             
+            // Shuffle
             result = result.OrderBy(a => Guid.NewGuid()).ToList();
 
             return result[0];
         }
 
         /// <summary>
-        /// Choisi aléatoirement le penguin que l'IA va déplacer
+        /// Get randomly the penguin to move
         /// </summary>
-        /// <returns>La position du penguin ou [-1;-1] si l'IA ne peut plus déplacer de penguin</returns>
+        /// <param name="possibilitiesOrigin"></param>
+        /// <returns>Position of the penguin or [-1;-1] if the AI can't move his penguins</returns>
         public Coordinates FindOrigin(List<Coordinates> possibilitiesOrigin)
         {
             Movements moveOrigin = new Movements(null, null, Board);
