@@ -96,8 +96,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// </summary>
         public void StartGame()
         {
-            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger("logfile");
-            log.Info("Game started");
+
             // Get the number of penguins foreach player
             int numberPenguins = 0;
             switch (Players.Count)
@@ -153,6 +152,11 @@ namespace Game.Penguins.Helper.CustomGame
 
             // Apply changes
             StateChanged?.Invoke(this, null);
+
+            // Logging test
+            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger("CustomGame.cs : StartGame()");
+            log.Info("Game successfully started");
+            // TODO: Add relevant logging in relevant places
         }
 
         /// <summary>
