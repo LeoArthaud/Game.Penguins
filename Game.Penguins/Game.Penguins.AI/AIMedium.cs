@@ -9,7 +9,7 @@ using Game.Penguins.Core.Interfaces.Game.Players;
 
 namespace Game.Penguins.AI
 {
-    public class AIMedium : IAI
+    public class AIMedium
     {
         /// <summary>
         /// Plateau
@@ -80,15 +80,13 @@ namespace Game.Penguins.AI
         /// <summary>
         /// Get randomly the destination of the penguin
         /// </summary>
-        /// <param name="origin">coordinates of the origin</param>
         /// <returns>coordinates of the destination</returns>
-        public Coordinates FindDestination(Coordinates origin)
+        public Dictionary<string, Coordinates> FindDestination()
         {
             Movements move = new Movements(null, null, Board);
 
-            IList<Coordinates> result = move.CheckDeplacement(origin); // Do 4 times
             PossibilitiesOfOrigin();
-            IList<ICell> bestCells = new List<ICell>();
+            Dictionary<Coordinates, ICell> bestCells = new Dictionary<Coordinates, ICell>();
 
             foreach (var possibility in PossibilitiesOrigin)
             {
@@ -101,16 +99,25 @@ namespace Game.Penguins.AI
                 }
 
                 var resultOrderBy = resultCells.OrderByDescending(cell => cell.FishCount).ToList();
-                bestCells.Add(resultOrderBy[0]);
+                bestCells.Add(possibility, resultOrderBy[0]);
             }
             
-            var bestCellsOrderBy = bestCells.OrderByDescending(cell => cell.FishCount).ToList();
-
-            // TODO: Get greatest result before
-            Movements getCells = new Movements(Board.Board[origin.X, origin.Y], bestCellsOrderBy[0], Board);
+            
+            Coordinates greatOrigin = new Coordinates(0,0);
+            ICell greatDestination = new Cell(0);
+            foreach (var couple in bestCells)
+            {
+                if (couple.Value.FishCount > greatDestination.FishCount)
+                {
+                    greatDestination = couple.Value;
+                    greatOrigin = couple.Key;
+                }
+            }
+            
+            Movements getCells = new Movements(Board.Board[greatOrigin.X, greatOrigin.Y], greatDestination, Board);
             var coordinates = getCells.GetCoordinates();
 
-            return coordinates["destination"];
+            return coordinates;
         }
 
         /// <summary>

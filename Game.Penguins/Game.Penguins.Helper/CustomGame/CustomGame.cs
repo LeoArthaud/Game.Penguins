@@ -318,27 +318,15 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Get positions of penguins of the current player
                 PossibilitiesOfOrigin();
+                var coordinates = aiMedium.FindDestination();
 
                 // Get the penguin to move
-                Coordinates origin = aiMedium.FindOrigin(PossibilitiesOrigin);
+                Coordinates origin = coordinates["origin"];
+                Coordinates destination = coordinates["destination"];
 
-                // If all penguins of the player can't move
-                if (origin.X == -1 && origin.Y == -1)
-                {
-                    // Delete all penguins
-                    ChangeStateLastMovement();
-                    AffectedCurrentPlayer(ChangeType.Move);
-                }
-                // If player can move at least 1 penguin
-                else
-                {
-                    // Get the destination of the penguin
-                    Coordinates destination = aiMedium.FindDestination(origin);
-
-                    // Apply changes
-                    ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
-                    AffectedCurrentPlayer(ChangeType.Move);
-                }
+                ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                AffectedCurrentPlayer(ChangeType.Move);
+                
             }
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)

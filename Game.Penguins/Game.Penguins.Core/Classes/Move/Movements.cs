@@ -65,6 +65,8 @@ namespace Game.Penguins.Core.Classes.Move
         public IList<Coordinates> CheckDeplacement(Coordinates origin)
         {
             IList<Coordinates> result = new List<Coordinates>();
+            Console.WriteLine("**************************************************");
+            Console.WriteLine("New turn : Origin : " + origin.X + ", " + origin.Y);
 
             // Get cells at the right of the penguin
             var list = GetCoordinatesRight(origin);
@@ -73,6 +75,8 @@ namespace Game.Penguins.Core.Classes.Move
                 foreach (var element in list)
                 {
                     result.Add(element);
+                    Console.WriteLine("Right");
+                    Console.WriteLine(element.X+", "+element.Y);
                 }
             }
 
@@ -83,6 +87,8 @@ namespace Game.Penguins.Core.Classes.Move
                 foreach (var element in list)
                 {
                     result.Add(element);
+                    Console.WriteLine("Left");
+                    Console.WriteLine(element.X + ", " + element.Y);
                 }
             }
 
@@ -93,6 +99,8 @@ namespace Game.Penguins.Core.Classes.Move
                 foreach (var element in list)
                 {
                     result.Add(element);
+                    Console.WriteLine("Down-Right");
+                    Console.WriteLine(element.X + ", " + element.Y);
                 }
             }
 
@@ -103,6 +111,8 @@ namespace Game.Penguins.Core.Classes.Move
                 foreach (var element in list)
                 {
                     result.Add(element);
+                    Console.WriteLine("Up-Right");
+                    Console.WriteLine(element.X + ", " + element.Y);
                 }
             }
 
@@ -113,6 +123,8 @@ namespace Game.Penguins.Core.Classes.Move
                 foreach (var element in list)
                 {
                     result.Add(element);
+                    Console.WriteLine("Down-Left");
+                    Console.WriteLine(element.X + ", " + element.Y);
                 }
             }
 
@@ -123,6 +135,8 @@ namespace Game.Penguins.Core.Classes.Move
                 foreach (var element in list)
                 {
                     result.Add(element);
+                    Console.WriteLine("Up-Left");
+                    Console.WriteLine(element.X + ", " + element.Y);
                 }
             }
 
