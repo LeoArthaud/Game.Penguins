@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Game.Penguins.Core\Game.Penguins.Core.csproj" />
+    <ProjectReference Include="..\Game.Penguins.Helper\Game.Penguins.Helper.csproj" />
   </ItemGroup>
 
 </Project>

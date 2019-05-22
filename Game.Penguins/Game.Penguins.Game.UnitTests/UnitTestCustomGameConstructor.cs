@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Game.Penguins.Core.CustomGame;
-using Game.Penguins.Core.CustomGame.App;
+using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
+using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Game.Penguins.Game.UnitTests

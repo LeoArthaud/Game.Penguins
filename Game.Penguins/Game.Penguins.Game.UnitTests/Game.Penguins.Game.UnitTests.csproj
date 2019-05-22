@@ -67,6 +67,10 @@
       <Project>{80C125C4-2E4E-4AB0-A0A0-F084808683DD}</Project>
       <Name>Game.Penguins.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Game.Penguins.Helper\Game.Penguins.Helper.csproj">
+      <Project>{DFF94941-05A4-4FC9-946C-694B85C33FF1}</Project>
+      <Name>Game.Penguins.Helper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

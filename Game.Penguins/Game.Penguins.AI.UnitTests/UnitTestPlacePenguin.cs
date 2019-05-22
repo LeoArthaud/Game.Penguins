@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Game.Penguins.Core.CustomGame;
-using Game.Penguins.Core.CustomGame.Board;
+using Game.Penguins.Core.Classes;
+using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Interfaces;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
+using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -183,9 +184,6 @@ namespace Game.Penguins.AI.UnitTests
             Player player2 = new Player("Player2", PlayerType.AIEasy);
             customGame.Players.Add(player1);
             customGame.Players.Add(player2);
-
-
-            customGame.CountPlayers = 2;
 
             customGame.StartGame();
             customGame.CurrentPlayer = customGame.Players[0];

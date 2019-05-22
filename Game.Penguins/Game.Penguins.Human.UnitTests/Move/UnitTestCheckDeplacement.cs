@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Game.Penguins.Core.CustomGame;
-using Game.Penguins.Core.CustomGame.App;
-using Game.Penguins.Core.CustomGame.Board;
-using Game.Penguins.Core.CustomGame.Move;
+using Game.Penguins.Core.Classes;
+using Game.Penguins.Core.Classes.App;
+using Game.Penguins.Core.Classes.Board;
+using Game.Penguins.Core.Classes.Move;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
+using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Game.Penguins.Human.UnitTests.Move
@@ -37,7 +38,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             Assert.IsTrue(listPossibilities[0].X == 1 && listPossibilities[0].Y == 0);
             Assert.IsTrue(listPossibilities[1].X == 2 && listPossibilities[1].Y == 0);
         }
@@ -64,7 +65,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             Assert.IsTrue(listPossibilities[0].X == 1 && listPossibilities[0].Y == 0);
             Assert.IsTrue(listPossibilities[1].X == 0 && listPossibilities[1].Y == 0);
         }
@@ -91,7 +92,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             Assert.IsTrue(listPossibilities[1].X == 1 && listPossibilities[1].Y == 5);
             Assert.IsTrue(listPossibilities[2].X == 2 && listPossibilities[2].Y == 6);
         }
@@ -116,7 +117,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             Assert.IsTrue(listPossibilities[4].X == 4 && listPossibilities[4].Y == 6);
             Assert.IsTrue(listPossibilities[5].X == 4 && listPossibilities[5].Y == 5);
             Assert.IsTrue(listPossibilities[6].X == 5 && listPossibilities[6].Y == 4);
@@ -148,7 +149,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             Assert.IsTrue(listPossibilities[1].X == 6 && listPossibilities[1].Y == 1);
             Assert.IsTrue(listPossibilities[2].X == 6 && listPossibilities[2].Y == 2);
         }
@@ -176,7 +177,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             Assert.IsTrue(listPossibilities[1].X == 2 && listPossibilities[1].Y == 6);
             Assert.IsTrue(listPossibilities[2].X == 1 && listPossibilities[2].Y == 5);
         }
@@ -204,7 +205,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             foreach (var element in listPossibilities)
             {
                 Assert.IsTrue(element.X != xDestination && element.Y != yDestination);
@@ -234,7 +235,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             foreach (var element in listPossibilities)
             {
                 Assert.IsTrue(element.X != xDestination || element.Y != yDestination);
@@ -264,7 +265,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             foreach (var element in listPossibilities)
             {
                 Assert.IsTrue(element.X != xDestination || element.Y != yDestination);
@@ -294,7 +295,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             foreach (var element in listPossibilities)
             {
                 Assert.IsTrue(element.X != xDestination || element.Y != yDestination);
@@ -324,7 +325,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             foreach (var element in listPossibilities)
             {
                 Assert.IsTrue(element.X != xDestination || element.Y != yDestination);
@@ -355,7 +356,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             foreach (var element in listPossibilities)
             {
                 Assert.IsTrue(element.X != xDestination || element.Y != yDestination);
@@ -386,7 +387,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.CheckDeplacement(result);
+            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             foreach (var element in listPossibilities)
             {
                 Assert.IsTrue(element.X != xDestination || element.Y != yDestination);
@@ -412,9 +413,7 @@ namespace Game.Penguins.Human.UnitTests.Move
             Player player2 = new Player("Player2", PlayerType.Human);
             customGame.Players.Add(player1);
             customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
+            
             customGame.StartGame();
             customGame.CurrentPlayer = customGame.Players[0];
             customGame.IdPlayer = 0;

@@ -482,6 +482,9 @@ namespace Game.Penguins.Helper.CustomGame
             playerCurrent.ChangeState();
         }
 
+        /// <summary>
+        /// Determine who is the next player
+        /// </summary>
         private void ChangeCurrentPlayer()
         {
             if (IdPlayer + 1 < Players.Count)

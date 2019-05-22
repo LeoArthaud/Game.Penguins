@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Game.Penguins.Core.CustomGame;
-using Game.Penguins.Core.CustomGame.App;
+using Game.Penguins.Core.Classes;
+using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Interfaces;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
+using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -149,7 +150,7 @@ namespace Game.Penguins.Game.UnitTests
             Assert.IsTrue(customGame.Players[0].Color == PlayerColor.Blue);
             Assert.IsTrue(customGame.Players[1].Color == PlayerColor.Yellow);
         }
-        
+
         #endregion
 
         #region Private Functions
@@ -158,6 +159,7 @@ namespace Game.Penguins.Game.UnitTests
         /// Init the game
         /// </summary>
         /// <param name="countPlayer">number of players</param>
+        /// <param name="randomMock">mock for random, can be null</param>
         /// <returns>game</returns>
         public CustomGame InitGame(int countPlayer, Mock<IRandom> randomMock)
         {
@@ -178,7 +180,6 @@ namespace Game.Penguins.Game.UnitTests
                 Player player = new Player("Player"+i, PlayerType.Human);
                 customGame.Players.Add(player);
             }
-            customGame.CountPlayers = countPlayer;
 
             // Launch function
             customGame.StartGame();
