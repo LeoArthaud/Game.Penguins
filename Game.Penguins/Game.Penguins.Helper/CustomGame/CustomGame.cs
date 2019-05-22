@@ -177,7 +177,7 @@ namespace Game.Penguins.Helper.CustomGame
             if (CurrentPlayer.PlayerType == PlayerType.AIEasy)
             {
                 // Call AIEasy
-                AIEasy aiEasy = new AIEasy(Board, random);
+                AIEasy aiEasy = new AIEasy(Board, random, CurrentPlayer);
 
                 // Get coordinates
                 Coordinates coordinates = aiEasy.PlacePenguin();
@@ -189,7 +189,7 @@ namespace Game.Penguins.Helper.CustomGame
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
             {
                 // Call AIMedium
-                AIMedium aiMedium = new AIMedium(Board, random);
+                AIMedium aiMedium = new AIMedium(Board, random, CurrentPlayer);
 
                 // Get coordinates
                 Coordinates coordinates = aiMedium.PlacePenguin();
@@ -242,22 +242,30 @@ namespace Game.Penguins.Helper.CustomGame
                         IList<Coordinates> coordinates = new List<Coordinates>();
                         foreach (var possibility in PossibilitiesOrigin)
                         {
+                            Player playerCurrent = (Player)CurrentPlayer;
                             var list = move.CheckDeplacement(possibility);
-                            if (list.Count != 0)
+                            if (list.Count == 0)
                             {
-                                foreach (var position in list)
-                                {
-                                    coordinates.Add(position);
-                                }
+
+                                // Get cell
+                                Cell cell = (Cell)Board.Board[possibility.X, possibility.Y];
+
+                                // Add to the player number of point of the cell
+                                playerCurrent.Points += cell.FishCount;
+
+                                // Cell become water
+                                cell.CellType = CellType.Water;
+
+                                // Cell have no fish
+                                cell.FishCount = 0;
+
+                                // Cell have no penguin
+                                cell.CurrentPenguin = null;
+
+                                // Apply change
+                                cell.ChangeState();
                             }
                         }
-
-                        // If the player can't move his penguins, delete all his penguin
-                        if (coordinates.Count == 0)
-                        {
-                            ChangeStateLastMovement();
-                        }
-
                         AffectedCurrentPlayer(ChangeType.Move);
                     }
                 }
@@ -275,7 +283,7 @@ namespace Game.Penguins.Helper.CustomGame
             if (CurrentPlayer.PlayerType == PlayerType.AIEasy)
             {
                 // Call an AIEasy
-                AIEasy aiEasy = new AIEasy(Board, random);
+                AIEasy aiEasy = new AIEasy(Board, random, CurrentPlayer);
 
                 // Get positions of penguins of the current player
                 PossibilitiesOfOrigin();
@@ -306,7 +314,7 @@ namespace Game.Penguins.Helper.CustomGame
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
             {
                 // Call an AIMedium
-                AIMedium aiMedium = new AIMedium(Board, random);
+                AIMedium aiMedium = new AIMedium(Board, random, CurrentPlayer);
 
                 // Get positions of penguins of the current player
                 PossibilitiesOfOrigin();

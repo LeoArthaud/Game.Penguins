@@ -5,7 +5,7 @@ using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Classes.Move;
 using Game.Penguins.Core.Interfaces;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
-
+using Game.Penguins.Core.Interfaces.Game.Players;
 namespace Game.Penguins.AI
 {
     public class AIEasy : IAI
@@ -21,14 +21,20 @@ namespace Game.Penguins.AI
         private IRandom random;
 
         /// <summary>
+        /// Current player
+        /// </summary>
+        public IPlayer CurrentPlayer { get; set; }
+
+        /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="board"></param>
         /// <param name="random"></param>
-        public AIEasy(IBoard board, IRandom random)
+        public AIEasy(IBoard board, IRandom random, IPlayer currentPlayer)
         {
             Board = board;
             this.random = random;
+            CurrentPlayer = currentPlayer;
         }
 
         /// <summary>
@@ -75,6 +81,7 @@ namespace Game.Penguins.AI
         /// <returns>Position of the penguin or [-1;-1] if the AI can't move his penguins</returns>
         public Coordinates FindOrigin(List<Coordinates> possibilitiesOrigin)
         {
+            Player playerCurrent = (Player)CurrentPlayer;
             Movements moveOrigin = new Movements(null, null, Board);
             foreach (var possibility in possibilitiesOrigin)
             {
@@ -85,6 +92,23 @@ namespace Game.Penguins.AI
                         return possibility;
                     }
                 }
+                // Get cell
+                Cell cell = (Cell)Board.Board[possibility.X, possibility.Y];
+           
+                // Add to the player number of point of the cell
+                playerCurrent.Points += cell.FishCount;
+
+                // Cell become water
+                cell.CellType = CellType.Water;
+
+                // Cell have no fish
+                cell.FishCount = 0;
+
+                // Cell have no penguin
+                cell.CurrentPenguin = null;
+
+                // Apply change
+                cell.ChangeState();
             }
             return new Coordinates(-1, -1);
 
