@@ -291,24 +291,13 @@ namespace Game.Penguins.Helper.CustomGame
                 // Get the penguin to move
                 Coordinates origin = aiEasy.FindOrigin(PossibilitiesOrigin);
 
-                // If all penguins of the player can't move
-                if (origin.X == -1 && origin.Y == -1)
-                {
-                    // Delete all penguins
-                    ChangeStateLastMovement();
-                    AffectedCurrentPlayer(ChangeType.Move);
-                }
-                // If player can move at least 1 penguin
-                else
-                {
-                    // Get the destination of the penguin
-                    Coordinates destination = aiEasy.FindDestination(origin);
+                // Get the destination of the penguin
+                Coordinates destination = aiEasy.FindDestination(origin);
 
-                    // Apply changes
-                    ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
-                    AffectedCurrentPlayer(ChangeType.Move);
-                }
-
+                // Apply changes
+                ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                AffectedCurrentPlayer(ChangeType.Move);
+                
             }
             // If AI is medium
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
@@ -324,6 +313,7 @@ namespace Game.Penguins.Helper.CustomGame
                 Coordinates origin = coordinates["origin"];
                 Coordinates destination = coordinates["destination"];
 
+                // Apply changes
                 ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
                 AffectedCurrentPlayer(ChangeType.Move);
                 
@@ -404,38 +394,6 @@ namespace Game.Penguins.Helper.CustomGame
             // Apply changes
             cellOrigin.ChangeState();
             cellDestination.ChangeState();
-            NextAction = NextActionType.MovePenguin;
-        }
-
-        /// <summary>
-        /// Delete penguins of the board
-        /// </summary>
-        private void ChangeStateLastMovement()
-        {
-            PossibilitiesOfOrigin();
-            Player playerCurrent = (Player)CurrentPlayer;
-            for (int i = 0; i < PossibilitiesOrigin.Count; i++)
-            {
-                // Get cell
-                Cell cell = (Cell)Board.Board[PossibilitiesOrigin[i].X, PossibilitiesOrigin[i].Y];
-
-                // Add to the player number of point of the cell
-                playerCurrent.Points += cell.FishCount;
-
-                // Cell become water
-                cell.CellType = CellType.Water;
-
-                // Cell have no fish
-                cell.FishCount = 0;
-
-                // Cell have no penguin
-                cell.CurrentPenguin = null;
-
-                // Apply change
-                cell.ChangeState();
-            }
-
-            // Define next action
             NextAction = NextActionType.MovePenguin;
         }
 
