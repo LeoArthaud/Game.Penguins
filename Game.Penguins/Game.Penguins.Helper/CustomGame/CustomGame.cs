@@ -318,7 +318,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Get positions of penguins of the current player
                 PossibilitiesOfOrigin();
-                var coordinates = aiMedium.FindDestination();
+                var coordinates = aiMedium.FindOriginDestination();
 
                 // Get the penguin to move
                 Coordinates origin = coordinates["origin"];

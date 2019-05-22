@@ -21,6 +21,14 @@ namespace Game.Penguins.AI
         /// </summary>
         private IRandom random;
 
+        /// <summary>
+        /// Positions of penguins of current player
+        /// </summary>
+        public List<Coordinates> PossibilitiesOrigin { get; set; }
+
+        /// <summary>
+        /// Current player
+        /// </summary>
         public IPlayer CurrentPlayer { get; set; }
 
         /// <summary>
@@ -56,32 +64,10 @@ namespace Game.Penguins.AI
         }
 
         /// <summary>
-        /// Get randomly the penguin to move
-        /// </summary>
-        /// <param name="possibilitiesOrigin"></param>
-        /// <returns>Position of the penguin or [-1;-1] if the AI can't move his penguins</returns>
-        public Coordinates FindOrigin(List<Coordinates> possibilitiesOrigin)
-        {
-            Movements moveOrigin = new Movements(null, null, Board);
-            foreach (var possibility in possibilitiesOrigin)
-            {
-                foreach (var direction in moveOrigin.CanMove(possibility))
-                {
-                    if (direction.Value == false)
-                    {
-                        return possibility;
-                    }
-                }
-            }
-            return new Coordinates(-1, -1);
-
-        }
-
-        /// <summary>
         /// Get randomly the destination of the penguin
         /// </summary>
         /// <returns>coordinates of the destination</returns>
-        public Dictionary<string, Coordinates> FindDestination()
+        public Dictionary<string, Coordinates> FindOriginDestination()
         {
             Movements move = new Movements(null, null, Board);
 
@@ -121,10 +107,8 @@ namespace Game.Penguins.AI
         }
 
         /// <summary>
-        /// Positions of penguins of current player
+        /// Get current player penguins
         /// </summary>
-        public List<Coordinates> PossibilitiesOrigin { get; set; }
-
         private void PossibilitiesOfOrigin()
         {
             PossibilitiesOrigin = new List<Coordinates>();

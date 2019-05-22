@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Game.Penguins.Core.Classes.Board;
-using Game.Penguins.Core.Interfaces;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
+using Game.Penguins.Core.Interfaces.Game.Players;
 
 namespace Game.Penguins.AI
 {
     public interface IAI
     {
         IBoard Board { get; set; }
+
+        IPlayer CurrentPlayer { get; set; }
 
         Coordinates PlacePenguin();
 
