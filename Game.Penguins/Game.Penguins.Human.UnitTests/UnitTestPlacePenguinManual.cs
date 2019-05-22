@@ -149,7 +149,7 @@ namespace Game.Penguins.Human.UnitTests
             for(int i = 2; i<4; i++)
             {
             Cell cell = (Cell)customGame.Board.Board[x, y];
-            cell.FishCount = 2;
+            cell.FishCount = i;
 
             customGame.PlacePenguinManual(x, y);
 
