@@ -8,7 +8,7 @@ using Game.Penguins.Core.Interfaces.Game.Players;
 using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Game.Penguins.Human.UnitTests.Move
+namespace Game.Penguins.Game.UnitTests.Move
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
