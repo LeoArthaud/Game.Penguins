@@ -200,7 +200,14 @@ namespace Game.Penguins.Helper.CustomGame
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
             {
-                throw new NotImplementedException();
+                // Call AIHard
+                AIHard aiHard = new AIHard(Board, random, CurrentPlayer);
+
+                // Get coordinates
+                Coordinates coordinates = aiHard.PlacePenguin();
+
+                // Apply changes
+                ChangeStatePlace(coordinates.X, coordinates.Y);
             }
 
             // Apply all changes
@@ -321,7 +328,20 @@ namespace Game.Penguins.Helper.CustomGame
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
             {
-                throw new NotImplementedException();
+                // Call an AIHard
+                AIHard aiHard = new AIHard(Board, random, CurrentPlayer);
+
+                // Get positions of penguins of the current player
+                PossibilitiesOfOrigin();
+                var coordinates = aiHard.FindOriginDestination();
+
+                // Get the penguin to move
+                Coordinates origin = coordinates["origin"];
+                Coordinates destination = coordinates["destination"];
+
+                // Apply changes
+                ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                AffectedCurrentPlayer(ChangeType.Move);
             }
         }
         

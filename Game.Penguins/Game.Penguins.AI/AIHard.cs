@@ -52,17 +52,54 @@ namespace Game.Penguins.AI
         public Coordinates PlacePenguin()
         {
             // Get random x and y
-            int randomX = random.Next(0, 8);
-            int randomY = random.Next(0, 8);
+            bool isNear = false;
+            var possiblePosition = getFishNear();
+            int placeX;
+            int placeY;
+
+            if (possiblePosition.Count != 0)
+            {
+                isNear = true;
+            }
+
+            if (isNear)
+            {
+                Console.WriteLine(possiblePosition[1].X + "," + possiblePosition[1].Y);
+                return possiblePosition[1];
+            }
+            else
+            {
+                Console.Write("Random position");
+                placeX = random.Next(0, 8);
+                placeY = random.Next(0, 8);
+            }
 
             // If cell at [x;y] has already a penguin or has more than one fish
-            while (Board.Board[randomX, randomY].FishCount != 1 || Board.Board[randomX, randomY].CellType == CellType.FishWithPenguin)
+            while ((Board.Board[placeX, placeY].FishCount != 1 || Board.Board[placeX, placeY].CellType == CellType.FishWithPenguin) && isNear == false)
             {
                 // Change random x and y
-                randomX = random.Next(0, 8);
-                randomY = random.Next(0, 8);
+                placeX = random.Next(0, 8);
+                placeY = random.Next(0, 8);
             }
-            return new Coordinates(randomX, randomY);
+            return new Coordinates(placeX, placeY);
+        }
+
+        private List<Coordinates> getFishNear()
+        {
+            List<Coordinates> coordinatesList = new List<Coordinates>();
+            int X = -1;
+            int Y = -1;
+
+            Coordinates coordinates = new Coordinates(X, Y);
+            coordinatesList.Add(coordinates);
+
+            int X2 = 1;
+            int Y2 = 1;
+
+            Coordinates coordinates2 = new Coordinates(X2, Y2);
+            coordinatesList.Add(coordinates2);
+
+            return coordinatesList;
         }
 
         /// <summary>
