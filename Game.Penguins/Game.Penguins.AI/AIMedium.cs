@@ -8,7 +8,7 @@ using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
 namespace Game.Penguins.AI
 {
-    public class AIMedium
+    public class AIMedium : IAI
     {
         /// <summary>
         /// Plateau
