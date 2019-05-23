@@ -17,7 +17,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         #region Public Functions
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesRight() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultRight_AllRow()
@@ -53,7 +53,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesLeft() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultLeft_AllRow()
@@ -89,7 +89,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesDownRight() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultDownRight_AllRow()
@@ -126,7 +126,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesUpRight() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultUpRight_AllRow()
@@ -162,7 +162,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesDownLeft() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultDownLeft_AllRow()
@@ -198,7 +198,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesUpLeft() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultUpLeft_AllRow()
@@ -234,7 +234,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesRight() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultRight_BlockBy()
@@ -272,7 +272,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesLeft() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultLeft_BlockBy()
@@ -310,7 +310,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesDownRight() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultDownRight_BlockBy()
@@ -348,7 +348,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesUpRight() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultUpRight_BlockBy()
@@ -386,7 +386,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesDownLeft() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultDownLeft_BlockBy()
@@ -425,7 +425,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function GetCoordinatesUpLeft() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultUpLeft_BlockBy()
@@ -463,7 +463,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// 
+        /// Test if the function CheckDeplacement() returns the good coordinates (with up-right)
         /// </summary>
         [TestMethod]
         public void Test_CheckDeplacement_ResultUpRight()
