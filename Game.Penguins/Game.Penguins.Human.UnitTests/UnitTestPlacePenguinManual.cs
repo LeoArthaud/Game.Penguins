@@ -141,7 +141,7 @@ namespace Game.Penguins.Human.UnitTests
         /// Test, in the function PlacePenguinManual()
         /// </summary>
         [TestMethod]
-        public void Test_customgame_PlacePenguinManual_FishCount()
+        public void Test_PlacePenguinManual_FishCount()
         {
             CustomGame customGame = InitGame();
 
@@ -149,21 +149,21 @@ namespace Game.Penguins.Human.UnitTests
             int x = 0;
             int y = 0;
 
-            for(int i = 2; i<4; i++)
+            for(int i = 2; i< 4; i++)
             {
-            Cell cell = (Cell)customGame.Board.Board[x, y];
-            cell.FishCount = i;
+                Cell cell = (Cell)customGame.Board.Board[x, y];
+                cell.FishCount = i;
 
-            customGame.PlacePenguinManual(x, y);
+                customGame.PlacePenguinManual(x, y);
 
-            Assert.IsTrue(cell.CurrentPenguin == null);
+                Assert.IsTrue(cell.CurrentPenguin == null);
             }
 
 
         }
 
         [TestMethod]
-        public void Test_customgame_PlacePenguinManual_CellType()
+        public void Test_PlacePenguinManual_CellType()
         {
             CustomGame customGame = InitGame();
 
@@ -177,7 +177,6 @@ namespace Game.Penguins.Human.UnitTests
             customGame.PlacePenguinManual(x, y);
 
             Assert.IsTrue(cell.CurrentPenguin == null);
-
 
         }
         #endregion
