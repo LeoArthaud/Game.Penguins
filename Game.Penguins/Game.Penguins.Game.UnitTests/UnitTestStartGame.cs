@@ -89,51 +89,7 @@ namespace Game.Penguins.Game.UnitTests
             // Verify that the action after StartGame() is PlacePenguin
             Assert.IsTrue(customGame.NextAction == NextActionType.PlacePenguin);
         }
-
-        /// <summary>
-        /// Test, in the function StartGame(), if the name is set correctly
-        /// </summary>
-        [TestMethod]
-        public void Test_StartGame_Name()
-        {
-            // Init game
-            CustomGame customGame = InitGame(2, null);
-
-            // Test Name of the players
-            Assert.IsTrue(customGame.Players[0].Name == "Player0");
-            Assert.IsTrue(customGame.Players[1].Name == "Player1");
-        }
-
-        /// <summary>
-        /// Test, in the function StartGame(), if the identifier is not null
-        /// </summary>
-        [TestMethod]
-        public void Test_StartGame_Identifier()
-        {
-            // Init game
-            CustomGame customGame = InitGame(2, null);
-
-            // Test identifier of the players
-            foreach (var player in customGame.Players)
-            {
-                Assert.IsNotNull(player.Identifier);
-            }
-        }
-
-        /// <summary>
-        /// Test, in the function StartGame(), if the NextAction is PlacePenguin
-        /// </summary>
-        [TestMethod]
-        public void Test_StartGame_PlayerType()
-        {
-            // Init game
-            CustomGame customGame = InitGame(2, null);
-
-            // Test type of the players
-            Assert.IsTrue(customGame.Players[0].PlayerType == PlayerType.Human);
-            Assert.IsTrue(customGame.Players[1].PlayerType == PlayerType.Human);
-        }
-
+        
         /// <summary>
         /// Test, in the function StartGame(), if the color is random
         /// </summary>

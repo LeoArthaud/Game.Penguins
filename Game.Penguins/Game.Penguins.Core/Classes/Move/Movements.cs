@@ -414,26 +414,22 @@ namespace Game.Penguins.Core.Classes.Move
         /// <summary>
         /// Check if the penguin can move in a direction
         /// </summary>
-        /// <param name="originX">Coordinate X of the origin</param>
-        /// <param name="originY">Coordinate Y of the origin</param>
+        /// <param name="x">Coordinate X</param>
+        /// <param name="y">Coordinate Y</param>
         /// <returns>true if the penguin can't move</returns>
-        public bool CheckCaseWater(int originX, int originY)
+        public bool CheckCaseWater(int x, int y)
         {
             // If the cell not exceed the border of the board
-            if (0 <= originX && 0 <= originY && originX < 8 && originY < 8)
+            if (0 <= x && 0 <= y && x < 8 && y < 8)
             {
-                // If the type of the cell is equal to Water or FishWithPenguin
-                if (Board.Board[originX, originY].CellType == CellType.Water || Board.Board[originX, originY].CellType == CellType.FishWithPenguin)
+                // If the type of the cell is equal to Fish
+                if (Board.Board[x, y].CellType == CellType.Fish)
                 {
-                    return true;
+                    return false;
                 }
             }
-            else
-            {
-                return true;
-            }
             
-            return false;
+            return true;
         }
     }
 }
