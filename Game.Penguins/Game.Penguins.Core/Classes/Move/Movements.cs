@@ -154,7 +154,7 @@ namespace Game.Penguins.Core.Classes.Move
             for (int i = 1; i < 8; i++)
             {
                 // If the cell not exceed the border of the board
-                if (origin.X + i < 8)
+                if (origin.X + i < 8 && origin.Y >= 0 && origin.Y < 8 && origin.X + i >= 0)
                 {
                     // If the cell is free
                     if (Board.Board[origin.X + i, origin.Y].CellType == CellType.Fish)
@@ -187,7 +187,7 @@ namespace Game.Penguins.Core.Classes.Move
             for (int i = 1; i < 8; i++)
             {
                 // If the cell not exceed the border of the board
-                if (origin.X - i >= 0)
+                if (origin.X - i >= 0 && origin.Y >= 0 && origin.Y < 8 && origin.X - i < 8)
                 {
                     // If the cell is free
                     if (Board.Board[origin.X - i, origin.Y].CellType == CellType.Fish)

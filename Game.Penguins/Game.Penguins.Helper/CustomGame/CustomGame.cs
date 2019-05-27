@@ -79,7 +79,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// <param name="playerName">Name of player</param>
         /// <param name="playerType">Type of player (human or AI)</param>
         /// <returns>return player which is add</returns>
-        IPlayer IGame.AddPlayer(string playerName, PlayerType playerType)
+        public IPlayer AddPlayer(string playerName, PlayerType playerType)
         {
             // Create new player with the name and the type
             Player player = new Player(playerName, playerType);
@@ -308,7 +308,10 @@ namespace Game.Penguins.Helper.CustomGame
                 Coordinates destination = aiEasy.FindDestination(origin);
 
                 // Apply changes
-                ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                if (origin.X >= 0 && origin.X < 8 && origin.Y >= 0 && origin.Y < 8 && destination.X >= 0 && destination.X < 8 && destination.Y >= 0 && destination.Y < 8)
+                {
+                    ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                }
                 AffectedCurrentPlayer(ChangeType.Move);
                 
             }
