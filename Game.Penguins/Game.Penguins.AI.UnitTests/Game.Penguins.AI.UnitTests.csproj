@@ -84,7 +84,10 @@
   <ItemGroup>
     <Compile Include="Easy\UnitTestMovePenguin.cs" />
     <Compile Include="Easy\UnitTestPlacePenguin.cs" />
+    <Compile Include="Hard\UnitTestMovePenguin.cs" />
     <Compile Include="Hard\UnitTestPlacePenguin.cs" />
+    <Compile Include="Medium\UnitTestMovePenguin.cs" />
+    <Compile Include="Medium\UnitTestPlacePenguin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestMovePenguin.cs" />
     <Compile Include="UnitTestPlacePenguin.cs" />
@@ -112,9 +115,7 @@
       <Name>Game.Penguins.Helper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Medium\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

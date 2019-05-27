@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Interfaces;
@@ -8,7 +9,7 @@ using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Game.Penguins.AI.UnitTests.Easy
+namespace Game.Penguins.AI.UnitTests.Medium
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
@@ -34,9 +35,9 @@ namespace Game.Penguins.AI.UnitTests.Easy
             cell.FishCount = 1;
 
             // Launch function
-            AIEasy aiEasy = new AIEasy(customGame.Board, randomMock.Object, customGame.CurrentPlayer);
+            AIMedium aiMedium = new AIMedium(customGame.Board, randomMock.Object, customGame.CurrentPlayer);
 
-            Coordinates coordinates = aiEasy.PlacePenguin();
+            Coordinates coordinates = aiMedium.PlacePenguin();
 
             Assert.IsTrue(coordinates.X == 0 && coordinates.Y == 0);
         }
@@ -50,8 +51,8 @@ namespace Game.Penguins.AI.UnitTests.Easy
             // Init game
             Mock<IRandom> randomMock = new Mock<IRandom>();
             randomMock.SetupSequence(e => e.Next(0, 8))
-                                                    .Returns(0).Returns(0)
-                                                    .Returns(1).Returns(1);
+                .Returns(0).Returns(0)
+                .Returns(1).Returns(1);
 
             CustomGame customGame = InitGame(null);
 
@@ -70,9 +71,9 @@ namespace Game.Penguins.AI.UnitTests.Easy
             cell2.FishCount = 1;
 
             // Launch function
-            AIEasy aiEasy = new AIEasy(customGame.Board, randomMock.Object, customGame.CurrentPlayer);
+            AIMedium aiMedium = new AIMedium(customGame.Board, randomMock.Object, customGame.CurrentPlayer);
 
-            Coordinates coordinates = aiEasy.PlacePenguin();
+            Coordinates coordinates = aiMedium.PlacePenguin();
 
             Assert.IsTrue(coordinates.X == 1 && coordinates.Y == 1);
         }
@@ -106,9 +107,9 @@ namespace Game.Penguins.AI.UnitTests.Easy
             cell2.FishCount = 1;
 
             // Launch function
-            AIEasy aiEasy = new AIEasy(customGame.Board, randomMock.Object, customGame.CurrentPlayer);
+            AIMedium aiMedium = new AIMedium(customGame.Board, randomMock.Object, customGame.CurrentPlayer);
 
-            Coordinates coordinates = aiEasy.PlacePenguin();
+            Coordinates coordinates = aiMedium.PlacePenguin();
 
             Assert.IsTrue(coordinates.X == 1 && coordinates.Y == 1);
         }
@@ -120,8 +121,8 @@ namespace Game.Penguins.AI.UnitTests.Easy
             CustomGame customGame = randomMock == null ? new CustomGame(new AppRandom()) : new CustomGame(randomMock.Object);
 
             // Add 2 players
-            customGame.AddPlayer("Player1", PlayerType.AIEasy);
-            customGame.AddPlayer("Player2", PlayerType.AIEasy);
+            customGame.AddPlayer("Player1", PlayerType.AIMedium);
+            customGame.AddPlayer("Player2", PlayerType.AIMedium);
 
             customGame.StartGame();
             customGame.CurrentPlayer = customGame.Players[0];
