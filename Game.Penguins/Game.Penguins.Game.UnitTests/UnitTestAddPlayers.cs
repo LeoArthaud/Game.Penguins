@@ -15,7 +15,7 @@ namespace Game.Penguins.Game.UnitTests
     {
 
         [TestMethod]
-        public void Test_AddPlayers_Human()
+        public void Test_AddPlayers()
         {
             CustomGame customGame = new CustomGame(new AppRandom());
 
