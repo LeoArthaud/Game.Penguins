@@ -216,8 +216,6 @@ namespace Game.Penguins.Helper.CustomGame
                 ChangeStatePlace(coordinates.X, coordinates.Y);
             }
 
-            // Apply all changes
-            StateChanged?.Invoke(this, null);
 
         }
 
@@ -283,8 +281,6 @@ namespace Game.Penguins.Helper.CustomGame
                     }
                 }
             }
-            // Apply all changes
-            StateChanged?.Invoke(this, null);
         }
 
         /// <summary>
@@ -308,10 +304,7 @@ namespace Game.Penguins.Helper.CustomGame
                 Coordinates destination = aiEasy.FindDestination(origin);
 
                 // Apply changes
-                if (origin.X >= 0 && origin.X < 8 && origin.Y >= 0 && origin.Y < 8 && destination.X >= 0 && destination.X < 8 && destination.Y >= 0 && destination.Y < 8)
-                {
-                    ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
-                }
+                ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
                 AffectedCurrentPlayer(ChangeType.Move);
                 
             }
