@@ -35,12 +35,12 @@ namespace Game.Penguins.AI
         /// <summary>
         /// Get a list of cells with 3 points
         /// </summary>
-        public IList<Coordinates> threePoints { get; set;}
+        public IList<Coordinates> ThreePoints { get; set; }
 
         /// <summary>
         /// Get a list of solo fish near 3 points cells
         /// </summary>
-        public IList<Coordinates> soloFish = new List<Coordinates>();
+        public IList<Coordinates> SoloFish { get; set; }
 
         /// <summary>
         /// Constructor
@@ -62,28 +62,26 @@ namespace Game.Penguins.AI
         public Coordinates PlacePenguin()
         {
             
-            threePoints = getThreePoints();
-            soloFish = getFishNear(threePoints);
+            ThreePoints = getThreePoints();
+            SoloFish = getFishNear(ThreePoints);
             // Get random x and y
             bool isNear = false;
             int placeX;
             int placeY;
 
-            if (soloFish.Count != 0)
+            if (SoloFish.Count != 0)
             {
                 isNear = true;
             }
 
             if (isNear)
             {
-                return soloFish[random.Next(0, soloFish.Count)];
+                return SoloFish[random.Next(0, SoloFish.Count)];
             }
-            else
-            {
-                Console.Write("Random position");
-                placeX = random.Next(0, 8);
-                placeY = random.Next(0, 8);
-            }
+
+            Console.Write("Random position");
+            placeX = random.Next(0, 8);
+            placeY = random.Next(0, 8);
 
             // If cell at [x;y] has already a penguin or has more than one fish
             while ((Board.Board[placeX, placeY].FishCount != 1 || Board.Board[placeX, placeY].CellType == CellType.FishWithPenguin) && isNear == false)
@@ -95,7 +93,7 @@ namespace Game.Penguins.AI
             return new Coordinates(placeX, placeY);
         }
 
-        private IList<Coordinates> getThreePoints()
+        public IList<Coordinates> getThreePoints()
         {
             int k = 0;
             List<Coordinates> coordinatesList = new List<Coordinates>();
@@ -116,7 +114,7 @@ namespace Game.Penguins.AI
             return coordinatesList;
         }
 
-        private IList<Coordinates> getFishNear(IList<Coordinates> threePoints)
+        public IList<Coordinates> getFishNear(IList<Coordinates> threePoints)
         {
             int k = 0;
             List<Coordinates> soloFishList = new List<Coordinates>();
