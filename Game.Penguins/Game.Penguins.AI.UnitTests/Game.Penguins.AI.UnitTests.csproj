@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Easy\UnitTestMovePenguin.cs" />
     <Compile Include="Easy\UnitTestPlacePenguin.cs" />
     <Compile Include="Hard\UnitTestPlacePenguin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
