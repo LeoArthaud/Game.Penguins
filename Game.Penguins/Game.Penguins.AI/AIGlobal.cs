@@ -76,7 +76,13 @@ namespace Game.Penguins.AI
             // Shuffle
             result = result.OrderBy(a => Guid.NewGuid()).ToList();
 
-            return result[0];
+            if (result.Count != 0)
+            {
+                return result[0];
+            } else
+            {
+                return new Coordinates(-1, -1);
+            }
         }
 
         /// <summary>
