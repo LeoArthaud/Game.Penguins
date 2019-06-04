@@ -9,6 +9,9 @@ using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 namespace Game.Penguins.AI
 {
+    /// <summary>
+    /// Abstract superclass for other AI classes. Implements IAI interface.
+    /// </summary>
     public abstract class AIGlobal : IAI
     {
         /// <summary>

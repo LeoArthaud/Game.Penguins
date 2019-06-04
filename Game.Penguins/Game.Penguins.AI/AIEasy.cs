@@ -9,6 +9,9 @@ using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 namespace Game.Penguins.AI
 {
+    /// <summary>
+    /// Easy difficulty AI. Subclass of AIGlobal.
+    /// </summary>
     public class AIEasy : AIGlobal
     {
         /// <summary>

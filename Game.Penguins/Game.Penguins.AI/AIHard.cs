@@ -10,6 +10,9 @@ using Game.Penguins.Core.Interfaces.Game.Players;
 
 namespace Game.Penguins.AI
 {
+    /// <summary>
+    /// Hard difficulty AI. Subclass of AIGlobal.
+    /// </summary>
     public class AIHard : AIGlobal
     {
         /// <summary>
