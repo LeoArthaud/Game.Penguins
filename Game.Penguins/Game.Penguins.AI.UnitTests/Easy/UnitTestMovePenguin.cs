@@ -22,14 +22,14 @@ namespace Game.Penguins.AI.UnitTests.Easy
         [TestMethod]
         public void Test_FindOrigin_CanMove()
         {
-            //Init Game
+            // Init Game
             CustomGame customGame = InitGame(null);
             List<Coordinates> list = new List<Coordinates>();
 
             // Penguin in 0;0
             int x = 0;
             int y = 0;
-
+            // Set cell with penguin
             Cell cell = (Cell)customGame.Board.Board[x, y];
             cell.FishCount = 1;
             cell.CellType = CellType.FishWithPenguin;
@@ -54,14 +54,14 @@ namespace Game.Penguins.AI.UnitTests.Easy
         [TestMethod]
         public void Test_FindOrigin_ApplyChange()
         {
-            //Init Game
+            // Init Game
             CustomGame customGame = InitGame(null);
             List<Coordinates> list = new List<Coordinates>();
 
             // Penguin in 0;0
             int x = 0;
             int y = 0;
-
+            // Set cell with penguin
             Cell cell = (Cell)customGame.Board.Board[x, y];
             cell.FishCount = 1;
             cell.CellType = CellType.FishWithPenguin;
@@ -71,14 +71,14 @@ namespace Game.Penguins.AI.UnitTests.Easy
             // Cell water in 1;0
             x = 1;
             y = 0;
-
+            // Set cell water
             cell = (Cell)customGame.Board.Board[x, y];
             cell.CellType = CellType.Water;
 
             // Cell water in 0;1
             x = 0;
-            y = 1;
-
+            y = 1;            
+            // Set cell water
             cell = (Cell)customGame.Board.Board[x, y];
             cell.CellType = CellType.Water;
 
@@ -106,7 +106,7 @@ namespace Game.Penguins.AI.UnitTests.Easy
             // Penguin in 0;0
             int x = 0;
             int y = 0;
-
+            // Set cell with penguin
             Cell cell = (Cell)customGame.Board.Board[x, y];
             cell.FishCount = 1;
             cell.CellType = CellType.FishWithPenguin;
@@ -115,14 +115,14 @@ namespace Game.Penguins.AI.UnitTests.Easy
             // Cell water in 0;1
             x = 0;
             y = 1;
-
+            // Set cell water
             cell = (Cell)customGame.Board.Board[x, y];
             cell.CellType = CellType.Water;
 
             // Cell water in 2;0
             x = 2;
             y = 0;
-
+            // Set cell water
             cell = (Cell)customGame.Board.Board[x, y];
             cell.CellType = CellType.Water;
 
@@ -130,11 +130,18 @@ namespace Game.Penguins.AI.UnitTests.Easy
             AIEasy aiEasy = new AIEasy(customGame.Board, new AppRandom(), customGame.CurrentPlayer);
             Coordinates coordinates = aiEasy.FindDestination(new Coordinates(0,0));
 
+            // Test
             Assert.IsTrue(coordinates.X == 1 && coordinates.Y == 0);
 
         }
+
         #region Private Functions
 
+        /// <summary>
+        /// Init the game with 2 players AIEasy
+        /// </summary>
+        /// <param name="randomMock">mock for the random</param>
+        /// <returns>the game with modifications</returns>
         public CustomGame InitGame(Mock<IRandom> randomMock)
         {
             CustomGame customGame = randomMock == null ? new CustomGame(new AppRandom()) : new CustomGame(randomMock.Object);
@@ -143,7 +150,10 @@ namespace Game.Penguins.AI.UnitTests.Easy
             customGame.AddPlayer("Player1", PlayerType.AIEasy);
             customGame.AddPlayer("Player2", PlayerType.AIEasy);
 
+            // Launch function
             customGame.StartGame();
+
+            // Set current player
             customGame.CurrentPlayer = customGame.Players[0];
             customGame.IdPlayer = 0;
 
