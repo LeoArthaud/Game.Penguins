@@ -355,13 +355,6 @@ namespace Game.Penguins.Helper.CustomGame
                     EndGame();
                 }
 
-                // Log penguin movement
-                //Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                //log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
-
-                // Apply changes
-                //ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
-                //AffectedCurrentPlayer(ChangeType.Move);
             }
             // If AI is medium
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
@@ -559,21 +552,6 @@ namespace Game.Penguins.Helper.CustomGame
                 }
             }
 
-            if (count > Players.Count && PossibilitiesOrigin.Count == 0)
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        Cell cell = (Cell)Board.Board[i, j];
-                        cell.CellType = CellType.Water;
-                        cell.CurrentPenguin = null;
-                        cell.FishCount = 0;
-                        cell.ChangeState();
-                    }
-                }
-            }
-
             // Apply change
             playerCurrent.ChangeState();
         }
@@ -590,7 +568,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Log player change
                 Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"*** {CurrentPlayer.Name}'{(CurrentPlayer.Name.EndsWith("s") ? "" : "s")} turn ***");
+                log.Info($"*** It's the turn of {CurrentPlayer.Name} ***");
             }
             else
             {
@@ -599,7 +577,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Log player change
                 Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"*** {CurrentPlayer.Name}'{(CurrentPlayer.Name.EndsWith("s") ? "" : "s")} turn ***");
+                log.Info($"*** It's the turn of {CurrentPlayer.Name} ***");
             }
 
             
