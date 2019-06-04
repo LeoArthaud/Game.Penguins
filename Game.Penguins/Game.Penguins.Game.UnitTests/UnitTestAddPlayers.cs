@@ -13,7 +13,9 @@ namespace Game.Penguins.Game.UnitTests
     [TestClass]
     public class UnitTestAddPlayers
     {
-
+        /// <summary>
+        /// Test initialisation with humain player and AI player
+        /// </summary>
         [TestMethod]
         public void Test_AddPlayers()
         {
@@ -23,6 +25,7 @@ namespace Game.Penguins.Game.UnitTests
             customGame.AddPlayer("AI", PlayerType.AIEasy);
             customGame.AddPlayer("Human", PlayerType.Human);
 
+            // Tests
             Assert.IsTrue(customGame.Players[0].PlayerType == PlayerType.AIEasy && customGame.Players[0].Name == "AI");
             Assert.IsTrue(customGame.Players[1].PlayerType == PlayerType.Human && customGame.Players[1].Name == "Human");
         }

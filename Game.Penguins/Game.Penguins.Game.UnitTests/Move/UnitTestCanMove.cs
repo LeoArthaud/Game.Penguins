@@ -21,11 +21,14 @@ namespace Game.Penguins.Game.UnitTests.Move
         [TestMethod]
         public void Test_CanMove()
         {
+            // Init Game
             CustomGame customGame = InitGame();
 
+            // launch move function
             Movements move = new Movements(null, null, customGame.Board);
             var result = move.CanMove(new Coordinates(4, 4));
 
+            // Tests
             Assert.IsFalse(result[DirectionType.Droite]);
             Assert.IsFalse(result[DirectionType.Gauche]);
             Assert.IsFalse(result[DirectionType.BasDroite]);
@@ -33,8 +36,10 @@ namespace Game.Penguins.Game.UnitTests.Move
             Assert.IsFalse(result[DirectionType.HautDroite]);
             Assert.IsFalse(result[DirectionType.HautGauche]);
 
+
             result = move.CanMove(new Coordinates(3, 5));
 
+            // Tests
             Assert.IsFalse(result[DirectionType.Droite]);
             Assert.IsFalse(result[DirectionType.Gauche]);
             Assert.IsFalse(result[DirectionType.BasDroite]);
