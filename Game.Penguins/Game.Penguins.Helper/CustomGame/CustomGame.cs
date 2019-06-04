@@ -69,6 +69,10 @@ namespace Game.Penguins.Helper.CustomGame
 
             // Initialize the random function
             this.random = random;
+
+            // Log game initialization
+            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+            log.Info("Game was initialized successfully.");
         }
 
         #region Public Functions
@@ -86,6 +90,10 @@ namespace Game.Penguins.Helper.CustomGame
 
             // Add the player to the list
             Players.Add(player);
+
+            // Log player addition to the list
+            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+            log.Info($"{player.Name} ({player.PlayerType.ToString()}) added to the list of players.");
 
             // Return player
             return player;
@@ -153,10 +161,9 @@ namespace Game.Penguins.Helper.CustomGame
             // Apply changes
             StateChanged?.Invoke(this, null);
 
-            // Logging test
+            // Log game start
             Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-            log.Info("Game successfully started");
-            // TODO: Add relevant logging in relevant places
+            log.Info($"Game was successfully started with {Players.Count} players. Each player has {numberPenguins} penguins.");
         }
 
         /// <summary>
@@ -171,6 +178,10 @@ namespace Game.Penguins.Helper.CustomGame
             {
                 // Apply change
                 ChangeStatePlace(x, y);
+
+                // Log manual penguin placement
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({x}, {y})");
             }
         }
 
@@ -190,6 +201,10 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Apply changes
                 ChangeStatePlace(coordinates.X, coordinates.Y);
+
+                // Log penguin placement
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y})");
             }
             // If AI is medium
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
@@ -202,6 +217,10 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Apply changes
                 ChangeStatePlace(coordinates.X, coordinates.Y);
+
+                // Log penguin placement
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y})");
             }
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
@@ -214,8 +233,11 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Apply changes
                 ChangeStatePlace(coordinates.X, coordinates.Y);
-            }
 
+                // Log penguin placement
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y})");
+            }
 
         }
 
@@ -267,6 +289,9 @@ namespace Game.Penguins.Helper.CustomGame
                                 // Cell become water
                                 cell.CellType = CellType.Water;
 
+                                // Register points for log
+                                var cellPoints = cell.FishCount;
+
                                 // Cell have no fish
                                 cell.FishCount = 0;
 
@@ -275,6 +300,10 @@ namespace Game.Penguins.Helper.CustomGame
 
                                 // Apply change
                                 cell.ChangeState();
+
+                                // Log manual penguin movement
+                                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                                log.Info($"{playerCurrent.Name} moved to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
                             }
                         }
                         AffectedCurrentPlayer(ChangeType.Move);
@@ -303,10 +332,13 @@ namespace Game.Penguins.Helper.CustomGame
                 // Get the destination of the penguin
                 Coordinates destination = aiEasy.FindDestination(origin);
 
+                // Log penguin movement
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+
                 // Apply changes
                 ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
                 AffectedCurrentPlayer(ChangeType.Move);
-                
             }
             // If AI is medium
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
@@ -322,10 +354,13 @@ namespace Game.Penguins.Helper.CustomGame
                 Coordinates origin = coordinates["origin"];
                 Coordinates destination = coordinates["destination"];
 
+                // Log penguin movement
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+
                 // Apply changes
                 ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
                 AffectedCurrentPlayer(ChangeType.Move);
-                
             }
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
@@ -340,6 +375,10 @@ namespace Game.Penguins.Helper.CustomGame
                 // Get the penguin to move
                 Coordinates origin = coordinates["origin"];
                 Coordinates destination = coordinates["destination"];
+
+                // Log penguin movement
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
                 // Apply changes
                 ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
@@ -373,6 +412,7 @@ namespace Game.Penguins.Helper.CustomGame
             foreach (var player1 in Players)
             {
                 var player = (Player)player1;
+
                 if (player == CurrentPlayer)
                 {
                     player.Penguins -= 1;
@@ -412,7 +452,7 @@ namespace Game.Penguins.Helper.CustomGame
             // Modify destination cell
             cellDestination.CellType = CellType.FishWithPenguin;
             cellDestination.CurrentPenguin = new Penguin(CurrentPlayer);
-            
+
             // Apply changes
             cellOrigin.ChangeState();
             cellDestination.ChangeState();
@@ -467,12 +507,22 @@ namespace Game.Penguins.Helper.CustomGame
             {
                 IdPlayer = IdPlayer + 1;
                 CurrentPlayer = Players[IdPlayer];
+
+                // Log player change
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                log.Info($"*** {CurrentPlayer.Name}'{(CurrentPlayer.Name.EndsWith("s") ? "" : "s")} turn ***");
             }
             else
             {
                 IdPlayer = 0;
                 CurrentPlayer = Players[IdPlayer];
+
+                // Log player change
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                log.Info($"*** {CurrentPlayer.Name}'{(CurrentPlayer.Name.EndsWith("s") ? "" : "s")} turn ***");
             }
+
+            
         }
 
         /// <summary>
