@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
+using NLog.LayoutRenderers.Wrappers;
+
 namespace Game.Penguins.Helper.CustomGame
 {
     /// <summary>
@@ -442,6 +444,26 @@ namespace Game.Penguins.Helper.CustomGame
             if (nbPenguin.Count == 0)
             {
                 NextAction = NextActionType.Nothing;
+                
+                // Determining the winner and highscore
+                // Log end of game
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+
+                var highScore = 0;
+                Player winner = null;
+
+                foreach (var player in Players)
+                {
+                    if (player.Points > highScore)
+                    {
+                        highScore = player.Points;
+                        winner = (Player)player;
+                    }
+                }
+
+                log.Info("There are no penguins left in play.");
+                log.Info($"{winner.Name} wins the game with {highScore} points!");
+                log.Info("***** GAME END *****");
             }
         }
         

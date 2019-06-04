@@ -15,106 +15,114 @@ namespace Game.Penguins.AI.UnitTests.Easy
     public class UnitTestPlacePenguin
     {
         /// <summary>
-        /// 
+        /// If a penguin is place at the first try of random
         /// </summary>
         [TestMethod]
         public void Test_PlacePenguin_FirstTry()
         {
-            // Init game
+            // Mock 0;0
             Mock<IRandom> randomMock = new Mock<IRandom>();
             randomMock.SetupSequence(e => e.Next(0, 8)).Returns(0);
 
+            // Init game
             CustomGame customGame = InitGame(null);
 
-            // Position of cell
+            // Position of cell to place the penguin
             int x = 0;
             int y = 0;
-
+            // Set cell
             Cell cell = (Cell)customGame.Board.Board[x, y];
             cell.FishCount = 1;
 
-            // Launch function
+            // Launch function with Mock
             AIEasy aiEasy = new AIEasy(customGame.Board, randomMock.Object, customGame.CurrentPlayer);
-
             Coordinates coordinates = aiEasy.PlacePenguin();
 
+            // Test if the penguin is place on the cell
             Assert.IsTrue(coordinates.X == 0 && coordinates.Y == 0);
         }
 
         /// <summary>
-        /// 
+        /// If a penguin is place not at the first try of random because of the number of points on the cell
         /// </summary>
         [TestMethod]
         public void Test_PlacePenguin_NotFirstTry_FishCount()
         {
-            // Init game
+            // Mock 0;0 then 1;1
             Mock<IRandom> randomMock = new Mock<IRandom>();
             randomMock.SetupSequence(e => e.Next(0, 8))
                                                     .Returns(0).Returns(0)
                                                     .Returns(1).Returns(1);
 
+            // Init game
             CustomGame customGame = InitGame(null);
 
             // Position of first cell
             int x = 0;
             int y = 0;
-
+            // Set first cell
             Cell cell1 = (Cell)customGame.Board.Board[x, y];
             cell1.FishCount = 3;
 
             // Position of second cell
             x = 1;
             y = 1;
-
+            // Set second cell
             Cell cell2 = (Cell)customGame.Board.Board[x, y];
             cell2.FishCount = 1;
-
-            // Launch function
+            
+            // Launch function with Mock
             AIEasy aiEasy = new AIEasy(customGame.Board, randomMock.Object, customGame.CurrentPlayer);
-
             Coordinates coordinates = aiEasy.PlacePenguin();
 
+            // Test if the penguin is place on the second cell
             Assert.IsTrue(coordinates.X == 1 && coordinates.Y == 1);
         }
 
         /// <summary>
-        /// 
+        /// If a penguin is place not at the first try of random because a penguin is already on the cell
         /// </summary>
         [TestMethod]
         public void Test_PlacePenguin_NotFirstTry_FishWithPenguin()
         {
-            // Init game
+            // Mock 0;0 then 1;1
             Mock<IRandom> randomMock = new Mock<IRandom>();
             randomMock.SetupSequence(e => e.Next(0, 8))
                 .Returns(0).Returns(0)
                 .Returns(1).Returns(1);
 
+            // Init game
             CustomGame customGame = InitGame(null);
 
             // Position of first cell
             int x = 0;
             int y = 0;
-
+            // Set first cell
             Cell cell1 = (Cell)customGame.Board.Board[x, y];
             cell1.CellType = CellType.FishWithPenguin;
 
             // Position of second cell
             x = 1;
             y = 1;
-
+            // Set second cell
             Cell cell2 = (Cell)customGame.Board.Board[x, y];
             cell2.FishCount = 1;
 
-            // Launch function
+            // Launch function with Mock
             AIEasy aiEasy = new AIEasy(customGame.Board, randomMock.Object, customGame.CurrentPlayer);
-
             Coordinates coordinates = aiEasy.PlacePenguin();
 
+            // Test if the penguin is place on the second cell
             Assert.IsTrue(coordinates.X == 1 && coordinates.Y == 1);
         }
 
         #region Private Functions
 
+        /// <summary>
+        /// Init the game with 2 players AIEasy
+        /// </summary>
+        /// <param name="randomMock">mock for the random</param>
+        /// <returns>the game with modifications</returns>
         public CustomGame InitGame(Mock<IRandom> randomMock)
         {
             CustomGame customGame = randomMock == null ? new CustomGame(new AppRandom()) : new CustomGame(randomMock.Object);
@@ -123,7 +131,10 @@ namespace Game.Penguins.AI.UnitTests.Easy
             customGame.AddPlayer("Player1", PlayerType.AIEasy);
             customGame.AddPlayer("Player2", PlayerType.AIEasy);
 
+            // Launch function
             customGame.StartGame();
+
+            // Set current player
             customGame.CurrentPlayer = customGame.Players[0];
             customGame.IdPlayer = 0;
 
