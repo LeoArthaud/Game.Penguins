@@ -19,12 +19,14 @@ namespace Game.Penguins.Game.UnitTests.Move
         [TestMethod]
         public void Test_GetCoordinates_GetOriginDestination()
         {
+            // Init Game
             CustomGame customGame = InitGame();
 
             // Position of cell
             int xOrigin = 0;
             int yOrigin = 0;
 
+            // Set 
             Cell cellOrigin = (Cell)customGame.Board.Board[xOrigin, yOrigin];
             cellOrigin.FishCount = 1;
 
@@ -32,12 +34,15 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xDestination = 1;
             int yDestination = 1;
 
+            // Set Destination 
             Cell cellDestination = (Cell)customGame.Board.Board[xDestination, yDestination];
             cellDestination.FishCount = 3;
 
+            // Launch function
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
+            // Tests
             Assert.IsTrue(result["origin"].X == xOrigin);
             Assert.IsTrue(result["origin"].Y == yOrigin);
             Assert.IsTrue(result["destination"].X == xDestination);
