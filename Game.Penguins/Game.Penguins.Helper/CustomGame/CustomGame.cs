@@ -61,6 +61,10 @@ namespace Game.Penguins.Helper.CustomGame
         /// </summary>
         public CustomGame(IRandom random)
         {
+            // Log start of the program
+            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+            log.Info("***** NEW GAME *****");
+
             // Initialize list of players
             Players = new List<IPlayer>();
 
@@ -71,7 +75,7 @@ namespace Game.Penguins.Helper.CustomGame
             this.random = random;
 
             // Log game initialization
-            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+            //Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
             log.Info("Game was initialized successfully.");
         }
 
