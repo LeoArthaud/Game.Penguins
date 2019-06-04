@@ -65,7 +65,7 @@ namespace Game.Penguins.Core.Classes.Move
         /// </summary>
         /// <param name="origin">coordinates origin and destination</param>
         /// <returns>list of coordinates of cells where the penguin can move</returns>
-        public IList<Coordinates> CheckDeplacement(Coordinates origin)
+        public IList<Coordinates> CheckMove(Coordinates origin)
         {
             IList<Coordinates> result = new List<Coordinates>();
             Console.WriteLine("**************************************************");

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Classes.Board;
@@ -108,7 +107,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
             Coordinates coordinates = new Coordinates(1, 1);
 
             // Set others cells
-            customGame = SetFish(customGame);
+            SetFish(customGame);
 
             // Add cell with 3 points to the list
             fishThreePointsList.Add(coordinates);
@@ -165,7 +164,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
         /// </summary>
         /// <param name="customGame">instance of game</param>
         /// <returns>custom game with modifications</returns>
-        private CustomGame SetFish(CustomGame customGame)
+        private void SetFish(CustomGame customGame)
         {
             // Set cell up right of origin
             Cell cellUpRight = (Cell)customGame.Board.Board[2, 0];
@@ -197,7 +196,6 @@ namespace Game.Penguins.AI.UnitTests.Hard
             cellUpLeft.FishCount = 2;
             cellUpLeft.CellType = CellType.FishWithPenguin;
 
-            return customGame;
         }
 
         /// <summary>

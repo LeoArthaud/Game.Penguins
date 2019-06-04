@@ -36,7 +36,7 @@ namespace Game.Penguins.Human.UnitTests
             // Launch function
             customGame.PlacePenguinManual(x, y);
 
-            // Test si le penguin a bien été placé sur la cellule
+            // Tests
             Assert.IsTrue(customGame.Board.Board[x, y].CellType == CellType.FishWithPenguin);
             Assert.IsTrue(customGame.Board.Board[x, y].CurrentPenguin.Player == playerInitial);
         }
@@ -164,7 +164,7 @@ namespace Game.Penguins.Human.UnitTests
         }
 
         /// <summary>
-        /// Test placement if penguin already existe on placement cell
+        /// Test placement if penguin already exist on cell
         /// </summary>
         [TestMethod]
         public void Test_PlacePenguinManual_OnCellType_FishWithPenguin()

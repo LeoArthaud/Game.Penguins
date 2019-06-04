@@ -47,7 +47,7 @@ namespace Game.Penguins.AI
 
             foreach (var possibility in PossibilitiesOrigin)
             {
-                var list = move.CheckDeplacement(possibility);
+                var list = move.CheckMove(possibility);
                 IList<ICell> resultCells = new List<ICell>();
 
                 foreach (var element in list)

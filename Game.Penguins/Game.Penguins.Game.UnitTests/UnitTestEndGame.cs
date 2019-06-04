@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Game.Penguins.Core.Classes;
 using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Classes.Board;

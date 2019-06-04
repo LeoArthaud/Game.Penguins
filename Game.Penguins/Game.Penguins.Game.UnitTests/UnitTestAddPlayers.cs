@@ -14,7 +14,7 @@ namespace Game.Penguins.Game.UnitTests
     public class UnitTestAddPlayers
     {
         /// <summary>
-        /// Test initialisation with humain player and AI player
+        /// Test initialization with human player and AI player
         /// </summary>
         [TestMethod]
         public void Test_AddPlayers()
