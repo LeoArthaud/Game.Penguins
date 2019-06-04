@@ -19,6 +19,7 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_MoveManual_CheckGood()
         {
+            // Init Game
             CustomGame customGame = InitGame();
 
             // Position of origin cell
@@ -57,6 +58,7 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_MoveManual_BadCellTypeOrigin_Fish()
         {
+            //Init Game
             CustomGame customGame = InitGame();
 
             // Position of origin cell
@@ -95,6 +97,7 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_MoveManual_BadCellTypeOrigin_Water()
         {
+            //Init Game
             CustomGame customGame = InitGame();
 
             // Position of origin cell

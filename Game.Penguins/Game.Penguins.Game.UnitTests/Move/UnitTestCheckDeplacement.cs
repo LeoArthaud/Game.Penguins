@@ -34,7 +34,7 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellOrigin.CellType = CellType.FishWithPenguin;
             cellOrigin.CurrentPenguin = new Penguin(new Player("Player1", PlayerType.Human));
 
-            // Position of destination cell
+            // Position of cell destination 
             int xDestination = 7;
             int yDestination = 0;
 
@@ -65,7 +65,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         {
             CustomGame customGame = InitGame();
 
-            // Position of origin cell
+             // Position of cell origin
             int xOrigin = 7;
             int yOrigin = 0;
 
@@ -74,7 +74,7 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellOrigin.CellType = CellType.FishWithPenguin;
             cellOrigin.CurrentPenguin = new Penguin(new Player("Player1", PlayerType.Human));
 
-            // Position of destination cell
+            // Position of cell destination 
             int xDestination = 0;
             int yDestination = 0;
 
@@ -150,16 +150,19 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellOrigin.CellType = CellType.FishWithPenguin;
             cellOrigin.CurrentPenguin = new Penguin(new Player("Player1", PlayerType.Human));
 
-            // Position of cell
+            // Position of cell destination 
             int xDestination = 4;
             int yDestination = 0;
 
+            // Set destination
             Cell cellDestination = (Cell)customGame.Board.Board[xDestination, yDestination];
             cellDestination.CellType = CellType.Fish;
 
+            // Launch move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
+            // Tests
             var listPossibilities = moveOfHuman.GetCoordinatesUpRight(result["origin"]);
             Assert.IsTrue(listPossibilities[0].X == 1 && listPossibilities[0].Y == 6);
             Assert.IsTrue(listPossibilities[1].X == 1 && listPossibilities[1].Y == 5);
@@ -178,24 +181,28 @@ namespace Game.Penguins.Game.UnitTests.Move
         {
             CustomGame customGame = InitGame();
 
-            // Position of cell
+             // Position of cell origin
             int xOrigin = 7;
             int yOrigin = 0;
 
+            // Set Origin 
             Cell cellOrigin = (Cell)customGame.Board.Board[xOrigin, yOrigin];
             cellOrigin.CellType = CellType.FishWithPenguin;
             cellOrigin.CurrentPenguin = new Penguin(new Player("Player1", PlayerType.Human));
 
-            // Position of cell
+            // Position of cell destination 
             int xDestination = 3;
             int yDestination = 7;
 
+            // Set Destination
             Cell cellDestination = (Cell)customGame.Board.Board[xDestination, yDestination];
             cellDestination.CellType = CellType.Fish;
             
+            // Launch move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
+            // Tests
             var listPossibilities = moveOfHuman.GetCoordinatesDownLeft(result["origin"]);
             Assert.IsTrue(listPossibilities[0].X == 6 && listPossibilities[0].Y == 1);
             Assert.IsTrue(listPossibilities[1].X == 6 && listPossibilities[1].Y == 2);
@@ -214,24 +221,29 @@ namespace Game.Penguins.Game.UnitTests.Move
         {
             CustomGame customGame = InitGame();
 
-            // Position of cell
+             // Position of cell origin
             int xOrigin = 7;
             int yOrigin = 7;
+
+            // Set Origin 
 
             Cell cellOrigin = (Cell)customGame.Board.Board[xOrigin, yOrigin];
             cellOrigin.CellType = CellType.FishWithPenguin;
             cellOrigin.CurrentPenguin = new Penguin(new Player("Player1", PlayerType.Human));
 
-            // Position of cell
+            // Position of cell destination 
             int xDestination = 4;
             int yDestination = 0;
 
+            // Set Destination
             Cell cellDestination = (Cell)customGame.Board.Board[xDestination, yDestination];
             cellDestination.CellType = CellType.Fish;
-            
+
+            // Launch move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
+            // Tests
             var listPossibilities = moveOfHuman.GetCoordinatesUpLeft(result["origin"]);
             Assert.IsTrue(listPossibilities[0].X == 7 && listPossibilities[0].Y == 6);
             Assert.IsTrue(listPossibilities[1].X == 6 && listPossibilities[1].Y == 5);
@@ -345,12 +357,15 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xAfter = 1;
             int yAfter = 3;
 
+            // set After
             Cell cellAfter = (Cell)customGame.Board.Board[xAfter, yAfter];
             cellAfter.CellType = CellType.Water;
 
+            // launch move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
+            // Tests
             var listPossibilities = moveOfHuman.GetCoordinatesDownRight(result["origin"]);
             Assert.IsTrue(listPossibilities[0].X == 0 && listPossibilities[0].Y == 1);
             Assert.IsTrue(listPossibilities[1].X == 1 && listPossibilities[1].Y == 2);
@@ -362,12 +377,14 @@ namespace Game.Penguins.Game.UnitTests.Move
         [TestMethod]
         public void Test_CheckDeplacement_ResultUpRight_BlockBy()
         {
+            // Init Game
             CustomGame customGame = InitGame();
 
             // Position of cell origin
             int xOrigin = 0;
             int yOrigin = 7;
 
+            // Set Origin
             Cell cellOrigin = (Cell)customGame.Board.Board[xOrigin, yOrigin];
             cellOrigin.CellType = CellType.FishWithPenguin;
             cellOrigin.CurrentPenguin = new Penguin(new Player("Player1", PlayerType.Human));
@@ -376,6 +393,7 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xDestination = 1;
             int yDestination = 5;
 
+            // Set destination
             Cell cellDestination = (Cell)customGame.Board.Board[xDestination, yDestination];
             cellDestination.CellType = CellType.Fish;
 
@@ -383,12 +401,15 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xAfter = 2;
             int yAfter = 4;
 
+            // Set After
             Cell cellAfter = (Cell)customGame.Board.Board[xAfter, yAfter];
             cellAfter.CellType = CellType.Water;
 
+            //Launch move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
+            // Tests
             var listPossibilities = moveOfHuman.GetCoordinatesUpRight(result["origin"]);
             Assert.IsTrue(listPossibilities[0].X == 1 && listPossibilities[0].Y == 6);
             Assert.IsTrue(listPossibilities[1].X == 1 && listPossibilities[1].Y == 5);
@@ -405,7 +426,8 @@ namespace Game.Penguins.Game.UnitTests.Move
             // Position of cell origin
             int xOrigin = 7;
             int yOrigin = 0;
-
+            
+            // Set origin
             Cell cellOrigin = (Cell)customGame.Board.Board[xOrigin, yOrigin];
             cellOrigin.CellType = CellType.FishWithPenguin;
             cellOrigin.CurrentPenguin = new Penguin(new Player("Player1", PlayerType.Human));
@@ -414,6 +436,7 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xDestination = 5;
             int yDestination = 3;
 
+            // Set Destination
             Cell cellDestination = (Cell)customGame.Board.Board[xDestination, yDestination];
             cellDestination.CellType = CellType.Fish;
 
@@ -421,12 +444,15 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xAfter = 5;
             int yAfter = 4;
 
+            // Set After
             Cell cellAfter = (Cell)customGame.Board.Board[xAfter, yAfter];
             cellAfter.CellType = CellType.Water;
 
+            //Launch move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
+            // Tests
             var listPossibilities = moveOfHuman.GetCoordinatesDownLeft(result["origin"]);
             Assert.IsTrue(listPossibilities[0].X == 6 && listPossibilities[0].Y == 1);
             Assert.IsTrue(listPossibilities[1].X == 6 && listPossibilities[1].Y == 2);
@@ -445,6 +471,7 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xOrigin = 7;
             int yOrigin = 7;
 
+            // Set origin
             Cell cellOrigin = (Cell)customGame.Board.Board[xOrigin, yOrigin];
             cellOrigin.CellType = CellType.FishWithPenguin;
             cellOrigin.CurrentPenguin = new Penguin(new Player("Player1", PlayerType.Human));
@@ -453,6 +480,7 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xDestination = 6;
             int yDestination = 5;
 
+            // Set After
             Cell cellDestination = (Cell)customGame.Board.Board[xDestination, yDestination];
             cellDestination.CellType = CellType.Fish;
 
@@ -460,12 +488,15 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xAfter = 6;
             int yAfter = 4;
 
+            // Set After
             Cell cellAfter = (Cell)customGame.Board.Board[xAfter, yAfter];
             cellAfter.CellType = CellType.Water;
 
+            // Launch move
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
+            // Tests
             var listPossibilities = moveOfHuman.GetCoordinatesUpLeft(result["origin"]);
             Assert.IsTrue(listPossibilities[0].X == 7 && listPossibilities[0].Y == 6);
             Assert.IsTrue(listPossibilities[1].X == 6 && listPossibilities[1].Y == 5);
@@ -477,12 +508,14 @@ namespace Game.Penguins.Game.UnitTests.Move
         [TestMethod]
         public void Test_CheckDeplacement_ResultUpRight()
         {
+            // Init Game
             CustomGame customGame = InitGame();
 
             // Position of cell origin
             int xOrigin = 0;
             int yOrigin = 7;
 
+            // Set Origin
             Cell cellOrigin = (Cell)customGame.Board.Board[xOrigin, yOrigin];
             cellOrigin.CellType = CellType.FishWithPenguin;
             cellOrigin.CurrentPenguin = new Penguin(new Player("Player1", PlayerType.Human));
@@ -491,6 +524,7 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xDestination = 1;
             int yDestination = 5;
 
+            // Set Destination
             Cell cellDestination = (Cell)customGame.Board.Board[xDestination, yDestination];
             cellDestination.CellType = CellType.Fish;
 
@@ -498,12 +532,15 @@ namespace Game.Penguins.Game.UnitTests.Move
             int xAfter = 2;
             int yAfter = 4;
 
+            // Set After
             Cell cellAfter = (Cell)customGame.Board.Board[xAfter, yAfter];
             cellAfter.CellType = CellType.Water;
 
+            // Launch function 
             Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
             var result = moveOfHuman.GetCoordinates();
 
+            // Tests
             var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
             Assert.IsTrue(listPossibilities[7].X == 1 && listPossibilities[7].Y == 6);
             Assert.IsTrue(listPossibilities[8].X == 1 && listPossibilities[8].Y == 5);
