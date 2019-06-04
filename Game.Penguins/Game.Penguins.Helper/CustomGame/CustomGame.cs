@@ -336,15 +336,32 @@ namespace Game.Penguins.Helper.CustomGame
                 Coordinates origin = aiEasy.FindOrigin(PossibilitiesOrigin);
 
                 // Get the destination of the penguin
-                Coordinates destination = aiEasy.FindDestination(origin);
+                //Coordinates destination = aiEasy.FindDestination(origin);
+                Coordinates test = new Coordinates(-1, -1);
+                if (aiEasy.FindDestination(origin).X != test.X)
+                {
+                    Coordinates destination = aiEasy.FindDestination(origin);
+         
+                    // Log penguin movement
+                    Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                    log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+
+                    // Apply changes
+                    ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                    AffectedCurrentPlayer(ChangeType.Move);
+                }
+                else
+                {
+                    EndGame();
+                }
 
                 // Log penguin movement
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+                //Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                //log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
                 // Apply changes
-                ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
-                AffectedCurrentPlayer(ChangeType.Move);
+                //ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                //AffectedCurrentPlayer(ChangeType.Move);
             }
             // If AI is medium
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)

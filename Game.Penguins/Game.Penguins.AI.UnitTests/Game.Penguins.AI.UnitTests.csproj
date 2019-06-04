@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{843FCEF1-D6E3-4B00-A1BE-0BC50E01565A}</ProjectGuid>
+    <ProjectGuid>{D4AFD073-73F3-4558-8474-16E92744563A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Game.Penguins.AI.UnitTests</RootNamespace>
