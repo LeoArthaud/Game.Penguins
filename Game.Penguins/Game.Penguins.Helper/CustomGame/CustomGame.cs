@@ -356,7 +356,9 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Get the penguin to move
                 Coordinates origin = coordinates["origin"];
-                Coordinates destination = coordinates["destination"];
+                if (coordinates.Count != 1)
+                {
+                    Coordinates destination = coordinates["destination"];
 
                 // Log penguin movement
                 Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
@@ -365,6 +367,11 @@ namespace Game.Penguins.Helper.CustomGame
                 // Apply changes
                 ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
                 AffectedCurrentPlayer(ChangeType.Move);
+                } else
+                {
+                    EndGame();
+                }
+                
             }
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
@@ -378,7 +385,9 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Get the penguin to move
                 Coordinates origin = coordinates["origin"];
-                Coordinates destination = coordinates["destination"];
+                if (coordinates.Count != 1)
+                {
+                    Coordinates destination = coordinates["destination"];
 
                 // Log penguin movement
                 Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
@@ -387,6 +396,35 @@ namespace Game.Penguins.Helper.CustomGame
                 // Apply changes
                 ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
                 AffectedCurrentPlayer(ChangeType.Move);
+                } else
+                {
+                    EndGame();
+                }
+
+                
+            }
+        }
+
+        public void EndGame()
+        {
+            List<bool> nbPenguin = new List<bool>();
+            Console.WriteLine(CurrentPlayer.Name);
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (Board.Board[i, j].CellType == CellType.FishWithPenguin)
+                    {
+                        AffectedCurrentPlayer(ChangeType.Move);
+                        nbPenguin.Add(true);
+                    }
+                }
+            }
+
+            if (nbPenguin.Count == 0)
+            {
+                NextAction = NextActionType.Nothing;
             }
         }
         
