@@ -5,6 +5,9 @@ using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
 namespace Game.Penguins.Core.Classes.Move
 {
+    /// <summary>
+    /// Represents movements on the board.
+    /// </summary>
     public class Movements
     {
         /// <summary>

@@ -3,6 +3,9 @@ using Game.Penguins.Core.Interfaces.Game.Players;
 
 namespace Game.Penguins.Core.Classes
 {
+    /// <summary>
+    /// Player class.
+    /// </summary>
     public class Player : IPlayer
     {
         public Guid Identifier { get; }

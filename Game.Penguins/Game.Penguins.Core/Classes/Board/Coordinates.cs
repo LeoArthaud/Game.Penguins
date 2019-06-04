@@ -1,5 +1,8 @@
 ﻿namespace Game.Penguins.Core.Classes.Board
 {
+    /// <summary>
+    /// Represents a set of x, y coordinates.
+    /// </summary>
     public class Coordinates
     {
         public int X { get; set; }

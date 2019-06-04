@@ -429,9 +429,6 @@ namespace Game.Penguins.Helper.CustomGame
                 NextAction = NextActionType.Nothing;
                 
                 // Determining the winner and highscore
-                // Log end of game
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-
                 var highScore = 0;
                 Player winner = null;
 
@@ -444,6 +441,8 @@ namespace Game.Penguins.Helper.CustomGame
                     }
                 }
 
+                // Log end of game
+                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
                 log.Info("There are no penguins left in play.");
                 log.Info($"{winner.Name} wins the game with {highScore} points!");
                 log.Info("***** GAME END *****");

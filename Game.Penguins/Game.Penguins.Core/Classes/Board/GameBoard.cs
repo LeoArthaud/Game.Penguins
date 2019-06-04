@@ -5,6 +5,9 @@ using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
 namespace Game.Penguins.Core.Classes.Board
 {
+    /// <summary>
+    /// Represents the game board. Implements IBoard interface.
+    /// </summary>
     public class GameBoard : IBoard
     {
         public ICell[,] Board { get; set; }
