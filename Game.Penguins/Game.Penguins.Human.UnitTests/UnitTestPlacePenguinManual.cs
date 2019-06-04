@@ -21,6 +21,7 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_CellStatus()
         {
+            //Init Game
             CustomGame customGame = InitGame();
 
             var playerInitial = customGame.Players[0];
@@ -162,20 +163,27 @@ namespace Game.Penguins.Human.UnitTests
 
         }
 
+        /// <summary>
+        /// Test placement if penguin already existe on placement cell
+        /// </summary>
         [TestMethod]
-        public void Test_PlacePenguinManual_CellType()
+        public void Test_PlacePenguinManual_OnCellType_FishWithPenguin()
         {
+            //Init game
             CustomGame customGame = InitGame();
 
-            // Position of cell
+            // Position of origin cell
             int x = 0;
             int y = 0;
 
+            // Init Cell with Penguin
             Cell cell = (Cell)customGame.Board.Board[x, y];
             cell.CellType = CellType.FishWithPenguin;
 
+            // Launch function
             customGame.PlacePenguinManual(x, y);
 
+            // Test
             Assert.IsTrue(cell.CurrentPenguin == null);
 
         }
