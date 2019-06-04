@@ -88,7 +88,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// </summary>
         /// <param name="playerName">Name of player</param>
         /// <param name="playerType">Type of player (human or AI)</param>
-        /// <returns>return player which is add</returns>
+        /// <returns>Player which was added</returns>
         public IPlayer AddPlayer(string playerName, PlayerType playerType)
         {
             // Create new player with the name and the type
@@ -445,7 +445,7 @@ namespace Game.Penguins.Helper.CustomGame
             {
                 NextAction = NextActionType.Nothing;
                 
-                // Determining the winner and highscore
+                // Determining the winner and high score
                 var highScore = 0;
                 Player winner = null;
 
