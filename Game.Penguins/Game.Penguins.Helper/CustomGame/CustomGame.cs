@@ -360,13 +360,13 @@ namespace Game.Penguins.Helper.CustomGame
                 {
                     Coordinates destination = coordinates["destination"];
 
-                // Log penguin movement
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+                    // Log penguin movement
+                    Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                    log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
-                // Apply changes
-                ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
-                AffectedCurrentPlayer(ChangeType.Move);
+                    // Apply changes
+                    ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                    AffectedCurrentPlayer(ChangeType.Move);
                 } else
                 {
                     EndGame();
@@ -389,13 +389,13 @@ namespace Game.Penguins.Helper.CustomGame
                 {
                     Coordinates destination = coordinates["destination"];
 
-                // Log penguin movement
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+                    // Log penguin movement
+                    Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                    log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
-                // Apply changes
-                ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
-                AffectedCurrentPlayer(ChangeType.Move);
+                    // Apply changes
+                    ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                    AffectedCurrentPlayer(ChangeType.Move);
                 } else
                 {
                     EndGame();
