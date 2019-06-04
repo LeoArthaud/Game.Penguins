@@ -10,27 +10,12 @@ using Game.Penguins.Core.Interfaces.Game.Players;
 
 namespace Game.Penguins.AI
 {
-    public class AIMedium
+    public class AIMedium : AIGlobal
     {
-        /// <summary>
-        /// Plateau
-        /// </summary>
-        public IBoard Board { get; set; }
-
-        /// <summary>
-        /// Allow to generate random number
-        /// </summary>
-        private IRandom random;
-
         /// <summary>
         /// Positions of penguins of current player
         /// </summary>
         public List<Coordinates> PossibilitiesOrigin { get; set; }
-
-        /// <summary>
-        /// Current player
-        /// </summary>
-        public IPlayer CurrentPlayer { get; set; }
 
         /// <summary>
         /// Constructor
@@ -38,31 +23,11 @@ namespace Game.Penguins.AI
         /// <param name="board"></param>
         /// <param name="random"></param>
         /// <param name="currentPlayer"></param>
-        public AIMedium(IBoard board, IRandom random, IPlayer currentPlayer)
+        public AIMedium(IBoard board, IRandom random, IPlayer currentPlayer) : base(board, random, currentPlayer)
         {
             Board = board;
             this.random = random;
             CurrentPlayer = currentPlayer;
-        }
-
-        /// <summary>
-        /// Get coordinates where to place the penguin
-        /// </summary>
-        /// <returns>coordinates</returns>
-        public Coordinates PlacePenguin()
-        {
-            // Get random x and y
-            int randomX = random.Next(0, 8);
-            int randomY = random.Next(0, 8);
-
-            // If cell at [x;y] has already a penguin or has more than one fish
-            while (Board.Board[randomX, randomY].FishCount != 1 || Board.Board[randomX, randomY].CellType == CellType.FishWithPenguin)
-            {
-                // Change random x and y
-                randomX = random.Next(0, 8);
-                randomY = random.Next(0, 8);
-            }
-            return new Coordinates(randomX, randomY);
         }
 
         /// <summary>

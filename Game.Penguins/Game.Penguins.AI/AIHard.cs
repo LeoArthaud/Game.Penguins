@@ -10,27 +10,12 @@ using Game.Penguins.Core.Interfaces.Game.Players;
 
 namespace Game.Penguins.AI
 {
-    public class AIHard
+    public class AIHard : AIGlobal
     {
-        /// <summary>
-        /// Plateau
-        /// </summary>
-        public IBoard Board { get; set; }
-
-        /// <summary>
-        /// Allow to generate random number
-        /// </summary>
-        private IRandom random;
-
         /// <summary>
         /// Positions of penguins of current player
         /// </summary>
         public List<Coordinates> PossibilitiesOrigin { get; set; }
-
-        /// <summary>
-        /// Current player
-        /// </summary>
-        public IPlayer CurrentPlayer { get; set; }
 
         /// <summary>
         /// Get a list of cells with 3 points
@@ -48,7 +33,7 @@ namespace Game.Penguins.AI
         /// <param name="board"></param>
         /// <param name="random"></param>
         /// <param name="currentPlayer"></param>
-        public AIHard(IBoard board, IRandom random, IPlayer currentPlayer)
+        public AIHard(IBoard board, IRandom random, IPlayer currentPlayer) : base(board, random, currentPlayer)
         {
             Board = board;
             this.random = random;
@@ -59,7 +44,7 @@ namespace Game.Penguins.AI
         /// Get coordinates where to place the penguin
         /// </summary>
         /// <returns>coordinates</returns>
-        public Coordinates PlacePenguin()
+        public new Coordinates PlacePenguin()
         {
             
             ThreePoints = getThreePoints();
@@ -195,7 +180,7 @@ namespace Game.Penguins.AI
 
             return soloFishList;
         }
-
+        
         /// <summary>
         /// Get randomly the destination of the penguin
         /// </summary>
