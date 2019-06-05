@@ -306,7 +306,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                                 // Log manual penguin movement
                                 ILog log = LogManager.GetLogger(GetType().ToString());
-                                log.Info($"{playerCurrent.Name} moved to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
+                                log.Info($"{playerCurrent.Name} moved a penguin to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
                             }
                         }
                         AffectedCurrentPlayer(ChangeType.Move);
@@ -341,7 +341,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                     // Log penguin movement
                     ILog log = LogManager.GetLogger(GetType().ToString());
-                    log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+                    log.Info($"{CurrentPlayer.Name} moved a penguin to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
@@ -371,7 +371,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                     // Log penguin movement
                     ILog log = LogManager.GetLogger(GetType().ToString());
-                    log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+                    log.Info($"{CurrentPlayer.Name} moved a penguin to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
@@ -405,7 +405,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                     // Log penguin movement
                     ILog log = LogManager.GetLogger(GetType().ToString());
-                    log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+                    log.Info($"{CurrentPlayer.Name} moved a penguin to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
