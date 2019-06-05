@@ -8,6 +8,12 @@ namespace Game.Penguins.Core.Classes.App
     /// </summary>
     public class AppRandom : IRandom
     {
+        /// <summary>
+        /// Returns a random integer between a minimum and a maximum.
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns>Random integer between min and max.</returns>
         public int Next(int min, int max)
         {
             Random random = new Random();

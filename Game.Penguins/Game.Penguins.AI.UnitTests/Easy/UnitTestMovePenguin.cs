@@ -3,18 +3,15 @@ using System.Diagnostics.CodeAnalysis;
 using Game.Penguins.Core.Classes;
 using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Classes.Board;
-using Game.Penguins.Core.Interfaces;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
-using Game.Penguins.Core.Interfaces.Game.Players;
 using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 namespace Game.Penguins.AI.UnitTests.Easy
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestMovePenguin
+    public class UnitTestMovePenguin : GlobalFunctions
     {
         /// <summary>
         /// If all the penguin of the AI can move
@@ -135,31 +132,5 @@ namespace Game.Penguins.AI.UnitTests.Easy
 
         }
 
-        #region Private Functions
-
-        /// <summary>
-        /// Init the game with 2 players AIEasy
-        /// </summary>
-        /// <param name="randomMock">mock for the random</param>
-        /// <returns>the game with modifications</returns>
-        public CustomGame InitGame(Mock<IRandom> randomMock)
-        {
-            CustomGame customGame = randomMock == null ? new CustomGame(new AppRandom()) : new CustomGame(randomMock.Object);
-
-            // Add 2 players
-            customGame.AddPlayer("Player1", PlayerType.AIEasy);
-            customGame.AddPlayer("Player2", PlayerType.AIEasy);
-
-            // Launch function
-            customGame.StartGame();
-
-            // Set current player
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
-
-            return customGame;
-        }
-
-        #endregion
     }
 }

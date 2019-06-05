@@ -60,6 +60,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="random"></param>
         public CustomGame(IRandom random)
         {
             // Log start of the program
@@ -406,6 +407,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// <summary>
         /// Function for remove a penguin alone
         /// </summary>
+        /// <param name="possibility"></param>
         public void RemovePenguin(Coordinates possibility)
         {
             Player playerCurrent = (Player)CurrentPlayer;
@@ -435,6 +437,10 @@ namespace Game.Penguins.Helper.CustomGame
             log.Info($"{playerCurrent.Name} moved to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
         }
 
+        // TODO: Implement a draw when two or more player have the same score.
+        /// <summary>
+        /// End of game function. Called when a player can no longer move penguins.
+        /// </summary>
         public void EndGame()
         {
             List<bool> nbPenguin = new List<bool>();
@@ -489,7 +495,7 @@ namespace Game.Penguins.Helper.CustomGame
         
         #endregion
 
-        #region Privates Functions
+        #region Private Functions
 
         /// <summary>
         /// Apply placement
@@ -563,6 +569,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// <summary>
         /// Affected next player
         /// </summary>
+        /// <param name="changeType"></param>
         private void AffectedCurrentPlayer(ChangeType changeType)
         {
             Player playerCurrent = (Player)CurrentPlayer;
