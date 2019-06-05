@@ -287,6 +287,17 @@ namespace Game.Penguins.Helper.CustomGame
                             }
                         }
                         AffectedCurrentPlayer(ChangeType.Move);
+                        // Check if the player can move his penguins
+                        PossibilitiesOfOrigin();
+                        foreach (var possibility in PossibilitiesOrigin)
+                        {
+
+                            var list = move.CheckMove(possibility);
+                            if (list.Count == 0)
+                            {
+                                RemovePenguin(possibility);
+                            }
+                        }
                     }
                 }
             }
@@ -432,6 +443,9 @@ namespace Game.Penguins.Helper.CustomGame
 
             // Apply change
             cell.ChangeState();
+
+            // Apply change
+            playerCurrent.ChangeState();
 
             ILog log = LogManager.GetLogger(GetType().ToString());
             log.Info($"{playerCurrent.Name} moved to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
