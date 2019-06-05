@@ -365,7 +365,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Get the penguin to move
                 Coordinates origin = coordinates["origin"];
-                if (coordinates.Count != 1)
+                try
                 {
                     Coordinates destination = coordinates["destination"];
 
@@ -376,8 +376,13 @@ namespace Game.Penguins.Helper.CustomGame
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
                     AffectedCurrentPlayer(ChangeType.Move);
-                } else
+                }
+                catch (Exception e)
                 {
+                    // Log penguin movement
+                    ILog log = LogManager.GetLogger(GetType().ToString());
+                    log.Info("Your penguins can't move : " + e);
+
                     EndGame();
                 }
                 
@@ -394,7 +399,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Get the penguin to move
                 Coordinates origin = coordinates["origin"];
-                if (coordinates.Count != 1)
+                try
                 {
                     Coordinates destination = coordinates["destination"];
 
@@ -405,12 +410,15 @@ namespace Game.Penguins.Helper.CustomGame
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
                     AffectedCurrentPlayer(ChangeType.Move);
-                } else
+                }
+                catch (Exception e)
                 {
+                    // Log penguin movement
+                    ILog log = LogManager.GetLogger(GetType().ToString());
+                    log.Info("Your penguins can't move : " + e);
+
                     EndGame();
                 }
-
-                
             }
         }
 

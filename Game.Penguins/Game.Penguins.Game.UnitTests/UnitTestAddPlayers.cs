@@ -17,8 +17,9 @@ namespace Game.Penguins.Game.UnitTests
         /// Test initialization with human player and AI player
         /// </summary>
         [TestMethod]
-        public void Test_AddPlayers()
+        public void Test_AddPlayers_NotNull()
         {
+            // Init Game
             CustomGame customGame = new CustomGame(new AppRandom());
 
             // Add 2 players
@@ -30,5 +31,6 @@ namespace Game.Penguins.Game.UnitTests
             Assert.IsTrue(customGame.Players[1].PlayerType == PlayerType.Human && customGame.Players[1].Name == "Human");
             Assert.IsTrue(customGame.Players[0].Identifier != customGame.Players[1].Identifier);
         }
+
     }
 }

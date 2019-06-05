@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Common.Logging;
 using Game.Penguins.Core.Classes;
 using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Classes.Move;
@@ -76,11 +77,15 @@ namespace Game.Penguins.AI
             // Shuffle
             result = result.OrderBy(a => Guid.NewGuid()).ToList();
 
-            if (result.Count != 0)
+            try
             {
                 return result[0];
-            } else
+            }
+            catch (Exception e)
             {
+                // Log penguin movement
+                ILog log = LogManager.GetLogger(GetType().ToString());
+                log.Info("Your penguins can't move : " + e);
                 return new Coordinates(-1, -1);
             }
         }
