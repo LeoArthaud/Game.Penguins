@@ -14,7 +14,7 @@ using NLog.LayoutRenderers.Wrappers;
 namespace Game.Penguins.Helper.CustomGame
 {
     /// <summary>
-    /// Instance of the game
+    /// Represents an instance of the game.
     /// </summary>
     public class CustomGame : IGame
     {
@@ -65,7 +65,7 @@ namespace Game.Penguins.Helper.CustomGame
         {
             // Log start of the program
             Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-            log.Info("***** NEW GAME *****");
+            log.Info("***** GAME START *****");
 
             // Initialize list of players
             Players = new List<IPlayer>();
@@ -77,7 +77,6 @@ namespace Game.Penguins.Helper.CustomGame
             this.random = random;
 
             // Log game initialization
-            //Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
             log.Info("Game was initialized successfully.");
         }
 
@@ -111,7 +110,7 @@ namespace Game.Penguins.Helper.CustomGame
         public void StartGame()
         {
 
-            // Get the number of penguins foreach player
+            // Get the number of penguins for each player
             int numberPenguins = 0;
             switch (Players.Count)
             {
@@ -175,8 +174,8 @@ namespace Game.Penguins.Helper.CustomGame
         /// <summary>
         /// The player places a penguin manually on the board
         /// </summary>
-        /// <param name="x">x of the selected cell</param>
-        /// <param name="y">y of the selected cell</param>
+        /// <param name="x">x coordinate of the selected cell</param>
+        /// <param name="y">y coordinate of the selected cell</param>
         public void PlacePenguinManual(int x, int y)
         {
             // If selected cell has one fish and has no penguin already
@@ -210,7 +209,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Log penguin placement
                 Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y})");
+                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y}).");
             }
             // If AI is medium
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
@@ -226,7 +225,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Log penguin placement
                 Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y})");
+                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y}).");
             }
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
@@ -242,7 +241,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Log penguin placement
                 Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y})");
+                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y}).");
             }
 
         }

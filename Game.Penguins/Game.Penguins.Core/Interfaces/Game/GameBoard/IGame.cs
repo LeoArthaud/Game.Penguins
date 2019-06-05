@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Game.Penguins.Core.Interfaces.Game.GameBoard
 {
+    /// <summary>
+    /// Interface for Game objects.
+    /// </summary>
     public interface IGame
     {
         /// <summary>

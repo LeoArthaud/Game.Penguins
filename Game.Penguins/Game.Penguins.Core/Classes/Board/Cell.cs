@@ -3,6 +3,9 @@ using Game.Penguins.Core.Interfaces.Game.GameBoard;
 
 namespace Game.Penguins.Core.Classes.Board
 {
+    /// <summary>
+    /// Represents a cell on the board. Implements ICell interface.
+    /// </summary>
     public class Cell : ICell
     {
         public CellType CellType { get; set; }
