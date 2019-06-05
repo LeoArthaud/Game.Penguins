@@ -13,7 +13,7 @@ namespace Game.Penguins.Core.Classes.App
         /// </summary>
         /// <param name="min"></param>
         /// <param name="max"></param>
-        /// <returns></returns>
+        /// <returns>Random integer between min and max.</returns>
         public int Next(int min, int max)
         {
             Random random = new Random();

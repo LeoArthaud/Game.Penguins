@@ -14,7 +14,7 @@ namespace Game.Penguins.Core.Interfaces
         /// </summary>
         /// <param name="min"></param>
         /// <param name="max"></param>
-        /// <returns></returns>
+        /// <returns>Random integer between min and max.</returns>
         int Next(int min, int max);
     }
 }
