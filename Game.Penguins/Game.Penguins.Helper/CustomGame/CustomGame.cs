@@ -276,28 +276,12 @@ namespace Game.Penguins.Helper.CustomGame
                         ChangeStateMove(origin, destination);
 
                         // Check if the player can move his penguins
-                        PossibilitiesOfOrigin();
-                        foreach (var possibility in PossibilitiesOrigin)
-                        {
-                           
-                            var list = move.CheckMove(possibility);
-                            if (list.Count == 0)
-                            {
-                                RemovePenguin(possibility);
-                            }
-                        }
-                        AffectedCurrentPlayer(ChangeType.Move);
-                        // Check if the player can move his penguins
-                        PossibilitiesOfOrigin();
-                        foreach (var possibility in PossibilitiesOrigin)
-                        {
+                        RemovePenguin();
 
-                            var list = move.CheckMove(possibility);
-                            if (list.Count == 0)
-                            {
-                                RemovePenguin(possibility);
-                            }
-                        }
+                        AffectedCurrentPlayer(ChangeType.Move);
+
+                        // Check if the player can move his penguins
+                        RemovePenguin();
                     }
                 }
             }
@@ -337,8 +321,12 @@ namespace Game.Penguins.Helper.CustomGame
 
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
-                    
+
+                    RemovePenguin();
+
                     AffectedCurrentPlayer(ChangeType.Move);
+
+                    RemovePenguin();
                 }
                 else
                 {
@@ -368,7 +356,14 @@ namespace Game.Penguins.Helper.CustomGame
 
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+
+
+                    RemovePenguin();
+
                     AffectedCurrentPlayer(ChangeType.Move);
+
+                    RemovePenguin();
+
                 }
                 catch (Exception e)
                 {
@@ -402,7 +397,12 @@ namespace Game.Penguins.Helper.CustomGame
 
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+
+                    RemovePenguin();
+
                     AffectedCurrentPlayer(ChangeType.Move);
+
+                    RemovePenguin();
                 }
                 catch (Exception e)
                 {
@@ -419,36 +419,47 @@ namespace Game.Penguins.Helper.CustomGame
         /// Function for remove a penguin alone
         /// </summary>
         /// <param name="possibility"></param>
-        public void RemovePenguin(Coordinates possibility)
+        public void RemovePenguin()
         {
-            Player playerCurrent = (Player)CurrentPlayer;
+            Movements move = new Movements(null, null, Board);
+            PossibilitiesOfOrigin();
+            foreach (var possibility in PossibilitiesOrigin)
+            {
 
-            // Get cell
-            Cell cell = (Cell)Board.Board[possibility.X, possibility.Y];
+                var list = move.CheckMove(possibility);
+                if (list.Count == 0)
+                {
+                    Player playerCurrent = (Player)CurrentPlayer;
 
-            // Add to the player number of point of the cell
-            playerCurrent.Points += cell.FishCount;
+                    // Get cell
+                    Cell cell = (Cell)Board.Board[possibility.X, possibility.Y];
 
-            // Cell become water
-            cell.CellType = CellType.Water;
+                    // Add to the player number of point of the cell
+                    playerCurrent.Points += cell.FishCount;
 
-            // Register points for log
-            var cellPoints = cell.FishCount;
+                    // Cell become water
+                    cell.CellType = CellType.Water;
 
-            // Cell have no fish
-            cell.FishCount = 0;
+                    // Register points for log
+                    var cellPoints = cell.FishCount;
 
-            // Cell have no penguin
-            cell.CurrentPenguin = null;
+                    // Cell have no fish
+                    cell.FishCount = 0;
 
-            // Apply change
-            cell.ChangeState();
+                    // Cell have no penguin
+                    cell.CurrentPenguin = null;
 
-            // Apply change
-            playerCurrent.ChangeState();
+                    // Apply change
+                    cell.ChangeState();
 
-            ILog log = LogManager.GetLogger(GetType().ToString());
-            log.Info($"{playerCurrent.Name} moved to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
+                    // Apply change
+                    playerCurrent.ChangeState();
+
+                    ILog log = LogManager.GetLogger(GetType().ToString());
+                    log.Info($"{playerCurrent.Name} moved to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
+                }
+            }
+            
         }
 
         // TODO: Implement a draw when two or more player have the same score.

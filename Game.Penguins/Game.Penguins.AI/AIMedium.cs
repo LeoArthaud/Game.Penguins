@@ -66,26 +66,6 @@ namespace Game.Penguins.AI
                         bestCells.Add(possibility, resultOrderBy[0]);
                     }
                 }
-                else
-                {
-                    // Get cell
-                    Cell cell = (Cell)Board.Board[possibility.X, possibility.Y];
-
-                    // Add to the player number of point of the cell
-                    playerCurrent.Points += cell.FishCount;
-
-                    // Cell become water
-                    cell.CellType = CellType.Water;
-
-                    // Cell have no fish
-                    cell.FishCount = 0;
-
-                    // Cell have no penguin
-                    cell.CurrentPenguin = null;
-
-                    // Apply change
-                    cell.ChangeState();
-                }
             }
             
             
