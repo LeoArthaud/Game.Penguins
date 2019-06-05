@@ -18,24 +18,12 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_CellStatus()
         {
-            //Init Game
-            CustomGame customGame = InitGame();
-
-            var playerInitial = customGame.Players[0];
-
-            // Position of cell
-            int x = 0;
-            int y = 0;
-
-            Cell cell = (Cell)customGame.Board.Board[x, y];
-            cell.FishCount = 1;
-
-            // Launch function
-            customGame.PlacePenguinManual(x, y);
+            // Init
+            CustomGame customGame = LaunchFunction();
 
             // Tests
-            Assert.IsTrue(customGame.Board.Board[x, y].CellType == CellType.FishWithPenguin);
-            Assert.IsTrue(customGame.Board.Board[x, y].CurrentPenguin.Player == playerInitial);
+            Assert.IsTrue(customGame.Board.Board[0, 0].CellType == CellType.FishWithPenguin);
+            Assert.IsTrue(customGame.Board.Board[0, 0].CurrentPenguin.Player == customGame.Players[0]);
         }
 
         /// <summary>
@@ -44,17 +32,8 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_NumberPenguinDecrease()
         {
-            CustomGame customGame = InitGame();
-
-            // Position of cell
-            int x = 0;
-            int y = 0;
-
-            Cell cell = (Cell)customGame.Board.Board[x, y];
-            cell.FishCount = 1;
-
-            // Launch function
-            customGame.PlacePenguinManual(x, y);
+            // Init
+            CustomGame customGame = LaunchFunction();
 
             // Test if decrease of number penguins work
             Assert.IsTrue(customGame.Players[0].Penguins == 3);
@@ -66,17 +45,8 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_ChangeCurrentPlayer()
         {
-            CustomGame customGame = InitGame();
-
-            // Position of cell
-            int x = 0;
-            int y = 0;
-
-            Cell cell = (Cell)customGame.Board.Board[x, y];
-            cell.FishCount = 1;
-
-            // Launch function
-            customGame.PlacePenguinManual(x, y);
+            // Init
+            CustomGame customGame = LaunchFunction();
 
             // Test if CurrentPlayer is changed
             Assert.IsTrue(customGame.CurrentPlayer == customGame.Players[1]);
@@ -88,17 +58,8 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_NextActionPlace()
         {
-            CustomGame customGame = InitGame();
-
-            // Position of cell
-            int x = 0;
-            int y = 0;
-
-            Cell cell = (Cell)customGame.Board.Board[x, y];
-            cell.FishCount = 1;
-
-            // Launch function
-            customGame.PlacePenguinManual(x, y);
+            // Init
+            CustomGame customGame = LaunchFunction();
 
             Assert.IsTrue(customGame.NextAction == NextActionType.PlacePenguin);
         }
@@ -131,6 +92,7 @@ namespace Game.Penguins.Human.UnitTests
                 count++;
             }
 
+            // Tests
             Assert.IsTrue(customGame.CurrentPlayer.Penguins == 0);
             Assert.IsTrue(customGame.NextAction == NextActionType.MovePenguin);
         }
@@ -156,7 +118,6 @@ namespace Game.Penguins.Human.UnitTests
 
                 Assert.IsTrue(cell.CurrentPenguin == null);
             }
-
 
         }
 
@@ -186,5 +147,26 @@ namespace Game.Penguins.Human.UnitTests
         }
         #endregion
 
+        #region Private Functions
+
+        /// <summary>
+        /// Set cell and launch function PlacePenguinManual
+        /// </summary>
+        private CustomGame LaunchFunction()
+        {
+            //Init Game
+            CustomGame customGame = InitGame();
+            
+            // Set cell
+            Cell cell = (Cell)customGame.Board.Board[0, 0];
+            cell.FishCount = 1;
+
+            // Launch function
+            customGame.PlacePenguinManual(0, 0);
+
+            return customGame;
+        }
+
+        #endregion
     }
 }

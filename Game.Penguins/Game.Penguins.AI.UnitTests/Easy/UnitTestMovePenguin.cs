@@ -84,10 +84,6 @@ namespace Game.Penguins.AI.UnitTests.Easy
             Coordinates coordinates = aiEasy.FindOrigin(list);
 
             // Tests
-            Assert.IsTrue(customGame.Board.Board[0,0].CellType == CellType.Water);
-            Assert.IsTrue(customGame.Board.Board[0,0].FishCount == 0);
-            Assert.IsTrue(customGame.Board.Board[0,0].CurrentPenguin == null);
-            Assert.IsTrue(customGame.CurrentPlayer.Points == 1);
             Assert.IsTrue(coordinates.X == -1 && coordinates.Y == -1);
         }
 
@@ -129,6 +125,47 @@ namespace Game.Penguins.AI.UnitTests.Easy
 
             // Test
             Assert.IsTrue(coordinates.X == 1 && coordinates.Y == 0);
+
+        }
+
+        /// <summary>
+        /// Get coordinates if the penguin can't move
+        /// </summary>
+        [TestMethod]
+        public void Test_FindDestination_CannotMove()
+        {
+            //Init Game
+            CustomGame customGame = InitGame(null);
+
+            // Penguin in 0;0
+            int x = 0;
+            int y = 0;
+            // Set cell with penguin
+            Cell cell = (Cell)customGame.Board.Board[x, y];
+            cell.FishCount = 1;
+            cell.CellType = CellType.FishWithPenguin;
+            cell.CurrentPenguin = new Penguin(customGame.CurrentPlayer);
+
+            // Cell water in 0;1
+            x = 0;
+            y = 1;
+            // Set cell water
+            cell = (Cell)customGame.Board.Board[x, y];
+            cell.CellType = CellType.Water;
+
+            // Cell water in 1;0
+            x = 1;
+            y = 0;
+            // Set cell water
+            cell = (Cell)customGame.Board.Board[x, y];
+            cell.CellType = CellType.Water;
+
+            // Launch function
+            AIEasy aiEasy = new AIEasy(customGame.Board, new AppRandom(), customGame.CurrentPlayer);
+            Coordinates coordinates = aiEasy.FindDestination(new Coordinates(0, 0));
+
+            // Test
+            Assert.IsTrue(coordinates.X == -1 && coordinates.Y == -1);
 
         }
 

@@ -189,10 +189,6 @@ namespace Game.Penguins.AI.UnitTests.Medium
             Dictionary<string, Coordinates> coordinates = aiMedium.FindOriginDestination();
 
             // Tests
-            Assert.IsTrue(customGame.Board.Board[0, 0].CellType == CellType.Water);
-            Assert.IsTrue(customGame.Board.Board[0, 0].FishCount == 0);
-            Assert.IsTrue(customGame.Board.Board[0, 0].CurrentPenguin == null);
-            Assert.IsTrue(customGame.CurrentPlayer.Points == 1);
             Assert.IsTrue(coordinates.Count == 1);
         }
 
