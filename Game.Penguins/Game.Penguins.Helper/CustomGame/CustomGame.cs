@@ -278,6 +278,8 @@ namespace Game.Penguins.Helper.CustomGame
                         // Check if the player can move his penguins
                         RemovePenguin();
 
+                        EndGame();
+
                         AffectedCurrentPlayer(ChangeType.Move);
 
                         // Check if the player can move his penguins
@@ -321,6 +323,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                     RemovePenguin();
 
+                    EndGame();
                     AffectedCurrentPlayer(ChangeType.Move);
 
                     RemovePenguin();
@@ -357,6 +360,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                     RemovePenguin();
 
+                    EndGame();
                     AffectedCurrentPlayer(ChangeType.Move);
 
                     RemovePenguin();
@@ -397,8 +401,10 @@ namespace Game.Penguins.Helper.CustomGame
 
                     RemovePenguin();
 
-                    AffectedCurrentPlayer(ChangeType.Move);
+                    EndGame();
 
+                    AffectedCurrentPlayer(ChangeType.Move);
+                
                     RemovePenguin();
                 }
                 catch (Exception e)
@@ -408,6 +414,7 @@ namespace Game.Penguins.Helper.CustomGame
                     log.Warn($"Your penguins can't move : '{e}'");
 
                     EndGame();
+
                 }
             }
         }
@@ -473,7 +480,6 @@ namespace Game.Penguins.Helper.CustomGame
                 {
                     if (Board.Board[i, j].CellType == CellType.FishWithPenguin)
                     {
-                        AffectedCurrentPlayer(ChangeType.Move);
                         nbPenguin.Add(true);
                     }
                 }
