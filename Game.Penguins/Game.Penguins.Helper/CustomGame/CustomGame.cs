@@ -292,6 +292,7 @@ namespace Game.Penguins.Helper.CustomGame
             }
         }
 
+        // TODO: Fix OutOfBound origin variable when playing with AIEasy (see Glo for details)
         /// <summary>
         /// Move penguin for AI
         /// </summary>
