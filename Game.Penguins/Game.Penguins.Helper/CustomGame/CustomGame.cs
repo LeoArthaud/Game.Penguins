@@ -381,7 +381,7 @@ namespace Game.Penguins.Helper.CustomGame
                 {
                     // Log penguin movement
                     ILog log = LogManager.GetLogger(GetType().ToString());
-                    log.Info("Your penguins can't move : " + e);
+                    log.Warn($"Your penguins can't move : '{e}'");
 
                     EndGame();
                 }
@@ -415,13 +415,16 @@ namespace Game.Penguins.Helper.CustomGame
                 {
                     // Log penguin movement
                     ILog log = LogManager.GetLogger(GetType().ToString());
-                    log.Info("Your penguins can't move : " + e);
+                    log.Warn($"Your penguins can't move : '{e}'");
 
                     EndGame();
                 }
             }
         }
 
+        /// <summary>
+        /// End of game function. Called when a player cannot play anymore.
+        /// </summary>
         public void EndGame()
         {
             List<bool> nbPenguin = new List<bool>();
@@ -459,7 +462,17 @@ namespace Game.Penguins.Helper.CustomGame
                 // Log end of game
                 ILog log = LogManager.GetLogger(GetType().ToString());
                 log.Info("There are no penguins left in play.");
-                log.Info($"{winner.Name} wins the game with {highScore} points!");
+
+                try
+                {
+                    log.Info($"{winner.Name} wins the game with {highScore} points!");
+
+                }
+                catch (System.NullReferenceException e)
+                {
+                    log.Warn($"winner variable is null : '{e}'");
+                }
+
                 log.Info("***** GAME END *****");
             }
         }
