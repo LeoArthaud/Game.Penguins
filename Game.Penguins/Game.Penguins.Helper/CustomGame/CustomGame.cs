@@ -76,7 +76,6 @@ namespace Game.Penguins.Helper.CustomGame
             this.random = random;
 
             // Log game initialization
-            //Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
             log.Info("Game was initialized successfully.");
         }
 
