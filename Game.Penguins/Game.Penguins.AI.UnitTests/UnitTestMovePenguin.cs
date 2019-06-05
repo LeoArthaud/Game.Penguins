@@ -1,9 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Game.Penguins.Core.Classes;
-using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
-using Game.Penguins.Core.Interfaces.Game.Players;
 using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,7 +9,7 @@ namespace Game.Penguins.AI.UnitTests
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestMovePenguin
+    public class UnitTestMovePenguin : GlobalFunctions
     {
         /// <summary>
         /// Test if the AI Easy has move
@@ -20,7 +18,7 @@ namespace Game.Penguins.AI.UnitTests
         public void Test_MovePenguin_AIEasy()
         {
             // Init Game
-            CustomGame customGame = InitGame();
+            CustomGame customGame = InitGame(null);
 
             // Launch function to place a penguin
             customGame.PlacePenguin();
@@ -50,13 +48,13 @@ namespace Game.Penguins.AI.UnitTests
         }
 
         /// <summary>
-        /// 
+        /// Test if the AI Easy cannot move
         /// </summary>
         [TestMethod]
         public void Test_MovePenguin_AIEasy_EndGame()
         {
             // Init Game
-            CustomGame customGame = InitGame();
+            CustomGame customGame = InitGame(null);
 
             // Position of cell with penguin 0;0
             int x = 0;
@@ -95,7 +93,7 @@ namespace Game.Penguins.AI.UnitTests
         public void Test_MovePenguin_AIMedium()
         {
             // Init Game
-            CustomGame customGame = InitGame();
+            CustomGame customGame = InitGame(null);
 
             // Set Current player
             customGame.CurrentPlayer = customGame.Players[1];
@@ -128,13 +126,13 @@ namespace Game.Penguins.AI.UnitTests
         }
 
         /// <summary>
-        /// 
+        /// Test if the AI Medium cannot move
         /// </summary>
         [TestMethod]
         public void Test_MovePenguin_AIMedium_EndGame()
         {
             // Init Game
-            CustomGame customGame = InitGame();
+            CustomGame customGame = InitGame(null);
             
             // Set Current player
             customGame.CurrentPlayer = customGame.Players[1];
@@ -176,7 +174,7 @@ namespace Game.Penguins.AI.UnitTests
         public void Test_MovePenguin_AIHard()
         {
             // Init Game
-            CustomGame customGame = InitGame();
+            CustomGame customGame = InitGame(null);
 
             // Set current player
             customGame.CurrentPlayer = customGame.Players[2];
@@ -209,13 +207,13 @@ namespace Game.Penguins.AI.UnitTests
         }
 
         /// <summary>
-        /// 
+        /// Test if the AI Hard cannot move
         /// </summary>
         [TestMethod]
         public void Test_MovePenguin_AIHard_EndGame()
         {
             // Init Game
-            CustomGame customGame = InitGame();
+            CustomGame customGame = InitGame(null);
 
             // Set Current player
             customGame.CurrentPlayer = customGame.Players[2];
@@ -250,31 +248,5 @@ namespace Game.Penguins.AI.UnitTests
             Assert.IsTrue(customGame.NextAction == NextActionType.Nothing);
         }
 
-        #region Private Functions
-
-        /// <summary>
-        /// Init the game with 3 players (AIEasy, AIMedium, AIHard)
-        /// </summary>
-        /// <returns>the game with modifications</returns>
-        public CustomGame InitGame()
-        {
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 3 players
-            customGame.AddPlayer("Player1", PlayerType.AIEasy);
-            customGame.AddPlayer("Player2", PlayerType.AIMedium);
-            customGame.AddPlayer("Player3", PlayerType.AIHard);
-
-            // Launch function
-            customGame.StartGame();
-
-            // Set current player
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
-
-            return customGame;
-        }
-
-        #endregion
     }
 }
