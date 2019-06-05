@@ -13,7 +13,7 @@ using Common.Logging;
 namespace Game.Penguins.Helper.CustomGame
 {
     /// <summary>
-    /// Represents an instance of the game.
+    /// Represents an instance of the game. Implements IGame interface.
     /// </summary>
     public class CustomGame : IGame
     {
@@ -64,7 +64,7 @@ namespace Game.Penguins.Helper.CustomGame
         {
             // Log start of the program
             ILog log = LogManager.GetLogger(GetType().ToString());
-            log.Info("***** NEW GAME *****");
+            log.Info("***** GAME START *****");
 
             // Initialize list of players
             Players = new List<IPlayer>();
@@ -461,7 +461,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Log end of game
                 ILog log = LogManager.GetLogger(GetType().ToString());
-                log.Info("There are no penguins left in play.");
+                log.Info("There are no penguin left in play.");
 
                 try
                 {
