@@ -1,9 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Game.Penguins.Core.Classes;
-using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
-using Game.Penguins.Core.Interfaces.Game.Players;
 using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,7 +9,7 @@ namespace Game.Penguins.Human.UnitTests
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestMoveManual
+    public class UnitTestMoveManual : GlobalFunctions
     {
         /// <summary>
         /// Test if the function MoveManual place the penguin at the new destination
@@ -252,30 +250,5 @@ namespace Game.Penguins.Human.UnitTests
             Assert.IsTrue(customGame.Board.Board[xOrigin, yOrigin].CellType == CellType.Water);
         }
 
-        #region Private Functions
-
-        /// <summary>
-        /// Init the game
-        /// </summary>
-        /// <returns>game</returns>
-        private CustomGame InitGame()
-        {
-            // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
-
-            return customGame;
-        }
-
-        #endregion
     }
 }

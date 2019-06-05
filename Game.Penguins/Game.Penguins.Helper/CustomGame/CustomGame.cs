@@ -60,6 +60,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="random"></param>
         public CustomGame(IRandom random)
         {
             // Log start of the program
@@ -302,6 +303,7 @@ namespace Game.Penguins.Helper.CustomGame
             }
         }
 
+        // TODO: Fix OutOfBound origin variable when playing with AIEasy (see Glo for details)
         /// <summary>
         /// Move penguin for AI
         /// </summary>
@@ -322,16 +324,20 @@ namespace Game.Penguins.Helper.CustomGame
                 // Get the destination of the penguin
                 //Coordinates destination = aiEasy.FindDestination(origin);
                 Coordinates test = new Coordinates(-1, -1);
-                if (aiEasy.FindDestination(origin).X != test.X)
+                if (origin.X != test.X)
                 {
                     Coordinates destination = aiEasy.FindDestination(origin);
+
+                    Console.WriteLine("origin : " + origin.X + ", " + origin.Y);
 
                     // Log penguin movement
                     ILog log = LogManager.GetLogger(GetType().ToString());
                     log.Info($"{CurrentPlayer.Name} moved a penguin to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
+
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                    
                     AffectedCurrentPlayer(ChangeType.Move);
                 }
                 else
@@ -412,6 +418,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// <summary>
         /// Function for remove a penguin alone
         /// </summary>
+        /// <param name="possibility"></param>
         public void RemovePenguin(Coordinates possibility)
         {
             Player playerCurrent = (Player)CurrentPlayer;
@@ -444,6 +451,10 @@ namespace Game.Penguins.Helper.CustomGame
             log.Info($"{playerCurrent.Name} moved to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
         }
 
+        // TODO: Implement a draw when two or more player have the same score.
+        /// <summary>
+        /// End of game function. Called when a player can no longer move penguins.
+        /// </summary>
         public void EndGame()
         {
             List<bool> nbPenguin = new List<bool>();
@@ -498,7 +509,7 @@ namespace Game.Penguins.Helper.CustomGame
         
         #endregion
 
-        #region Privates Functions
+        #region Private Functions
 
         /// <summary>
         /// Apply placement
@@ -572,6 +583,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// <summary>
         /// Affected next player
         /// </summary>
+        /// <param name="changeType"></param>
         private void AffectedCurrentPlayer(ChangeType changeType)
         {
             Player playerCurrent = (Player)CurrentPlayer;

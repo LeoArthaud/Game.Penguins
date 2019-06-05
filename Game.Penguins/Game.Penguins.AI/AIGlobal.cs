@@ -36,7 +36,7 @@ namespace Game.Penguins.AI
         /// <param name="board"></param>
         /// <param name="random"></param>
         /// <param name="currentPlayer"></param>
-        public AIGlobal(IBoard board, IRandom random, IPlayer currentPlayer)
+        protected AIGlobal(IBoard board, IRandom random, IPlayer currentPlayer)
         {
             Board = board;
             this.random = random;

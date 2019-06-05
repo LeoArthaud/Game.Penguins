@@ -4,7 +4,6 @@ using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Interfaces;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
-using Game.Penguins.Core.Interfaces.Game.Players;
 using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -13,7 +12,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestPlacePenguin
+    public class UnitTestPlacePenguin : GlobalFunctions
     {
         /// <summary>
         /// Test if the function return a table of 10 cells
@@ -22,7 +21,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
         public void Test_PlacePenguin_getThreePoints()
         {
             // Init game
-            CustomGame customGame = InitGame();
+            CustomGame customGame = InitGame(null);
 
             // Init AI Hard
             AIHard aiHard = new AIHard(customGame.Board, new AppRandom(), customGame.CurrentPlayer);
@@ -38,7 +37,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
         public void Test_PlacePenguin_getFishNear()
         {
             // Init Game
-            CustomGame customGame = InitGame();
+            CustomGame customGame = InitGame(null);
 
             // Init AI Hard
             AIHard aiHard = new AIHard(customGame.Board, new AppRandom(), customGame.CurrentPlayer);
@@ -95,7 +94,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
         public void Test_PlacePenguin_getFishNearEmpty()
         {
             // Init game
-            CustomGame customGame = InitGame();
+            CustomGame customGame = InitGame(null);
 
             // Init AI Hard
             AIHard aiHard = new AIHard(customGame.Board, new AppRandom(), customGame.CurrentPlayer);
@@ -133,7 +132,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
                 .Returns(2)
                 .Returns(2);
             //Init Game
-            CustomGame customGame = InitGame();
+            CustomGame customGame = InitGame(null);
             
             for (int i = 0; i < 8; i++)
             {
@@ -198,27 +197,6 @@ namespace Game.Penguins.AI.UnitTests.Hard
 
         }
 
-        /// <summary>
-        /// Init the game with 2 players AIHard
-        /// </summary>
-        /// <returns>the game with modifications</returns>
-        public CustomGame InitGame()
-        {
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 2 IA hard
-            customGame.AddPlayer("Player1", PlayerType.AIHard);
-            customGame.AddPlayer("Player2", PlayerType.AIHard);
-
-            // Launch function
-            customGame.StartGame();
-
-            // Set current player
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
-
-            return customGame;
-        }
 
         #endregion
     }

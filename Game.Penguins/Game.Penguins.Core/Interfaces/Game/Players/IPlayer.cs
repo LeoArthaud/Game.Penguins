@@ -13,7 +13,7 @@ namespace Game.Penguins.Core.Interfaces.Game.Players
         Guid Identifier { get; }
 
         /// <summary>
-        /// Informations about the user type (human or AI)
+        /// Information about the user type (human or AI)
         /// </summary>
         PlayerType PlayerType { get; }
 
