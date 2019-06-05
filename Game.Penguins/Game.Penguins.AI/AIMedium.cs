@@ -56,9 +56,17 @@ namespace Game.Penguins.AI
                 }
                 if (resultCells.Count != 0)
                 {
-                    var resultOrderBy = resultCells.OrderByDescending(cell => cell.FishCount).ToList();
-                    bestCells.Add(possibility, resultOrderBy[0]);
-                } else
+                    var resultOrderBy = resultCells.Where(cell => cell.FishCount == 3).ToList();
+                    if (resultOrderBy.Count == 0)
+                    {
+                        bestCells.Add(possibility, resultCells[random.Next(0, resultCells.Count)]);
+                    }
+                    else
+                    {
+                        bestCells.Add(possibility, resultOrderBy[0]);
+                    }
+                }
+                else
                 {
                     // Get cell
                     Cell cell = (Cell)Board.Board[possibility.X, possibility.Y];
