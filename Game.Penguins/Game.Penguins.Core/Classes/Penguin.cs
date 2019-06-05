@@ -8,8 +8,15 @@ namespace Game.Penguins.Core.Classes
     /// </summary>
     public class Penguin : IPenguin
     {
+        /// <summary>
+        /// Player
+        /// </summary>
         public IPlayer Player { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="player"></param>
         public Penguin(IPlayer player)
         {
             Player = player;

@@ -25,6 +25,12 @@ namespace Game.Penguins.Core.Classes.Move
         /// </summary>
         public IBoard Board { get; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="destination"></param>
+        /// <param name="board"></param>
         public Movements(ICell origin, ICell destination, IBoard board)
         {
             Origin = origin;
