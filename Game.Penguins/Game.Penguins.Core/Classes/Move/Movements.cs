@@ -384,32 +384,32 @@ namespace Game.Penguins.Core.Classes.Move
             // Direction right
             int x = origin.X + 1;
             int y = origin.Y;
-            directions.Add(DirectionType.Droite, CheckFreeCell(x, y));
+            directions.Add(DirectionType.Right, CheckFreeCell(x, y));
 
             // Direction left
             x = origin.X - 1;
             y = origin.Y;
-            directions.Add(DirectionType.Gauche, CheckFreeCell(x, y));
+            directions.Add(DirectionType.Left, CheckFreeCell(x, y));
 
             // Direction down-right
             x = origin.Y % 2 != 0 ? origin.X + 1 : origin.X;
             y = origin.Y + 1;
-            directions.Add(DirectionType.BasDroite, CheckFreeCell(x, y));
+            directions.Add(DirectionType.DownRight, CheckFreeCell(x, y));
 
             // Direction up-right
             x = origin.Y % 2 != 0 ? origin.X + 1 : origin.X;
             y = origin.Y - 1;
-            directions.Add(DirectionType.HautDroite, CheckFreeCell(x, y));
+            directions.Add(DirectionType.UpRight, CheckFreeCell(x, y));
 
             // Direction down-left
             x = origin.Y % 2 == 0 ? origin.X - 1 : origin.X;
             y = origin.Y + 1;
-            directions.Add(DirectionType.BasGauche, CheckFreeCell(x, y));
+            directions.Add(DirectionType.DownLeft, CheckFreeCell(x, y));
 
             // Direction up-left
             x = origin.Y % 2 == 0 ? origin.X - 1 : origin.X;
             y = origin.Y - 1;
-            directions.Add(DirectionType.HautGauche, CheckFreeCell(x, y));
+            directions.Add(DirectionType.UpLeft, CheckFreeCell(x, y));
             
             return directions;
         }

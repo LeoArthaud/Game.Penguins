@@ -5,12 +5,12 @@
     /// </summary>
     public enum DirectionType
     {
-        Droite = 0,
-        Gauche,
-        HautDroite,
-        HautGauche,
-        BasDroite,
-        BasGauche
+        Right = 0,
+        Left,
+        UpRight,
+        UpLeft,
+        DownRight,
+        DownLeft
     }
 
 }

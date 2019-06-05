@@ -29,23 +29,23 @@ namespace Game.Penguins.Game.UnitTests.Move
             var result = move.CanMove(new Coordinates(4, 4));
 
             // Tests
-            Assert.IsFalse(result[DirectionType.Droite]);
-            Assert.IsFalse(result[DirectionType.Gauche]);
-            Assert.IsFalse(result[DirectionType.BasDroite]);
-            Assert.IsFalse(result[DirectionType.BasGauche]);
-            Assert.IsFalse(result[DirectionType.HautDroite]);
-            Assert.IsFalse(result[DirectionType.HautGauche]);
+            Assert.IsFalse(result[DirectionType.Right]);
+            Assert.IsFalse(result[DirectionType.Left]);
+            Assert.IsFalse(result[DirectionType.DownRight]);
+            Assert.IsFalse(result[DirectionType.DownLeft]);
+            Assert.IsFalse(result[DirectionType.UpRight]);
+            Assert.IsFalse(result[DirectionType.UpLeft]);
 
 
             result = move.CanMove(new Coordinates(3, 5));
 
             // Tests
-            Assert.IsFalse(result[DirectionType.Droite]);
-            Assert.IsFalse(result[DirectionType.Gauche]);
-            Assert.IsFalse(result[DirectionType.BasDroite]);
-            Assert.IsFalse(result[DirectionType.BasGauche]);
-            Assert.IsFalse(result[DirectionType.HautDroite]);
-            Assert.IsFalse(result[DirectionType.HautGauche]);
+            Assert.IsFalse(result[DirectionType.Right]);
+            Assert.IsFalse(result[DirectionType.Left]);
+            Assert.IsFalse(result[DirectionType.DownRight]);
+            Assert.IsFalse(result[DirectionType.DownLeft]);
+            Assert.IsFalse(result[DirectionType.UpRight]);
+            Assert.IsFalse(result[DirectionType.UpLeft]);
         }
 
         #endregion
