@@ -315,12 +315,17 @@ namespace Game.Penguins.Helper.CustomGame
                 {
                     Coordinates destination = aiEasy.FindDestination(origin);
 
+                    Console.WriteLine("destination : " + Board.Board[destination.X, destination.Y]);
+                    Console.WriteLine("origin : " + Board.Board[origin.X, origin.Y]);
+
                     // Log penguin movement
                     ILog log = LogManager.GetLogger(GetType().ToString());
                     log.Info($"{CurrentPlayer.Name} moved a penguin to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
+
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+                    
                     AffectedCurrentPlayer(ChangeType.Move);
                 }
                 else
