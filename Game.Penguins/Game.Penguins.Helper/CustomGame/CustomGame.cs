@@ -312,7 +312,7 @@ namespace Game.Penguins.Helper.CustomGame
                 // Get the destination of the penguin
                 //Coordinates destination = aiEasy.FindDestination(origin);
                 Coordinates test = new Coordinates(-1, -1);
-                if (aiEasy.FindDestination(origin).X != test.X)
+                if (origin.X != test.X)
                 {
                     Coordinates destination = aiEasy.FindDestination(origin);
 
