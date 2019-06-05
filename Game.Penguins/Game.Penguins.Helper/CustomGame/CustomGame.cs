@@ -433,7 +433,6 @@ namespace Game.Penguins.Helper.CustomGame
         public void EndGame()
         {
             List<bool> nbPenguin = new List<bool>();
-            Console.WriteLine(CurrentPlayer.Name);
 
             for (int i = 0; i < 8; i++)
             {
@@ -473,9 +472,10 @@ namespace Game.Penguins.Helper.CustomGame
                     log.Info($"{winner.Name} wins the game with {highScore} points!");
 
                 }
-                catch (System.NullReferenceException e)
+                catch (NullReferenceException e)
                 {
                     log.Warn($"winner variable is null : '{e}'");
+                    throw;
                 }
 
                 log.Info("***** GAME END *****");

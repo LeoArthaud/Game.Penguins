@@ -384,32 +384,32 @@ namespace Game.Penguins.Core.Classes.Move
             // Direction right
             int x = origin.X + 1;
             int y = origin.Y;
-            directions.Add(DirectionType.Droite, CheckCaseWater(x, y));
+            directions.Add(DirectionType.Droite, CheckFreeCell(x, y));
 
             // Direction left
             x = origin.X - 1;
             y = origin.Y;
-            directions.Add(DirectionType.Gauche, CheckCaseWater(x, y));
+            directions.Add(DirectionType.Gauche, CheckFreeCell(x, y));
 
             // Direction down-right
             x = origin.Y % 2 != 0 ? origin.X + 1 : origin.X;
             y = origin.Y + 1;
-            directions.Add(DirectionType.BasDroite, CheckCaseWater(x, y));
+            directions.Add(DirectionType.BasDroite, CheckFreeCell(x, y));
 
             // Direction up-right
             x = origin.Y % 2 != 0 ? origin.X + 1 : origin.X;
             y = origin.Y - 1;
-            directions.Add(DirectionType.HautDroite, CheckCaseWater(x, y));
+            directions.Add(DirectionType.HautDroite, CheckFreeCell(x, y));
 
             // Direction down-left
             x = origin.Y % 2 == 0 ? origin.X - 1 : origin.X;
             y = origin.Y + 1;
-            directions.Add(DirectionType.BasGauche, CheckCaseWater(x, y));
+            directions.Add(DirectionType.BasGauche, CheckFreeCell(x, y));
 
             // Direction up-left
             x = origin.Y % 2 == 0 ? origin.X - 1 : origin.X;
             y = origin.Y - 1;
-            directions.Add(DirectionType.HautGauche, CheckCaseWater(x, y));
+            directions.Add(DirectionType.HautGauche, CheckFreeCell(x, y));
             
             return directions;
         }
@@ -420,7 +420,7 @@ namespace Game.Penguins.Core.Classes.Move
         /// <param name="x">Coordinate X</param>
         /// <param name="y">Coordinate Y</param>
         /// <returns>true if the penguin can't move</returns>
-        public bool CheckCaseWater(int x, int y)
+        public bool CheckFreeCell(int x, int y)
         {
             // If the cell not exceed the border of the board
             if (0 <= x && 0 <= y && x < 8 && y < 8)

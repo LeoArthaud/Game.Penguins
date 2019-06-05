@@ -12,7 +12,7 @@ namespace Game.Penguins.Game.UnitTests.Move
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestCheckCaseWater
+    public class UnitTestCheckFreeCell
     {
         #region Public Functions
 
@@ -44,7 +44,7 @@ namespace Game.Penguins.Game.UnitTests.Move
 
             //launch function
             Movements move = new Movements(cellOrigin, null, customGame.Board);
-            bool result = move.CheckCaseWater(xAfter, yAfter);
+            bool result = move.CheckFreeCell(xAfter, yAfter);
 
             //Tests
             Assert.IsTrue(result);
@@ -61,12 +61,12 @@ namespace Game.Penguins.Game.UnitTests.Move
 
             //launch function
             Movements move = new Movements(null, null, customGame.Board);
-            bool result = move.CheckCaseWater(8, 8);
+            bool result = move.CheckFreeCell(8, 8);
 
             //Tests
             Assert.IsTrue(result);
 
-            result = move.CheckCaseWater(-1, -1);
+            result = move.CheckFreeCell(-1, -1);
 
             //Tests
             Assert.IsTrue(result);
@@ -102,7 +102,7 @@ namespace Game.Penguins.Game.UnitTests.Move
 
             //launch function
             Movements move = new Movements(cellOrigin, null, customGame.Board);
-            bool result = move.CheckCaseWater(xAfter, yAfter);
+            bool result = move.CheckFreeCell(xAfter, yAfter);
 
             //Tests
             Assert.IsTrue(result);
@@ -136,7 +136,7 @@ namespace Game.Penguins.Game.UnitTests.Move
 
             //Launch function
             Movements move = new Movements(cellOrigin, null, customGame.Board);
-            bool result = move.CheckCaseWater(xAfter, yAfter);
+            bool result = move.CheckFreeCell(xAfter, yAfter);
 
             //Tests
             Assert.IsTrue(!result);

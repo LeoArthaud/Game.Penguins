@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Game.Penguins.Core.Classes;
 using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Classes.Board;
@@ -19,7 +20,7 @@ namespace Game.Penguins.Game.UnitTests
         /// 
         /// </summary>
         [TestMethod]
-        public void Test_EndGame_NoPlayer()
+        public void Test_EndGame_NoPenguinOnBoard()
         {
             // Init game
             CustomGame customGame = InitGame(null);
@@ -35,7 +36,21 @@ namespace Game.Penguins.Game.UnitTests
         /// 
         /// </summary>
         [TestMethod]
-        public void Test_EndGame_WithPlayer()
+        [ExpectedException(typeof(NullReferenceException))]
+        public void Test_EndGame_WinnerNull()
+        {
+            // Init game
+            CustomGame customGame = new CustomGame(new AppRandom());
+
+            // End Game
+            customGame.EndGame();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [TestMethod]
+        public void Test_EndGame_WithPenguinOnBoard()
         {
             // Init game
             CustomGame customGame = InitGame(null);

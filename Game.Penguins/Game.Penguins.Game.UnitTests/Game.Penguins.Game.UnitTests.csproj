@@ -76,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Move\UnitTestCanMove.cs" />
-    <Compile Include="Move\UnitTestCheckCaseWater.cs" />
+    <Compile Include="Move\UnitTestCheckFreeCell.cs" />
     <Compile Include="Move\UnitTestCheckMove.cs" />
     <Compile Include="Move\UnitTestGetCoordinates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
