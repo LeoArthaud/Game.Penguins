@@ -12,7 +12,7 @@ namespace Game.Penguins.AI.UnitTests.Easy
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestPlacePenguin
+    public class UnitTestPlacePenguin : GlobalFunctions
     {
         /// <summary>
         /// If a penguin is place at the first try of random
@@ -116,31 +116,5 @@ namespace Game.Penguins.AI.UnitTests.Easy
             Assert.IsTrue(coordinates.X == 1 && coordinates.Y == 1);
         }
 
-        #region Private Functions
-
-        /// <summary>
-        /// Init the game with 2 players AIEasy
-        /// </summary>
-        /// <param name="randomMock">mock for the random</param>
-        /// <returns>the game with modifications</returns>
-        public CustomGame InitGame(Mock<IRandom> randomMock)
-        {
-            CustomGame customGame = randomMock == null ? new CustomGame(new AppRandom()) : new CustomGame(randomMock.Object);
-
-            // Add 2 players
-            customGame.AddPlayer("Player1", PlayerType.AIEasy);
-            customGame.AddPlayer("Player2", PlayerType.AIEasy);
-
-            // Launch function
-            customGame.StartGame();
-
-            // Set current player
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
-
-            return customGame;
-        }
-
-        #endregion
     }
 }
