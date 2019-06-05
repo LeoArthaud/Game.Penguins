@@ -300,6 +300,14 @@ namespace Game.Penguins.ViewModels
                                     game.CurrentPlayer.PlayerType != PlayerType.Human;
             IsMoveMyPenguinAction = game.NextAction == NextActionType.MovePenguin &&
                                     game.CurrentPlayer.PlayerType == PlayerType.Human;
+
+            // Autoplay with AI
+            // Auto-place penguins
+            if (IsPlacePenguinAIAction)
+                PlayAICommand.Execute(null);
+            // Auto-move penguins
+            if (IsMovePenguinAIAction)
+                PlayAICommand.Execute(null);
         }
 
         public IApplicationContentView GetPreviousView()
