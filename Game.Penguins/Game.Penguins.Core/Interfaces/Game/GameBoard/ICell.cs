@@ -2,6 +2,9 @@
 
 namespace Game.Penguins.Core.Interfaces.Game.GameBoard
 {
+    /// <summary>
+    /// Interface for Cell objects.
+    /// </summary>
     public interface ICell
     {
         /// <summary>

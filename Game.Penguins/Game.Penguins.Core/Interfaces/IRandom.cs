@@ -5,7 +5,7 @@ using System.Text;
 namespace Game.Penguins.Core.Interfaces
 {
     /// <summary>
-    /// Interface pour simuler des nombres aléatoires
+    /// Interface for simulating random numbers.
     /// </summary>
     public interface IRandom
     {

@@ -4,7 +4,7 @@ using Game.Penguins.Core.Interfaces.Game.Players;
 namespace Game.Penguins.Core.Classes
 {
     /// <summary>
-    /// Player class.
+    /// Represents a player. Implements IPlayer interface.
     /// </summary>
     public class Player : IPlayer
     {

@@ -2,6 +2,9 @@
 
 namespace Game.Penguins.Core.Interfaces.Game.Players
 {
+    /// <summary>
+    /// Interface for Player objects.
+    /// </summary>
     public interface IPlayer
     {
         /// <summary>
