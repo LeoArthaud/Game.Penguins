@@ -282,7 +282,7 @@ namespace Game.Penguins.Helper.CustomGame
                             var list = move.CheckMove(possibility);
                             if (list.Count == 0)
                             {
-                                SuppPenguin(possibility);
+                                RemovePenguin(possibility);
                             }
                         }
                         AffectedCurrentPlayer(ChangeType.Move);
@@ -401,7 +401,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// <summary>
         /// Function for remove a penguin alone
         /// </summary>
-        public void SuppPenguin(Coordinates possibility)
+        public void RemovePenguin(Coordinates possibility)
         {
             Player playerCurrent = (Player)CurrentPlayer;
 
