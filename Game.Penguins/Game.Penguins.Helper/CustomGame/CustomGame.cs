@@ -398,6 +398,38 @@ namespace Game.Penguins.Helper.CustomGame
             }
         }
 
+        /// <summary>
+        /// Function for remove a penguin alone
+        /// </summary>
+        public void SuppPenguin(Coordinates possibility)
+        {
+            Player playerCurrent = (Player)CurrentPlayer;
+
+            // Get cell
+            Cell cell = (Cell)Board.Board[possibility.X, possibility.Y];
+
+            // Add to the player number of point of the cell
+            playerCurrent.Points += cell.FishCount;
+
+            // Cell become water
+            cell.CellType = CellType.Water;
+
+            // Register points for log
+            var cellPoints = cell.FishCount;
+
+            // Cell have no fish
+            cell.FishCount = 0;
+
+            // Cell have no penguin
+            cell.CurrentPenguin = null;
+
+            // Apply change
+            cell.ChangeState();
+
+            ILog log = LogManager.GetLogger(GetType().ToString());
+            log.Info($"{playerCurrent.Name} moved to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
+        }
+
         public void EndGame()
         {
             List<bool> nbPenguin = new List<bool>();
