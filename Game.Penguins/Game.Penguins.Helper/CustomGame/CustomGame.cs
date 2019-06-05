@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using NLog.LayoutRenderers.Wrappers;
 
 namespace Game.Penguins.Helper.CustomGame
 {
@@ -64,8 +63,8 @@ namespace Game.Penguins.Helper.CustomGame
         public CustomGame(IRandom random)
         {
             // Log start of the program
-            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-            log.Info("***** GAME START *****");
+            ILog log = LogManager.GetLogger(GetType().ToString());
+            log.Info("***** NEW GAME *****");
 
             // Initialize list of players
             Players = new List<IPlayer>();
@@ -97,7 +96,7 @@ namespace Game.Penguins.Helper.CustomGame
             Players.Add(player);
 
             // Log player addition to the list
-            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+            ILog log = LogManager.GetLogger(GetType().ToString());
             log.Info($"{player.Name} ({player.PlayerType.ToString()}) added to the list of players.");
 
             // Return player
@@ -167,7 +166,7 @@ namespace Game.Penguins.Helper.CustomGame
             StateChanged?.Invoke(this, null);
 
             // Log game start
-            Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+            ILog log = LogManager.GetLogger(GetType().ToString());
             log.Info($"Game was successfully started with {Players.Count} players. Each player has {numberPenguins} penguins.");
         }
 
@@ -185,7 +184,7 @@ namespace Game.Penguins.Helper.CustomGame
                 ChangeStatePlace(x, y);
 
                 // Log manual penguin placement
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                ILog log = LogManager.GetLogger(GetType().ToString());
                 log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({x}, {y})");
             }
         }
@@ -208,8 +207,8 @@ namespace Game.Penguins.Helper.CustomGame
                 ChangeStatePlace(coordinates.X, coordinates.Y);
 
                 // Log penguin placement
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y}).");
+                ILog log = LogManager.GetLogger(GetType().ToString());
+                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y})");
             }
             // If AI is medium
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
@@ -224,8 +223,8 @@ namespace Game.Penguins.Helper.CustomGame
                 ChangeStatePlace(coordinates.X, coordinates.Y);
 
                 // Log penguin placement
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y}).");
+                ILog log = LogManager.GetLogger(GetType().ToString());
+                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y})");
             }
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
@@ -240,8 +239,8 @@ namespace Game.Penguins.Helper.CustomGame
                 ChangeStatePlace(coordinates.X, coordinates.Y);
 
                 // Log penguin placement
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
-                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y}).");
+                ILog log = LogManager.GetLogger(GetType().ToString());
+                log.Info($"{CurrentPlayer.Name} placed a penguin on cell ({coordinates.X}, {coordinates.Y})");
             }
 
         }
@@ -266,7 +265,7 @@ namespace Game.Penguins.Helper.CustomGame
                     Dictionary<string, Coordinates> result = move.GetCoordinates();
 
                     // Get if the destination cell belongs to the list of possibilities
-                    int numberOfResults = move.CheckDeplacement(result["origin"])
+                    int numberOfResults = move.CheckMove(result["origin"])
                                             .Count(element => element.X == result["destination"].X && element.Y == result["destination"].Y);
                     
                     // If the destination cell belongs to the list
@@ -277,11 +276,10 @@ namespace Game.Penguins.Helper.CustomGame
 
                         // Check if the player can move his penguins
                         PossibilitiesOfOrigin();
-                        IList<Coordinates> coordinates = new List<Coordinates>();
                         foreach (var possibility in PossibilitiesOrigin)
                         {
                             Player playerCurrent = (Player)CurrentPlayer;
-                            var list = move.CheckDeplacement(possibility);
+                            var list = move.CheckMove(possibility);
                             if (list.Count == 0)
                             {
 
@@ -307,7 +305,7 @@ namespace Game.Penguins.Helper.CustomGame
                                 cell.ChangeState();
 
                                 // Log manual penguin movement
-                                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                                ILog log = LogManager.GetLogger(GetType().ToString());
                                 log.Info($"{playerCurrent.Name} moved to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
                             }
                         }
@@ -340,9 +338,9 @@ namespace Game.Penguins.Helper.CustomGame
                 if (aiEasy.FindDestination(origin).X != test.X)
                 {
                     Coordinates destination = aiEasy.FindDestination(origin);
-         
+
                     // Log penguin movement
-                    Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                    ILog log = LogManager.GetLogger(GetType().ToString());
                     log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
                     // Apply changes
@@ -372,7 +370,7 @@ namespace Game.Penguins.Helper.CustomGame
                     Coordinates destination = coordinates["destination"];
 
                     // Log penguin movement
-                    Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                    ILog log = LogManager.GetLogger(GetType().ToString());
                     log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
                     // Apply changes
@@ -401,7 +399,7 @@ namespace Game.Penguins.Helper.CustomGame
                     Coordinates destination = coordinates["destination"];
 
                     // Log penguin movement
-                    Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                    ILog log = LogManager.GetLogger(GetType().ToString());
                     log.Info($"{CurrentPlayer.Name} moved to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
 
                     // Apply changes
@@ -451,7 +449,7 @@ namespace Game.Penguins.Helper.CustomGame
                 }
 
                 // Log end of game
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                ILog log = LogManager.GetLogger(GetType().ToString());
                 log.Info("There are no penguins left in play.");
                 log.Info($"{winner.Name} wins the game with {highScore} points!");
                 log.Info("***** GAME END *****");
@@ -566,7 +564,7 @@ namespace Game.Penguins.Helper.CustomGame
                 CurrentPlayer = Players[IdPlayer];
 
                 // Log player change
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                ILog log = LogManager.GetLogger(GetType().ToString());
                 log.Info($"*** It's the turn of {CurrentPlayer.Name} ***");
             }
             else
@@ -575,7 +573,7 @@ namespace Game.Penguins.Helper.CustomGame
                 CurrentPlayer = Players[IdPlayer];
 
                 // Log player change
-                Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(GetType().ToString());
+                ILog log = LogManager.GetLogger(GetType().ToString());
                 log.Info($"*** It's the turn of {CurrentPlayer.Name} ***");
             }
 

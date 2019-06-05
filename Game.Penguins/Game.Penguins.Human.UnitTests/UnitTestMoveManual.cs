@@ -71,7 +71,7 @@ namespace Game.Penguins.Human.UnitTests
             cellOrigin.CurrentPenguin = null;
             cellOrigin.CellType = CellType.Fish;
 
-            // Coord cell destination
+            // Position cell destination
             int xDestination = 1;
             int yDestination = 0;
 
@@ -159,7 +159,7 @@ namespace Game.Penguins.Human.UnitTests
             cellDestination.CellType = CellType.Water;
             cellDestination.FishCount = 3;
 
-            //Launche function
+            //Launch function
             customGame.MoveManual(cellOrigin, cellDestination);
 
             // Tests
@@ -198,7 +198,7 @@ namespace Game.Penguins.Human.UnitTests
             cellDestination.CellType = CellType.FishWithPenguin;
             cellDestination.FishCount = 3;
 
-            // Launche function
+            // Launch function
             customGame.MoveManual(cellOrigin, cellDestination);
 
             // Test
@@ -213,7 +213,7 @@ namespace Game.Penguins.Human.UnitTests
         /// Test the suppression penguin
         /// </summary>
         [TestMethod]
-        public void Test_MoveManual_SupprPenguin()
+        public void Test_MoveManual_DeletePenguin()
         {
             // Init game
             CustomGame customGame = InitGame();
@@ -236,17 +236,17 @@ namespace Game.Penguins.Human.UnitTests
             Cell cell2 = (Cell)customGame.Board.Board[1,0];
             cell2.CellType = CellType.Water;
 
-            // Create a seconde penguin
-            Cell cell2ndOri = (Cell)customGame.Board.Board[4, 0];
-            cell2ndOri.CurrentPenguin = penguinCurrentPlayer;
-            cell2ndOri.CellType = CellType.FishWithPenguin;
+            // Create a second penguin
+            Cell cellOrigin2 = (Cell)customGame.Board.Board[4, 0];
+            cellOrigin2.CurrentPenguin = penguinCurrentPlayer;
+            cellOrigin2.CellType = CellType.FishWithPenguin;
 
-            // Set destination for the seconde penguin
-            Cell cell2ndDesti = (Cell)customGame.Board.Board[5, 0];
-            cell2ndDesti.CellType = CellType.Fish;
+            // Set destination for the second penguin
+            Cell cellDestination2 = (Cell)customGame.Board.Board[5, 0];
+            cellDestination2.CellType = CellType.Fish;
 
             // Simulate movement to activate the suppression
-            customGame.MoveManual(cell2ndOri, cell2ndDesti);
+            customGame.MoveManual(cellOrigin2, cellDestination2);
 
             // Test
             Assert.IsTrue(customGame.Board.Board[xOrigin, yOrigin].CellType == CellType.Water);

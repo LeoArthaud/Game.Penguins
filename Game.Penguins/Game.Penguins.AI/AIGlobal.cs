@@ -71,7 +71,7 @@ namespace Game.Penguins.AI
         {
             Movements move = new Movements(null, null, Board);
 
-            IList<Coordinates> result = move.CheckDeplacement(origin);
+            IList<Coordinates> result = move.CheckMove(origin);
 
             // Shuffle
             result = result.OrderBy(a => Guid.NewGuid()).ToList();

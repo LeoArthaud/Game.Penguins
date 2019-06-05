@@ -12,7 +12,7 @@ namespace Game.Penguins.Game.UnitTests.Move
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestCheckDeplacement
+    public class UnitTestCheckMove
     {
         #region Public Functions
 
@@ -20,7 +20,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesRight() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultRight_AllRow()
+        public void Test_CheckMove_ResultRight_AllRow()
         {
             // Init Game
             CustomGame customGame = InitGame();
@@ -61,7 +61,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesLeft() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultLeft_AllRow()
+        public void Test_CheckMove_ResultLeft_AllRow()
         {
             CustomGame customGame = InitGame();
 
@@ -101,7 +101,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesDownRight() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultDownRight_AllRow()
+        public void Test_CheckMove_ResultDownRight_AllRow()
         {
             CustomGame customGame = InitGame();
 
@@ -138,7 +138,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesUpRight() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultUpRight_AllRow()
+        public void Test_CheckMove_ResultUpRight_AllRow()
         {
             CustomGame customGame = InitGame();
 
@@ -177,7 +177,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesDownLeft() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultDownLeft_AllRow()
+        public void Test_CheckMove_ResultDownLeft_AllRow()
         {
             CustomGame customGame = InitGame();
 
@@ -217,7 +217,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesUpLeft() returns the good coordinates (all the row)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultUpLeft_AllRow()
+        public void Test_CheckMove_ResultUpLeft_AllRow()
         {
             CustomGame customGame = InitGame();
 
@@ -258,7 +258,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesRight() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultRight_BlockBy()
+        public void Test_CheckMove_ResultRight_BlockBy()
         {
             CustomGame customGame = InitGame();
 
@@ -296,7 +296,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesLeft() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultLeft_BlockBy()
+        public void Test_CheckMove_ResultLeft_BlockBy()
         {
             CustomGame customGame = InitGame();
 
@@ -334,7 +334,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesDownRight() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultDownRight_BlockBy()
+        public void Test_CheckMove_ResultDownRight_BlockBy()
         {
             CustomGame customGame = InitGame();
 
@@ -375,7 +375,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesUpRight() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultUpRight_BlockBy()
+        public void Test_CheckMove_ResultUpRight_BlockBy()
         {
             // Init Game
             CustomGame customGame = InitGame();
@@ -419,7 +419,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesDownLeft() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultDownLeft_BlockBy()
+        public void Test_CheckMove_ResultDownLeft_BlockBy()
         {
             CustomGame customGame = InitGame();
 
@@ -463,7 +463,7 @@ namespace Game.Penguins.Game.UnitTests.Move
         /// Test if the function GetCoordinatesUpLeft() returns the good coordinates (2 or 3 cells -> block by cell water)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultUpLeft_BlockBy()
+        public void Test_CheckMove_ResultUpLeft_BlockBy()
         {
             CustomGame customGame = InitGame();
 
@@ -503,10 +503,10 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// Test if the function CheckDeplacement() returns the good coordinates (with up-right)
+        /// Test if the function CheckMove() returns the good coordinates (with up-right)
         /// </summary>
         [TestMethod]
-        public void Test_CheckDeplacement_ResultUpRight()
+        public void Test_CheckMove_ResultUpRight()
         {
             // Init Game
             CustomGame customGame = InitGame();
@@ -541,7 +541,7 @@ namespace Game.Penguins.Game.UnitTests.Move
             var result = moveOfHuman.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.CheckDeplacement(result["origin"]);
+            var listPossibilities = moveOfHuman.CheckMove(result["origin"]);
             Assert.IsTrue(listPossibilities[7].X == 1 && listPossibilities[7].Y == 6);
             Assert.IsTrue(listPossibilities[8].X == 1 && listPossibilities[8].Y == 5);
         }
