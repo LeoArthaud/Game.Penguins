@@ -331,6 +331,7 @@ namespace Game.Penguins.Helper.CustomGame
                 }
                 else
                 {
+                    RemovePenguin();
                     EndGame();
                 }
 
@@ -372,6 +373,8 @@ namespace Game.Penguins.Helper.CustomGame
                     ILog log = LogManager.GetLogger(GetType().ToString());
                     log.Warn($"Your penguins can't move : '{e}'");
 
+
+                    RemovePenguin();
                     EndGame();
                 }
                 
@@ -413,6 +416,7 @@ namespace Game.Penguins.Helper.CustomGame
                     ILog log = LogManager.GetLogger(GetType().ToString());
                     log.Warn($"Your penguins can't move : '{e}'");
 
+                    RemovePenguin();
                     EndGame();
 
                 }

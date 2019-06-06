@@ -118,10 +118,6 @@ namespace Game.Penguins.AI.UnitTests.Hard
             Dictionary<string, Coordinates> coordinates = aiHard.FindOriginDestination();
 
             // Tests
-            Assert.IsTrue(customGame.Board.Board[0, 0].CellType == CellType.Water);
-            Assert.IsTrue(customGame.Board.Board[0, 0].FishCount == 0);
-            Assert.IsTrue(customGame.Board.Board[0, 0].CurrentPenguin == null);
-            Assert.IsTrue(customGame.CurrentPlayer.Points == 1);
             Assert.IsTrue(coordinates.Count == 1);
         }
     }
