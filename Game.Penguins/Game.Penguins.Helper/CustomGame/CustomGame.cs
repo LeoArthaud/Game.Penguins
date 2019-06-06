@@ -275,15 +275,16 @@ namespace Game.Penguins.Helper.CustomGame
                         // Apply changes
                         ChangeStateMove(origin, destination);
 
-                        // Check if the player can move his penguins
+                        // Remove penguin if he can't move
                         RemovePenguin();
 
+                        // Check if 
                         EndGame();
 
                         AffectedCurrentPlayer(ChangeType.Move);
 
                         // Check if the player can move his penguins
-                        RemovePenguin();
+                        //RemovePenguin();
                     }
                 }
             }
@@ -326,7 +327,7 @@ namespace Game.Penguins.Helper.CustomGame
                     EndGame();
                     AffectedCurrentPlayer(ChangeType.Move);
 
-                    RemovePenguin();
+                    //RemovePenguin();
                 }
                 else
                 {
@@ -359,11 +360,10 @@ namespace Game.Penguins.Helper.CustomGame
 
 
                     RemovePenguin();
-
                     EndGame();
                     AffectedCurrentPlayer(ChangeType.Move);
 
-                    RemovePenguin();
+                    //RemovePenguin();
 
                 }
                 catch (Exception e)
@@ -405,7 +405,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                     AffectedCurrentPlayer(ChangeType.Move);
                 
-                    RemovePenguin();
+                    //RemovePenguin();
                 }
                 catch (Exception e)
                 {
