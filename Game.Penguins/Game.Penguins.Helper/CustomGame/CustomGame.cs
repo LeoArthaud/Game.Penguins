@@ -278,9 +278,10 @@ namespace Game.Penguins.Helper.CustomGame
                         // Remove penguin if he can't move
                         RemovePenguin();
 
-                        // Check if 
+                        // Check if all penguin has removed, if is true, stop the game
                         EndGame();
 
+                        // Change current player
                         AffectedCurrentPlayer(ChangeType.Move);
 
                         // Check if the player can move his penguins
