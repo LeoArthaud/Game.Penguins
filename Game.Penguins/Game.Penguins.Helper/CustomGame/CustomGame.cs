@@ -322,9 +322,12 @@ namespace Game.Penguins.Helper.CustomGame
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
 
+                    // Remove Penguins if they can't move
                     RemovePenguin();
 
+                    // Close the game if the board contain 0 penguis
                     EndGame();
+
                     AffectedCurrentPlayer(ChangeType.Move);
                 }
                 else
