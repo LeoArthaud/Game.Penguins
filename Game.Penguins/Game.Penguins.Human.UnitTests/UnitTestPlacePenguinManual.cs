@@ -1,16 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Game.Penguins.Core.CustomGame;
-using Game.Penguins.Core.CustomGame.App;
-using Game.Penguins.Core.CustomGame.Board;
+using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
-using Game.Penguins.Core.Interfaces.Game.Players;
+using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Game.Penguins.Human.UnitTests
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestPlacePenguinManual
+    public class UnitTestPlacePenguinManual : GlobalFunctions
     {
         #region Public Functions
 
@@ -20,23 +18,12 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_CellStatus()
         {
-            CustomGame customGame = InitGame();
+            // Init
+            CustomGame customGame = LaunchFunction();
 
-            var playerInitial = customGame.Players[0];
-
-            // Position of cell
-            int x = 0;
-            int y = 0;
-
-            Cell cell = (Cell)customGame.Board.Board[x, y];
-            cell.FishCount = 1;
-
-            // Launch function
-            customGame.PlacePenguinManual(x, y);
-
-            // Test si le penguin a bien été placé sur la cellule
-            Assert.IsTrue(customGame.Board.Board[x, y].CellType == CellType.FishWithPenguin);
-            Assert.IsTrue(customGame.Board.Board[x, y].CurrentPenguin.Player == playerInitial);
+            // Tests
+            Assert.IsTrue(customGame.Board.Board[0, 0].CellType == CellType.FishWithPenguin);
+            Assert.IsTrue(customGame.Board.Board[0, 0].CurrentPenguin.Player == customGame.Players[0]);
         }
 
         /// <summary>
@@ -45,17 +32,8 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_NumberPenguinDecrease()
         {
-            CustomGame customGame = InitGame();
-
-            // Position of cell
-            int x = 0;
-            int y = 0;
-
-            Cell cell = (Cell)customGame.Board.Board[x, y];
-            cell.FishCount = 1;
-
-            // Launch function
-            customGame.PlacePenguinManual(x, y);
+            // Init
+            CustomGame customGame = LaunchFunction();
 
             // Test if decrease of number penguins work
             Assert.IsTrue(customGame.Players[0].Penguins == 3);
@@ -67,17 +45,8 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_ChangeCurrentPlayer()
         {
-            CustomGame customGame = InitGame();
-
-            // Position of cell
-            int x = 0;
-            int y = 0;
-
-            Cell cell = (Cell)customGame.Board.Board[x, y];
-            cell.FishCount = 1;
-
-            // Launch function
-            customGame.PlacePenguinManual(x, y);
+            // Init
+            CustomGame customGame = LaunchFunction();
 
             // Test if CurrentPlayer is changed
             Assert.IsTrue(customGame.CurrentPlayer == customGame.Players[1]);
@@ -89,17 +58,8 @@ namespace Game.Penguins.Human.UnitTests
         [TestMethod]
         public void Test_PlacePenguinManual_NextActionPlace()
         {
-            CustomGame customGame = InitGame();
-
-            // Position of cell
-            int x = 0;
-            int y = 0;
-
-            Cell cell = (Cell)customGame.Board.Board[x, y];
-            cell.FishCount = 1;
-
-            // Launch function
-            customGame.PlacePenguinManual(x, y);
+            // Init
+            CustomGame customGame = LaunchFunction();
 
             Assert.IsTrue(customGame.NextAction == NextActionType.PlacePenguin);
         }
@@ -132,38 +92,81 @@ namespace Game.Penguins.Human.UnitTests
                 count++;
             }
 
+            // Tests
             Assert.IsTrue(customGame.CurrentPlayer.Penguins == 0);
             Assert.IsTrue(customGame.NextAction == NextActionType.MovePenguin);
         }
 
+        /// <summary>
+        /// Test, in the function PlacePenguinManual()
+        /// </summary>
+        [TestMethod]
+        public void Test_PlacePenguinManual_FishCount()
+        {
+            CustomGame customGame = InitGame();
+
+            // Position of cell
+            int x = 0;
+            int y = 0;
+
+            for(int i = 2; i< 4; i++)
+            {
+                Cell cell = (Cell)customGame.Board.Board[x, y];
+                cell.FishCount = i;
+
+                customGame.PlacePenguinManual(x, y);
+
+                Assert.IsTrue(cell.CurrentPenguin == null);
+            }
+
+        }
+
+        /// <summary>
+        /// Test placement if penguin already exist on cell
+        /// </summary>
+        [TestMethod]
+        public void Test_PlacePenguinManual_OnCellType_FishWithPenguin()
+        {
+            //Init game
+            CustomGame customGame = InitGame();
+
+            // Position of origin cell
+            int x = 0;
+            int y = 0;
+
+            // Init Cell with Penguin
+            Cell cell = (Cell)customGame.Board.Board[x, y];
+            cell.CellType = CellType.FishWithPenguin;
+
+            // Launch function
+            customGame.PlacePenguinManual(x, y);
+
+            // Test
+            Assert.IsTrue(cell.CurrentPenguin == null);
+
+        }
         #endregion
 
         #region Private Functions
 
         /// <summary>
-        /// Init the game
+        /// Set cell and launch function PlacePenguinManual
         /// </summary>
-        /// <returns>game</returns>
-        private CustomGame InitGame()
+        private CustomGame LaunchFunction()
         {
-            // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
+            //Init Game
+            CustomGame customGame = InitGame();
+            
+            // Set cell
+            Cell cell = (Cell)customGame.Board.Board[0, 0];
+            cell.FishCount = 1;
 
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.CountPlayers = 2;
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
+            // Launch function
+            customGame.PlacePenguinManual(0, 0);
 
             return customGame;
         }
-        
+
         #endregion
     }
 }

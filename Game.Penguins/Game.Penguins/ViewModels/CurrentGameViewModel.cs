@@ -1,12 +1,12 @@
 ﻿using Game.Penguins.Commands;
-using Game.Penguins.Core.CustomGame;
+using Game.Penguins.Helper.CustomGame;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
 using Game.Penguins.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Game.Penguins.Core.CustomGame.App;
+using Game.Penguins.Core.Classes.App;
 
 namespace Game.Penguins.ViewModels
 {
@@ -326,6 +326,14 @@ namespace Game.Penguins.ViewModels
                                     game.CurrentPlayer.PlayerType != PlayerType.Human;
             IsMoveMyPenguinAction = game.NextAction == NextActionType.MovePenguin &&
                                     game.CurrentPlayer.PlayerType == PlayerType.Human;
+
+            // Autoplay with AI
+            // Auto-place penguins
+            //if (IsPlacePenguinAIAction)
+            //    PlayAICommand.Execute(null);
+            //// Auto-move penguins
+            //if (IsMovePenguinAIAction)
+            //    PlayAICommand.Execute(null);
         }
 
         public IApplicationContentView GetPreviousView()

@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Game.Penguins.Core.CustomGame;
-using Game.Penguins.Core.CustomGame.App;
+using Game.Penguins.Core.Classes;
+using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Interfaces;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
 using Game.Penguins.Core.Interfaces.Game.Players;
+using Game.Penguins.Helper.CustomGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -72,7 +73,7 @@ namespace Game.Penguins.Game.UnitTests
             // Init game
             CustomGame customGame = InitGame(2, null);
 
-            // Verify if currentplayer is assign 
+            // Verify if current player is assign 
             Assert.IsTrue(customGame.CurrentPlayer == customGame.Players[0] || customGame.CurrentPlayer == customGame.Players[1]);
         }
 
@@ -88,51 +89,7 @@ namespace Game.Penguins.Game.UnitTests
             // Verify that the action after StartGame() is PlacePenguin
             Assert.IsTrue(customGame.NextAction == NextActionType.PlacePenguin);
         }
-
-        /// <summary>
-        /// Test, in the function StartGame(), if the name is set correctly
-        /// </summary>
-        [TestMethod]
-        public void Test_StartGame_Name()
-        {
-            // Init game
-            CustomGame customGame = InitGame(2, null);
-
-            // Test Name of the players
-            Assert.IsTrue(customGame.Players[0].Name == "Player0");
-            Assert.IsTrue(customGame.Players[1].Name == "Player1");
-        }
-
-        /// <summary>
-        /// Test, in the function StartGame(), if the identifier is not null
-        /// </summary>
-        [TestMethod]
-        public void Test_StartGame_Identifier()
-        {
-            // Init game
-            CustomGame customGame = InitGame(2, null);
-
-            // Test identifier of the players
-            foreach (var player in customGame.Players)
-            {
-                Assert.IsNotNull(player.Identifier);
-            }
-        }
-
-        /// <summary>
-        /// Test, in the function StartGame(), if the NextAction is PlacePenguin
-        /// </summary>
-        [TestMethod]
-        public void Test_StartGame_PlayerType()
-        {
-            // Init game
-            CustomGame customGame = InitGame(2, null);
-
-            // Test type of the players
-            Assert.IsTrue(customGame.Players[0].PlayerType == PlayerType.Human);
-            Assert.IsTrue(customGame.Players[1].PlayerType == PlayerType.Human);
-        }
-
+        
         /// <summary>
         /// Test, in the function StartGame(), if the color is random
         /// </summary>
@@ -149,7 +106,7 @@ namespace Game.Penguins.Game.UnitTests
             Assert.IsTrue(customGame.Players[0].Color == PlayerColor.Blue);
             Assert.IsTrue(customGame.Players[1].Color == PlayerColor.Yellow);
         }
-        
+
         #endregion
 
         #region Private Functions
@@ -158,27 +115,18 @@ namespace Game.Penguins.Game.UnitTests
         /// Init the game
         /// </summary>
         /// <param name="countPlayer">number of players</param>
+        /// <param name="randomMock">mock for random, can be null</param>
         /// <returns>game</returns>
         public CustomGame InitGame(int countPlayer, Mock<IRandom> randomMock)
         {
             // Init game
-            CustomGame customGame;
-            if (randomMock != null)
-            {
-                customGame = new CustomGame(randomMock.Object);
-            }
-            else
-            {
-                customGame = new CustomGame(new AppRandom());
-            }
+            CustomGame customGame = randomMock != null ? new CustomGame(randomMock.Object) : new CustomGame(new AppRandom());
 
             // Add players
             for (int i = 0; i < countPlayer; i++)
             {
-                Player player = new Player("Player"+i, PlayerType.Human);
-                customGame.Players.Add(player);
+                customGame.AddPlayer("Player" + i, PlayerType.Human);
             }
-            customGame.CountPlayers = countPlayer;
 
             // Launch function
             customGame.StartGame();
