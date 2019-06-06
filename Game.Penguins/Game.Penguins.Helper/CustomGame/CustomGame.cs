@@ -333,6 +333,7 @@ namespace Game.Penguins.Helper.CustomGame
                 {
                     RemovePenguin();
                     EndGame();
+                    AffectedCurrentPlayer(ChangeType.Move);
                 }
 
             }
@@ -376,6 +377,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                     RemovePenguin();
                     EndGame();
+                    AffectedCurrentPlayer(ChangeType.Move);
                 }
                 
             }
@@ -418,7 +420,7 @@ namespace Game.Penguins.Helper.CustomGame
 
                     RemovePenguin();
                     EndGame();
-
+                    AffectedCurrentPlayer(ChangeType.Move);
                 }
             }
         }
@@ -426,7 +428,6 @@ namespace Game.Penguins.Helper.CustomGame
         /// <summary>
         /// Function for remove a penguin alone
         /// </summary>
-        /// <param name="possibility"></param>
         public void RemovePenguin()
         {
             Movements move = new Movements(null, null, Board);

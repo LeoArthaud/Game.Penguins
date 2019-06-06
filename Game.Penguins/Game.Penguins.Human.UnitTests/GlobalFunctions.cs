@@ -21,7 +21,10 @@ namespace Game.Penguins.Human.UnitTests
             customGame.AddPlayer("Player1", PlayerType.Human);
             customGame.AddPlayer("Player2", PlayerType.Human);
 
+            // Launch function
             customGame.StartGame();
+
+            // Set current player
             customGame.CurrentPlayer = customGame.Players[0];
             customGame.IdPlayer = 0;
 

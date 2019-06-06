@@ -73,7 +73,7 @@ namespace Game.Penguins.Game.UnitTests
             // Init game
             CustomGame customGame = InitGame(2, null);
 
-            // Verify if currentplayer is assign 
+            // Verify if current player is assign 
             Assert.IsTrue(customGame.CurrentPlayer == customGame.Players[0] || customGame.CurrentPlayer == customGame.Players[1]);
         }
 
@@ -120,21 +120,12 @@ namespace Game.Penguins.Game.UnitTests
         public CustomGame InitGame(int countPlayer, Mock<IRandom> randomMock)
         {
             // Init game
-            CustomGame customGame;
-            if (randomMock != null)
-            {
-                customGame = new CustomGame(randomMock.Object);
-            }
-            else
-            {
-                customGame = new CustomGame(new AppRandom());
-            }
+            CustomGame customGame = randomMock != null ? new CustomGame(randomMock.Object) : new CustomGame(new AppRandom());
 
             // Add players
             for (int i = 0; i < countPlayer; i++)
             {
-                Player player = new Player("Player"+i, PlayerType.Human);
-                customGame.Players.Add(player);
+                customGame.AddPlayer("Player" + i, PlayerType.Human);
             }
 
             // Launch function

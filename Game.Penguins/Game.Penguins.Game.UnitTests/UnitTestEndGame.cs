@@ -17,7 +17,7 @@ namespace Game.Penguins.Game.UnitTests
     public class UnitTestEndGame
     {
         /// <summary>
-        /// 
+        /// Test EndGame if there is no penguin on the board
         /// </summary>
         [TestMethod]
         public void Test_EndGame_NoPenguinOnBoard()
@@ -33,7 +33,7 @@ namespace Game.Penguins.Game.UnitTests
         }
 
         /// <summary>
-        /// 
+        /// Test EndGame if there is no winner
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
@@ -47,7 +47,7 @@ namespace Game.Penguins.Game.UnitTests
         }
 
         /// <summary>
-        /// 
+        /// Test EndGame if there is always penguin on the board
         /// </summary>
         [TestMethod]
         public void Test_EndGame_WithPenguinOnBoard()
@@ -98,9 +98,11 @@ namespace Game.Penguins.Game.UnitTests
 
             // Add 2 players
             customGame.AddPlayer("Player1", PlayerType.AIEasy);
+            // Set point
             Player player = (Player)customGame.Players[0];
             player.Points = 10;
             customGame.AddPlayer("Player2", PlayerType.AIEasy);
+            // Set point
             player = (Player)customGame.Players[1];
             player.Points = 5;
 
