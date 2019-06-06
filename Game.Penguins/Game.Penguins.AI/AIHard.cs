@@ -67,7 +67,6 @@ namespace Game.Penguins.AI
                 return SoloFish[random.Next(0, SoloFish.Count)];
             }
 
-            Console.Write("Random position");
             placeX = random.Next(0, 8);
             placeY = random.Next(0, 8);
 
@@ -97,7 +96,6 @@ namespace Game.Penguins.AI
                     }
                 }
             }
-            Console.WriteLine("il y a " + k + " case(s) de 3 points");
 
             return coordinatesList;
         }
@@ -118,7 +116,6 @@ namespace Game.Penguins.AI
                     if (Board.Board[cells.X - 1, cells.Y].FishCount == 1 && Board.Board[cells.X - 1, cells.Y].CellType == CellType.Fish)
                     {
                         soloFishList.Add(new Coordinates(cells.X - 1, cells.Y));
-                        Console.WriteLine("fish on left " + cells.X + ", " + cells.Y);
                     }
                 }
 
@@ -129,7 +126,6 @@ namespace Game.Penguins.AI
                     if (Board.Board[cells.X + 1, cells.Y].FishCount == 1 && Board.Board[cells.X + 1, cells.Y].CellType == CellType.Fish)
                     {
                         soloFishList.Add(new Coordinates(cells.X + 1, cells.Y));
-                        Console.WriteLine("fish on right " + cells.X +", "+ cells.Y);
                     }
                 }
 
@@ -179,7 +175,6 @@ namespace Game.Penguins.AI
 
                 k++;
             }
-            Console.WriteLine("il y a " + k + " soloFish autour d'une case de 3 points :)");
 
             return soloFishList;
         }
@@ -191,7 +186,6 @@ namespace Game.Penguins.AI
         public Dictionary<string, Coordinates> FindOriginDestination()
         {
             Movements move = new Movements(null, null, Board);
-            Player playerCurrent = (Player)CurrentPlayer;
 
             PossibilitiesOfOrigin();
             Dictionary<Coordinates, ICell> bestCells = new Dictionary<Coordinates, ICell>();

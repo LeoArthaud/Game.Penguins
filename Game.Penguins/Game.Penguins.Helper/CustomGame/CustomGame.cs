@@ -310,7 +310,6 @@ namespace Game.Penguins.Helper.CustomGame
                 Coordinates origin = aiEasy.FindOrigin(PossibilitiesOrigin);
 
                 // Get the destination of the penguin
-                //Coordinates destination = aiEasy.FindDestination(origin);
                 Coordinates test = new Coordinates(-1, -1);
                 if (origin.X != test.X)
                 {
@@ -327,8 +326,6 @@ namespace Game.Penguins.Helper.CustomGame
 
                     EndGame();
                     AffectedCurrentPlayer(ChangeType.Move);
-
-                    //RemovePenguin();
                 }
                 else
                 {
@@ -361,12 +358,9 @@ namespace Game.Penguins.Helper.CustomGame
                     // Apply changes
                     ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
 
-
                     RemovePenguin();
                     EndGame();
                     AffectedCurrentPlayer(ChangeType.Move);
-
-                    //RemovePenguin();
 
                 }
                 catch (Exception e)
@@ -374,7 +368,6 @@ namespace Game.Penguins.Helper.CustomGame
                     // Log penguin movement
                     ILog log = LogManager.GetLogger(GetType().ToString());
                     log.Warn($"Your penguins can't move : '{e}'");
-
 
                     RemovePenguin();
                     EndGame();
@@ -410,8 +403,6 @@ namespace Game.Penguins.Helper.CustomGame
                     EndGame();
 
                     AffectedCurrentPlayer(ChangeType.Move);
-                
-                    //RemovePenguin();
                 }
                 catch (Exception e)
                 {
