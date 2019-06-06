@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Penguins.Core.Classes;
 using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Classes.Move;
 using Game.Penguins.Core.Interfaces;
@@ -49,10 +48,9 @@ namespace Game.Penguins.AI
         /// <returns>coordinates</returns>
         public new Coordinates PlacePenguin()
         {
-            
-            ThreePoints = getThreePoints();
-            SoloFish = getFishNear(ThreePoints);
-            // Get random x and y
+            ThreePoints = GetThreePoints();
+            SoloFish = GetFishNear(ThreePoints);
+
             bool isNear = false;
             int placeX;
             int placeY;
@@ -67,6 +65,7 @@ namespace Game.Penguins.AI
                 return SoloFish[random.Next(0, SoloFish.Count)];
             }
 
+            // Get random x and y
             placeX = random.Next(0, 8);
             placeY = random.Next(0, 8);
 
@@ -80,7 +79,11 @@ namespace Game.Penguins.AI
             return new Coordinates(placeX, placeY);
         }
 
-        public IList<Coordinates> getThreePoints()
+        /// <summary>
+        /// Get list of cells with 3 points
+        /// </summary>
+        /// <returns></returns>
+        public IList<Coordinates> GetThreePoints()
         {
             int k = 0;
             List<Coordinates> coordinatesList = new List<Coordinates>();
@@ -100,7 +103,12 @@ namespace Game.Penguins.AI
             return coordinatesList;
         }
 
-        public IList<Coordinates> getFishNear(IList<Coordinates> threePoints)
+        /// <summary>
+        /// Get list of cells 3 points with cell 1 point around
+        /// </summary>
+        /// <param name="threePoints"></param>
+        /// <returns></returns>
+        public IList<Coordinates> GetFishNear(IList<Coordinates> threePoints)
         {
             int k = 0;
             List<Coordinates> soloFishList = new List<Coordinates>();
@@ -109,6 +117,7 @@ namespace Game.Penguins.AI
             {
                 int x;
                 int y;
+
                 //check left
                 if (cells.X - 1 >= 0)
                 {
@@ -180,7 +189,7 @@ namespace Game.Penguins.AI
         }
         
         /// <summary>
-        /// Get randomly the destination of the penguin
+        /// Get the destination of the penguin
         /// </summary>
         /// <returns>coordinates of the destination</returns>
         public Dictionary<string, Coordinates> FindOriginDestination()
@@ -225,7 +234,7 @@ namespace Game.Penguins.AI
         }
 
         /// <summary>
-        /// Get current player penguins
+        /// Get coordinates of penguins of current player
         /// </summary>
         private void PossibilitiesOfOrigin()
         {
