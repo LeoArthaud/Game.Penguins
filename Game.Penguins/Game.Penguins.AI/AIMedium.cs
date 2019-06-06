@@ -33,7 +33,7 @@ namespace Game.Penguins.AI
         }
 
         /// <summary>
-        /// Get randomly the destination of the penguin
+        /// Get the destination of the penguin
         /// </summary>
         /// <returns>coordinates of the destination</returns>
         public Dictionary<string, Coordinates> FindOriginDestination()
@@ -66,7 +66,6 @@ namespace Game.Penguins.AI
                 }
             }
             
-            
             Coordinates greatOrigin = new Coordinates(0,0);
             ICell greatDestination = new Cell(0);
             foreach (var couple in bestCells)
@@ -85,7 +84,7 @@ namespace Game.Penguins.AI
         }
 
         /// <summary>
-        /// Get current player penguins
+        /// Get coordinates of penguins of current player
         /// </summary>
         private void PossibilitiesOfOrigin()
         {

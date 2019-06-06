@@ -44,7 +44,7 @@ namespace Game.Penguins.AI
         }
 
         /// <summary>
-        /// Get coordinates where to place the penguin
+        /// Get randomly coordinates where to place the penguin
         /// </summary>
         /// <returns>coordinates</returns>
         public Coordinates PlacePenguin()
@@ -91,13 +91,12 @@ namespace Game.Penguins.AI
         }
 
         /// <summary>
-        /// Get randomly the penguin to move
+        /// Get the penguin to move
         /// </summary>
         /// <param name="possibilitiesOrigin"></param>
         /// <returns>Position of the penguin or [-1;-1] if the AI can't move his penguins</returns>
         public Coordinates FindOrigin(List<Coordinates> possibilitiesOrigin)
         {
-            Player playerCurrent = (Player)CurrentPlayer;
             Movements moveOrigin = new Movements(null, null, Board);
             foreach (var possibility in possibilitiesOrigin)
             {

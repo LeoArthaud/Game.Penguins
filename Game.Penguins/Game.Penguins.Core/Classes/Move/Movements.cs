@@ -79,6 +79,8 @@ namespace Game.Penguins.Core.Classes.Move
         /// <returns>list of coordinates of cells where the penguin can move</returns>
         public IList<Coordinates> CheckMove(Coordinates origin)
         {
+            Possibilities = new List<Coordinates>();
+
             // Get cells at the right of the penguin
             GetCoordinatesRight(origin);
 
