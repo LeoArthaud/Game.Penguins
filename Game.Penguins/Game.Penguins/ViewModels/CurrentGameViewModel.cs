@@ -47,17 +47,19 @@ namespace Game.Penguins.ViewModels
             }
             set
             {
-                if (value == null || game.CurrentPlayer.PlayerType != PlayerType.Human)
+                if (value == null || game.CurrentPlayer.PlayerType != PlayerType.Human || game.NextAction == NextActionType.Nothing)
                     return;
 
-                //// Check that the select is valid :
-                //if (game.NextAction == NextActionType.MovePenguin && selectFirst && value.Cell.CellType != CellType.FishWithPenguin)
-                //    return;
+                // Check that the select is valid :
+                if (game.NextAction == NextActionType.MovePenguin && selectFirst && value.Cell.CellType != CellType.FishWithPenguin)
+                    return;
 
-                //if (game.NextAction == NextActionType.MovePenguin && !selectFirst && value.Cell.CellType != CellType.Fish)
-                //    return;
+                if (game.NextAction == NextActionType.MovePenguin && selectFirst && value.Cell.CellType == CellType.FishWithPenguin && value.Cell.CurrentPenguin.Player.Identifier != game.CurrentPlayer.Identifier)
+                    return;
 
-                // A cell is selected :
+                if (game.NextAction == NextActionType.MovePenguin && !selectFirst && value.Cell.CellType != CellType.Fish)
+                    return;
+
                 if (selectFirst)
                 {
                     if (selectedFirst != null)
@@ -73,6 +75,18 @@ namespace Game.Penguins.ViewModels
 
                     value.IsSelectedSecond = true;
                     selectedSecond = value;
+                }
+
+                // A cell is selected :
+                if (game.NextAction == NextActionType.PlacePenguin)
+                    PlacePenguinCommand.Execute(null);
+                else if (game.NextAction == NextActionType.MovePenguin && value.IsSelectedSecond)
+                {
+                    MovePenguinValidationViewModel.Execute(null);
+                }
+                else if (game.NextAction == NextActionType.MovePenguin && value.IsSelectedFirst)
+                {
+                    MovePenguinSelectorCommand.Execute(null);
                 }
             }
         }
@@ -94,6 +108,18 @@ namespace Game.Penguins.ViewModels
                 }
             }
         }
+
+        #region Colors
+
+        public bool IsBlue { get; private set; }
+
+        public bool IsYellow { get; private set; }
+
+        public bool IsGreen { get; private set; }
+
+        public bool IsRed { get; private set; }
+
+        #endregion
 
         #endregion
 
@@ -300,6 +326,17 @@ namespace Game.Penguins.ViewModels
                                     game.CurrentPlayer.PlayerType != PlayerType.Human;
             IsMoveMyPenguinAction = game.NextAction == NextActionType.MovePenguin &&
                                     game.CurrentPlayer.PlayerType == PlayerType.Human;
+
+
+            IsBlue = game.CurrentPlayer.Color == PlayerColor.Blue;
+            IsYellow = game.CurrentPlayer.Color == PlayerColor.Yellow;
+            IsGreen = game.CurrentPlayer.Color == PlayerColor.Green;
+            IsRed = game.CurrentPlayer.Color == PlayerColor.Red;
+
+            RaisePropertyChanged(nameof(IsBlue));
+            RaisePropertyChanged(nameof(IsYellow));
+            RaisePropertyChanged(nameof(IsGreen));
+            RaisePropertyChanged(nameof(IsRed));
         }
 
         public IApplicationContentView GetPreviousView()
