@@ -260,7 +260,7 @@ namespace Game.Penguins.ViewModels
         {
             // TODO : Initialize with the right implementation
             //game = (IGame)null;
-            game = new CustomGame(new AppRandom());
+            game = new Helper.CustomGame.CustomGame(new AppRandom());
             
             game.StateChanged += Game_StateChanged;
 
@@ -326,6 +326,18 @@ namespace Game.Penguins.ViewModels
                                     game.CurrentPlayer.PlayerType != PlayerType.Human;
             IsMoveMyPenguinAction = game.NextAction == NextActionType.MovePenguin &&
                                     game.CurrentPlayer.PlayerType == PlayerType.Human;
+
+
+            IsBlue = game.CurrentPlayer.Color == PlayerColor.Blue;
+            IsYellow = game.CurrentPlayer.Color == PlayerColor.Yellow;
+            IsGreen = game.CurrentPlayer.Color == PlayerColor.Green;
+            IsRed = game.CurrentPlayer.Color == PlayerColor.Red;
+
+            RaisePropertyChanged(nameof(IsBlue));
+            RaisePropertyChanged(nameof(IsYellow));
+            RaisePropertyChanged(nameof(IsGreen));
+            RaisePropertyChanged(nameof(IsRed));
+
 
             // Autoplay with AI
             // Auto-place penguins
