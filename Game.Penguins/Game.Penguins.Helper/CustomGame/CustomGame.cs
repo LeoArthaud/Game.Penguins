@@ -41,7 +41,7 @@ namespace Game.Penguins.Helper.CustomGame
         /// Apply changes
         /// </summary>
         public event EventHandler StateChanged;
-        
+
         /// <summary>
         /// Id of current player
         /// </summary>
@@ -134,7 +134,7 @@ namespace Game.Penguins.Helper.CustomGame
             // Foreach player
             foreach (var player1 in Players)
             {
-                var player = (Player) player1;
+                var player = (Player)player1;
 
                 // Give the number of penguins
                 player.Penguins = numberPenguins;
@@ -148,7 +148,7 @@ namespace Game.Penguins.Helper.CustomGame
                     // Get an other random color
                     color = random.Next(0, 4);
                 }
-                
+
                 // Give the color to the player
                 player.Color = (PlayerColor)color;
 
@@ -179,7 +179,7 @@ namespace Game.Penguins.Helper.CustomGame
         public void PlacePenguinManual(int x, int y)
         {
             // If selected cell has one fish and has no penguin already
-            if (Board.Board[x, y].FishCount == 1 && Board.Board[x,y].CellType != CellType.FishWithPenguin)
+            if (Board.Board[x, y].FishCount == 1 && Board.Board[x, y].CellType != CellType.FishWithPenguin)
             {
                 // Apply change
                 ChangeStatePlace(x, y);
@@ -268,7 +268,7 @@ namespace Game.Penguins.Helper.CustomGame
                     // Get if the destination cell belongs to the list of possibilities
                     int numberOfResults = move.CheckMove(result["origin"])
                                             .Count(element => element.X == result["destination"].X && element.Y == result["destination"].Y);
-                    
+
                     // If the destination cell belongs to the list
                     if (numberOfResults > 0)
                     {
@@ -375,7 +375,7 @@ namespace Game.Penguins.Helper.CustomGame
                     EndGame();
                     AffectedCurrentPlayer(ChangeType.Move);
                 }
-                
+
             }
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
@@ -462,7 +462,7 @@ namespace Game.Penguins.Helper.CustomGame
                     log.Info($"{playerCurrent.Name} moved to cell ({possibility.X}, {possibility.Y}) and gained {cellPoints}.");
                 }
             }
-            
+
         }
 
         // TODO: Implement a draw when two or more player have the same score.
@@ -487,7 +487,7 @@ namespace Game.Penguins.Helper.CustomGame
             if (nbPenguin.Count == 0)
             {
                 NextAction = NextActionType.Nothing;
-                
+
                 // Determining the winner and high score
                 var highScore = 0;
                 Player winner = null;
@@ -519,7 +519,7 @@ namespace Game.Penguins.Helper.CustomGame
                 log.Info("***** GAME END *****");
             }
         }
-        
+
         #endregion
 
         #region Private Functions
@@ -642,7 +642,7 @@ namespace Game.Penguins.Helper.CustomGame
                 log.Info($"*** It's the turn of {CurrentPlayer.Name} ***");
             }
 
-            
+
         }
 
         /// <summary>
@@ -669,7 +669,7 @@ namespace Game.Penguins.Helper.CustomGame
             // Mixed the list
             PossibilitiesOrigin = PossibilitiesOrigin.OrderBy(a => Guid.NewGuid()).ToList();
         }
-        
+
         #endregion
     }
 }
