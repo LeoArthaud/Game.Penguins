@@ -8,7 +8,7 @@ namespace Game.Penguins.Human.UnitTests
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestPlacePenguinManual : GlobalFunctions
+    public class UnitTestPlacePenguinManual : GlobalFunction
     {
         #region Public Functions
 

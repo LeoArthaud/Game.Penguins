@@ -10,7 +10,7 @@ namespace Game.Penguins.AI.UnitTests.Medium
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestPlacePenguin : GlobalFunctions
+    public class UnitTestPlacePenguin : GlobalFunction
     {
         /// <summary>
         /// If a penguin is place at the first try of random

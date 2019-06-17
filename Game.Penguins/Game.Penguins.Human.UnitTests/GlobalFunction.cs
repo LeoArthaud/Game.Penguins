@@ -1,13 +1,15 @@
-﻿using Game.Penguins.Core.Classes.App;
+﻿using System.Diagnostics.CodeAnalysis;
+using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Interfaces.Game.Players;
 using Game.Penguins.Helper.CustomGame;
 
-namespace Game.Penguins.Game.UnitTests.Move
+namespace Game.Penguins.Human.UnitTests
 {
-    public abstract class GlobalFunctions
+    [ExcludeFromCodeCoverage]
+    public abstract class GlobalFunction
     {
         /// <summary>
-        /// Init the game
+        /// Init the game with 2 players human
         /// </summary>
         /// <returns>game</returns>
         public CustomGame InitGame()

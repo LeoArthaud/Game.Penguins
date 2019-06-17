@@ -9,7 +9,7 @@ namespace Game.Penguins.Human.UnitTests
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestMoveManual : GlobalFunctions
+    public class UnitTestMoveManual : GlobalFunction
     {
         /// <summary>
         /// Test if the function MoveManual place the penguin at the new destination

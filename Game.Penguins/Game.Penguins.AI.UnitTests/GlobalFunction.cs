@@ -8,7 +8,7 @@ using Moq;
 namespace Game.Penguins.AI.UnitTests
 {
     [ExcludeFromCodeCoverage]
-    public abstract class GlobalFunctions
+    public abstract class GlobalFunction
     {
         /// <summary>
         /// Init the game with 3 players (AIEasy, AIMedium, AIHard)

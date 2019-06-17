@@ -8,7 +8,7 @@ namespace Game.Penguins.Game.UnitTests.Move
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestGetCoordinates : GlobalFunctions
+    public class UnitTestGetCoordinates : GlobalFunction
     {
         /// <summary>
         /// Check if the function get the right coordinates of origin and destination of cells

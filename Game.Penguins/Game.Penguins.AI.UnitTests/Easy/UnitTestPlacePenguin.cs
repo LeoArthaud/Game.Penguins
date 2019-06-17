@@ -12,7 +12,7 @@ namespace Game.Penguins.AI.UnitTests.Easy
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestPlacePenguin : GlobalFunctions
+    public class UnitTestPlacePenguin : GlobalFunction
     {
         /// <summary>
         /// If a penguin is place at the first try of random

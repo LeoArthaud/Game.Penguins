@@ -14,7 +14,7 @@ namespace Game.Penguins.AI.UnitTests.Medium
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestMovePenguin : GlobalFunctions
+    public class UnitTestMovePenguin : GlobalFunction
     {
         /// <summary>
         /// Test if the penguin can move

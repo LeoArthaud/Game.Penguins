@@ -12,7 +12,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestPlacePenguin : GlobalFunctions
+    public class UnitTestPlacePenguin : GlobalFunction
     {
         /// <summary>
         /// Test if the function return a table of 10 cells

@@ -8,7 +8,7 @@ namespace Game.Penguins.Game.UnitTests.Move
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestCanMove : GlobalFunctions
+    public class UnitTestCanMove : GlobalFunction
     {
         #region Public Functions
 

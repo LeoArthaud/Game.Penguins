@@ -9,7 +9,7 @@ namespace Game.Penguins.AI.UnitTests
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestMovePenguin : GlobalFunctions
+    public class UnitTestMovePenguin : GlobalFunction
     {
         /// <summary>
         /// Test if the AI Easy has move
