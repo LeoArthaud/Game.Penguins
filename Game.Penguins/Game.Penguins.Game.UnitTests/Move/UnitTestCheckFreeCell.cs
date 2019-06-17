@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Game.Penguins.Core.Classes;
-using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Classes.Board;
 using Game.Penguins.Core.Classes.Move;
 using Game.Penguins.Core.Interfaces.Game.GameBoard;
@@ -12,7 +11,7 @@ namespace Game.Penguins.Game.UnitTests.Move
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class UnitTestCheckFreeCell
+    public class UnitTestCheckFreeCell : GlobalFunctions
     {
         #region Public Functions
 
@@ -144,32 +143,5 @@ namespace Game.Penguins.Game.UnitTests.Move
 
         #endregion
 
-        #region Private Functions
-
-
-        /// <summary>
-        /// Init the game
-        /// </summary>
-        /// <returns>game</returns>
-        private CustomGame InitGame()
-        {
-            // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // Add 2 players
-            Player player1 = new Player("Player1", PlayerType.Human);
-            Player player2 = new Player("Player2", PlayerType.Human);
-            customGame.Players.Add(player1);
-            customGame.Players.Add(player2);
-
-            customGame.StartGame();
-            customGame.CurrentPlayer = customGame.Players[0];
-            customGame.IdPlayer = 0;
-
-            return customGame;
-        }
-
-
-        #endregion
     }
 }

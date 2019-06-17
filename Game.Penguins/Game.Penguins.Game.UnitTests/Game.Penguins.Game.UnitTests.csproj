@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Move\GlobalFunctions.cs" />
     <Compile Include="Move\UnitTestCanMove.cs" />
     <Compile Include="Move\UnitTestCheckFreeCell.cs" />
     <Compile Include="Move\UnitTestCheckMove.cs" />
