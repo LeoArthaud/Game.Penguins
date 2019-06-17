@@ -39,8 +39,8 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellDestination.FishCount = 3;
 
             // Launch function
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
             Assert.IsTrue(result["origin"].X == xOrigin);

@@ -27,7 +27,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
             AIHard aiHard = new AIHard(customGame.Board, new AppRandom(), customGame.CurrentPlayer);
 
             // Test
-            Assert.IsTrue(aiHard.getThreePoints().Count == 10);
+            Assert.IsTrue(aiHard.GetThreePoints().Count == 10);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
             fishThreePointsList.Add(coordinates);
 
             // Launch function
-            IList<Coordinates> list = aiHard.getFishNear(fishThreePointsList);
+            IList<Coordinates> list = aiHard.GetFishNear(fishThreePointsList);
 
             // Test
             Assert.IsTrue(list[0].X == 0 && list[0].Y == 1);
@@ -112,7 +112,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
             fishThreePointsList.Add(coordinates);
 
             // Launch function
-            IList<Coordinates> list = aiHard.getFishNear(fishThreePointsList);
+            IList<Coordinates> list = aiHard.GetFishNear(fishThreePointsList);
 
             // Test
             Assert.IsTrue(list.Count == 0);

@@ -79,6 +79,8 @@ namespace Game.Penguins.Core.Classes.Move
         /// <returns>list of coordinates of cells where the penguin can move</returns>
         public IList<Coordinates> CheckMove(Coordinates origin)
         {
+            Possibilities = new List<Coordinates>();
+
             // Get cells at the right of the penguin
             GetCoordinatesRight(origin);
 
@@ -100,6 +102,8 @@ namespace Game.Penguins.Core.Classes.Move
             return Possibilities;
         }
 
+        #region Direction Right-Left
+
         /// <summary>
         /// Get cells at the right of the penguin
         /// </summary>
@@ -107,7 +111,7 @@ namespace Game.Penguins.Core.Classes.Move
         /// <returns>possibilities of move</returns>
         public void GetCoordinatesRight(Coordinates origin)
         {
-            RecursiveCellRightLeft(origin.X + 1, origin.Y, 1,0);
+            RecursiveCellRightLeft(origin.X + 1, origin.Y, 1, 0);
         }
 
         /// <summary>
@@ -128,7 +132,7 @@ namespace Game.Penguins.Core.Classes.Move
                     // Add cell to the list
                     Possibilities.Add(new Coordinates(x, y));
                     // Call the function
-                    RecursiveCellRightLeft(x + i, y + j, i , j);
+                    RecursiveCellRightLeft(x + i, y + j, i, j);
                 }
             }
         }
@@ -143,71 +147,11 @@ namespace Game.Penguins.Core.Classes.Move
             RecursiveCellRightLeft(origin.X - 1, origin.Y, -1, 0);
         }
 
-        /// <summary>
-        /// Check if the cell is free at the down-right
-        /// </summary>
-        /// <param name="x">Coordinate x of cell</param>
-        /// <param name="y">Coordinate y of cell</param>
-        /// <param name="i">Incrementation x</param>
-        /// <param name="j">Incrementation y</param>
-        public void RecursiveCellDownRight(int x, int y, int i, int j)
-        {
-            if (x < 8 && x >= 0 && y < 8 && y >= 0)
-            {
-                // If the cell is free
-                if (Board.Board[x, y].CellType == CellType.Fish)
-                {
-                    Possibilities.Add(new Coordinates(x, y));
-                    i = y % 2 != 0 ? 1 : 0;
-                    RecursiveCellDownRight(x + i, y + j, i, j);
-                }
-            }
-        }
 
-        /// <summary>
-        /// Get cells at the down-right of the penguin
-        /// </summary>
-        /// <param name="origin">coordinates of origin</param>
-        /// <returns>possibilities of move</returns>
-        public void GetCoordinatesDownRight(Coordinates origin)
-        {
-            int i = origin.Y % 2 != 0 ? 1 : 0;
-            int j = 1;
-            RecursiveCellDownRight(origin.X + i, origin.Y + j, i, j);
-        }
+        #endregion
 
-        /// <summary>
-        /// Check if the cell is free at the down-left
-        /// </summary>
-        /// <param name="x">Coordinate x of cell</param>
-        /// <param name="y">Coordinate y of cell</param>
-        /// <param name="i">Incrementation x</param>
-        /// <param name="j">Incrementation y</param>
-        public void RecursiveCellDownLeft(int x, int y, int i, int j)
-        {
-            if (x < 8 && x >= 0 && y < 8 && y >= 0)
-            {
-                // If the cell is free
-                if (Board.Board[x, y].CellType == CellType.Fish)
-                {
-                    Possibilities.Add(new Coordinates(x, y));
-                    i = y % 2 == 0 ? - 1 : 0;
-                    RecursiveCellDownLeft(x + i, y + j, i, j);
-                }
-            }
-        }
+        #region Direction Up-Right
 
-        /// <summary>
-        /// Get cells at the down-left of the penguin
-        /// </summary>
-        /// <param name="origin">coordinates of origin</param>
-        /// <returns>possibilities of move</returns>
-        public void GetCoordinatesDownLeft(Coordinates origin)
-        {
-            int i = origin.Y % 2 == 0 ? -1 : 0;
-            int j = 1;
-            RecursiveCellDownLeft(origin.X + i, origin.Y + j, i, j);
-        }
 
         /// <summary>
         /// Check if the cell is free at the up-right
@@ -242,6 +186,50 @@ namespace Game.Penguins.Core.Classes.Move
             RecursiveCellUpRight(origin.X + i, origin.Y + j, i, j);
         }
 
+
+        #endregion
+
+        #region Direction Down-Right
+
+        /// <summary>
+        /// Check if the cell is free at the down-right
+        /// </summary>
+        /// <param name="x">Coordinate x of cell</param>
+        /// <param name="y">Coordinate y of cell</param>
+        /// <param name="i">Incrementation x</param>
+        /// <param name="j">Incrementation y</param>
+        public void RecursiveCellDownRight(int x, int y, int i, int j)
+        {
+            if (x < 8 && x >= 0 && y < 8 && y >= 0)
+            {
+                // If the cell is free
+                if (Board.Board[x, y].CellType == CellType.Fish)
+                {
+                    Possibilities.Add(new Coordinates(x, y));
+                    i = y % 2 != 0 ? 1 : 0;
+                    RecursiveCellDownRight(x + i, y + j, i, j);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get cells at the down-right of the penguin
+        /// </summary>
+        /// <param name="origin">coordinates of origin</param>
+        /// <returns>possibilities of move</returns>
+        public void GetCoordinatesDownRight(Coordinates origin)
+        {
+            int i = origin.Y % 2 != 0 ? 1 : 0;
+            int j = 1;
+            RecursiveCellDownRight(origin.X + i, origin.Y + j, i, j);
+        }
+
+
+        #endregion
+
+        #region Direction Up-Left
+
+
         /// <summary>
         /// Check if the cell is free at the up-left
         /// </summary>
@@ -257,7 +245,7 @@ namespace Game.Penguins.Core.Classes.Move
                 if (Board.Board[x, y].CellType == CellType.Fish)
                 {
                     Possibilities.Add(new Coordinates(x, y));
-                    i = y % 2 == 0 ? - 1 : 0;
+                    i = y % 2 == 0 ? -1 : 0;
                     RecursiveCellUpLeft(x + i, y + j, i, j);
                 }
             }
@@ -270,10 +258,52 @@ namespace Game.Penguins.Core.Classes.Move
         /// <returns>possibilities of move</returns>
         public void GetCoordinatesUpLeft(Coordinates origin)
         {
-            int i = origin.Y % 2 == 0 ? - 1 : 0;
+            int i = origin.Y % 2 == 0 ? -1 : 0;
             int j = -1;
             RecursiveCellUpLeft(origin.X + i, origin.Y + j, i, j);
         }
+
+
+        #endregion
+
+        #region Direction Down-Left
+
+
+        /// <summary>
+        /// Check if the cell is free at the down-left
+        /// </summary>
+        /// <param name="x">Coordinate x of cell</param>
+        /// <param name="y">Coordinate y of cell</param>
+        /// <param name="i">Incrementation x</param>
+        /// <param name="j">Incrementation y</param>
+        public void RecursiveCellDownLeft(int x, int y, int i, int j)
+        {
+            if (x < 8 && x >= 0 && y < 8 && y >= 0)
+            {
+                // If the cell is free
+                if (Board.Board[x, y].CellType == CellType.Fish)
+                {
+                    Possibilities.Add(new Coordinates(x, y));
+                    i = y % 2 == 0 ? -1 : 0;
+                    RecursiveCellDownLeft(x + i, y + j, i, j);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get cells at the down-left of the penguin
+        /// </summary>
+        /// <param name="origin">coordinates of origin</param>
+        /// <returns>possibilities of move</returns>
+        public void GetCoordinatesDownLeft(Coordinates origin)
+        {
+            int i = origin.Y % 2 == 0 ? -1 : 0;
+            int j = 1;
+            RecursiveCellDownLeft(origin.X + i, origin.Y + j, i, j);
+        }
+
+
+        #endregion
 
         /// <summary>
         /// Get in which direction the penguin can move or not

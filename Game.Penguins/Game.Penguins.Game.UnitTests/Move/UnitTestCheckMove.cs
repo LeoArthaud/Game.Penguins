@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Game.Penguins.Core.Classes;
 using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Classes.Board;
@@ -43,18 +44,18 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellDestination.CellType = CellType.Fish;
 
             //Launch movement
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.GetCoordinatesRight(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 1 && listPossibilities[0].Y == 0);
-            Assert.IsTrue(listPossibilities[1].X == 2 && listPossibilities[1].Y == 0);
-            Assert.IsTrue(listPossibilities[2].X == 3 && listPossibilities[2].Y == 0);
-            Assert.IsTrue(listPossibilities[3].X == 4 && listPossibilities[3].Y == 0);
-            Assert.IsTrue(listPossibilities[4].X == 5 && listPossibilities[4].Y == 0);
-            Assert.IsTrue(listPossibilities[5].X == 6 && listPossibilities[5].Y == 0);
-            Assert.IsTrue(listPossibilities[6].X == 7 && listPossibilities[6].Y == 0);
+            move.GetCoordinatesRight(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 1 && move.Possibilities[0].Y == 0);
+            Assert.IsTrue(move.Possibilities[1].X == 2 && move.Possibilities[1].Y == 0);
+            Assert.IsTrue(move.Possibilities[2].X == 3 && move.Possibilities[2].Y == 0);
+            Assert.IsTrue(move.Possibilities[3].X == 4 && move.Possibilities[3].Y == 0);
+            Assert.IsTrue(move.Possibilities[4].X == 5 && move.Possibilities[4].Y == 0);
+            Assert.IsTrue(move.Possibilities[5].X == 6 && move.Possibilities[5].Y == 0);
+            Assert.IsTrue(move.Possibilities[6].X == 7 && move.Possibilities[6].Y == 0);
         }
 
         /// <summary>
@@ -83,18 +84,18 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellDestination.CellType = CellType.Fish;
             
             //launch movement
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.GetCoordinatesLeft(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 6 && listPossibilities[0].Y == 0);
-            Assert.IsTrue(listPossibilities[1].X == 5 && listPossibilities[1].Y == 0);
-            Assert.IsTrue(listPossibilities[2].X == 4 && listPossibilities[2].Y == 0);
-            Assert.IsTrue(listPossibilities[3].X == 3 && listPossibilities[3].Y == 0);
-            Assert.IsTrue(listPossibilities[4].X == 2 && listPossibilities[4].Y == 0);
-            Assert.IsTrue(listPossibilities[5].X == 1 && listPossibilities[5].Y == 0);
-            Assert.IsTrue(listPossibilities[6].X == 0 && listPossibilities[6].Y == 0);
+            move.GetCoordinatesLeft(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 6 && move.Possibilities[0].Y == 0);
+            Assert.IsTrue(move.Possibilities[1].X == 5 && move.Possibilities[1].Y == 0);
+            Assert.IsTrue(move.Possibilities[2].X == 4 && move.Possibilities[2].Y == 0);
+            Assert.IsTrue(move.Possibilities[3].X == 3 && move.Possibilities[3].Y == 0);
+            Assert.IsTrue(move.Possibilities[4].X == 2 && move.Possibilities[4].Y == 0);
+            Assert.IsTrue(move.Possibilities[5].X == 1 && move.Possibilities[5].Y == 0);
+            Assert.IsTrue(move.Possibilities[6].X == 0 && move.Possibilities[6].Y == 0);
         }
 
         /// <summary>
@@ -121,17 +122,17 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellDestination.CellType = CellType.Fish;
 
 
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.GetCoordinatesDownRight(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 0 && listPossibilities[0].Y == 1);
-            Assert.IsTrue(listPossibilities[1].X == 1 && listPossibilities[1].Y == 2);
-            Assert.IsTrue(listPossibilities[2].X == 1 && listPossibilities[2].Y == 3);
-            Assert.IsTrue(listPossibilities[3].X == 2 && listPossibilities[3].Y == 4);
-            Assert.IsTrue(listPossibilities[4].X == 2 && listPossibilities[4].Y == 5);
-            Assert.IsTrue(listPossibilities[5].X == 3 && listPossibilities[5].Y == 6);
-            Assert.IsTrue(listPossibilities[6].X == 3 && listPossibilities[6].Y == 7);
+            move.GetCoordinatesDownRight(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 0 && move.Possibilities[0].Y == 1);
+            Assert.IsTrue(move.Possibilities[1].X == 1 && move.Possibilities[1].Y == 2);
+            Assert.IsTrue(move.Possibilities[2].X == 1 && move.Possibilities[2].Y == 3);
+            Assert.IsTrue(move.Possibilities[3].X == 2 && move.Possibilities[3].Y == 4);
+            Assert.IsTrue(move.Possibilities[4].X == 2 && move.Possibilities[4].Y == 5);
+            Assert.IsTrue(move.Possibilities[5].X == 3 && move.Possibilities[5].Y == 6);
+            Assert.IsTrue(move.Possibilities[6].X == 3 && move.Possibilities[6].Y == 7);
         }
 
         /// <summary>
@@ -159,18 +160,18 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellDestination.CellType = CellType.Fish;
 
             // Launch move
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.GetCoordinatesUpRight(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 1 && listPossibilities[0].Y == 6);
-            Assert.IsTrue(listPossibilities[1].X == 1 && listPossibilities[1].Y == 5);
-            Assert.IsTrue(listPossibilities[2].X == 2 && listPossibilities[2].Y == 4);
-            Assert.IsTrue(listPossibilities[3].X == 2 && listPossibilities[3].Y == 3);
-            Assert.IsTrue(listPossibilities[4].X == 3 && listPossibilities[4].Y == 2);
-            Assert.IsTrue(listPossibilities[5].X == 3 && listPossibilities[5].Y == 1);
-            Assert.IsTrue(listPossibilities[6].X == 4 && listPossibilities[6].Y == 0);
+            move.GetCoordinatesUpRight(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 1 && move.Possibilities[0].Y == 6);
+            Assert.IsTrue(move.Possibilities[1].X == 1 && move.Possibilities[1].Y == 5);
+            Assert.IsTrue(move.Possibilities[2].X == 2 && move.Possibilities[2].Y == 4);
+            Assert.IsTrue(move.Possibilities[3].X == 2 && move.Possibilities[3].Y == 3);
+            Assert.IsTrue(move.Possibilities[4].X == 3 && move.Possibilities[4].Y == 2);
+            Assert.IsTrue(move.Possibilities[5].X == 3 && move.Possibilities[5].Y == 1);
+            Assert.IsTrue(move.Possibilities[6].X == 4 && move.Possibilities[6].Y == 0);
         }
 
         /// <summary>
@@ -199,18 +200,18 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellDestination.CellType = CellType.Fish;
             
             // Launch move
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.GetCoordinatesDownLeft(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 6 && listPossibilities[0].Y == 1);
-            Assert.IsTrue(listPossibilities[1].X == 6 && listPossibilities[1].Y == 2);
-            Assert.IsTrue(listPossibilities[2].X == 5 && listPossibilities[2].Y == 3);
-            Assert.IsTrue(listPossibilities[3].X == 5 && listPossibilities[3].Y == 4);
-            Assert.IsTrue(listPossibilities[4].X == 4 && listPossibilities[4].Y == 5);
-            Assert.IsTrue(listPossibilities[5].X == 4 && listPossibilities[5].Y == 6);
-            Assert.IsTrue(listPossibilities[6].X == 3 && listPossibilities[6].Y == 7);
+            move.GetCoordinatesDownLeft(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 6 && move.Possibilities[0].Y == 1);
+            Assert.IsTrue(move.Possibilities[1].X == 6 && move.Possibilities[1].Y == 2);
+            Assert.IsTrue(move.Possibilities[2].X == 5 && move.Possibilities[2].Y == 3);
+            Assert.IsTrue(move.Possibilities[3].X == 5 && move.Possibilities[3].Y == 4);
+            Assert.IsTrue(move.Possibilities[4].X == 4 && move.Possibilities[4].Y == 5);
+            Assert.IsTrue(move.Possibilities[5].X == 4 && move.Possibilities[5].Y == 6);
+            Assert.IsTrue(move.Possibilities[6].X == 3 && move.Possibilities[6].Y == 7);
         }
 
         /// <summary>
@@ -240,18 +241,18 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellDestination.CellType = CellType.Fish;
 
             // Launch move
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.GetCoordinatesUpLeft(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 7 && listPossibilities[0].Y == 6);
-            Assert.IsTrue(listPossibilities[1].X == 6 && listPossibilities[1].Y == 5);
-            Assert.IsTrue(listPossibilities[2].X == 6 && listPossibilities[2].Y == 4);
-            Assert.IsTrue(listPossibilities[3].X == 5 && listPossibilities[3].Y == 3);
-            Assert.IsTrue(listPossibilities[4].X == 5 && listPossibilities[4].Y == 2);
-            Assert.IsTrue(listPossibilities[5].X == 4 && listPossibilities[5].Y == 1);
-            Assert.IsTrue(listPossibilities[6].X == 4 && listPossibilities[6].Y == 0);
+            move.GetCoordinatesUpLeft(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 7 && move.Possibilities[0].Y == 6);
+            Assert.IsTrue(move.Possibilities[1].X == 6 && move.Possibilities[1].Y == 5);
+            Assert.IsTrue(move.Possibilities[2].X == 6 && move.Possibilities[2].Y == 4);
+            Assert.IsTrue(move.Possibilities[3].X == 5 && move.Possibilities[3].Y == 3);
+            Assert.IsTrue(move.Possibilities[4].X == 5 && move.Possibilities[4].Y == 2);
+            Assert.IsTrue(move.Possibilities[5].X == 4 && move.Possibilities[5].Y == 1);
+            Assert.IsTrue(move.Possibilities[6].X == 4 && move.Possibilities[6].Y == 0);
         }
 
         /// <summary>
@@ -284,12 +285,12 @@ namespace Game.Penguins.Game.UnitTests.Move
             Cell cellAfter = (Cell)customGame.Board.Board[xAfter, yAfter];
             cellAfter.CellType = CellType.Water;
 
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.GetCoordinatesRight(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 1 && listPossibilities[0].Y == 0);
-            Assert.IsTrue(listPossibilities[1].X == 2 && listPossibilities[1].Y == 0);
+            move.GetCoordinatesRight(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 1 && move.Possibilities[0].Y == 0);
+            Assert.IsTrue(move.Possibilities[1].X == 2 && move.Possibilities[1].Y == 0);
         }
 
         /// <summary>
@@ -322,12 +323,12 @@ namespace Game.Penguins.Game.UnitTests.Move
             Cell cellAfter = (Cell)customGame.Board.Board[xAfter, yAfter];
             cellAfter.CellType = CellType.Water;
 
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
-            var listPossibilities = moveOfHuman.GetCoordinatesLeft(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 6 && listPossibilities[0].Y == 0);
-            Assert.IsTrue(listPossibilities[1].X == 5 && listPossibilities[1].Y == 0);
+            move.GetCoordinatesLeft(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 6 && move.Possibilities[0].Y == 0);
+            Assert.IsTrue(move.Possibilities[1].X == 5 && move.Possibilities[1].Y == 0);
         }
 
         /// <summary>
@@ -362,13 +363,13 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellAfter.CellType = CellType.Water;
 
             // launch move
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.GetCoordinatesDownRight(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 0 && listPossibilities[0].Y == 1);
-            Assert.IsTrue(listPossibilities[1].X == 1 && listPossibilities[1].Y == 2);
+            move.GetCoordinatesDownRight(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 0 && move.Possibilities[0].Y == 1);
+            Assert.IsTrue(move.Possibilities[1].X == 1 && move.Possibilities[1].Y == 2);
         }
 
         /// <summary>
@@ -406,13 +407,13 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellAfter.CellType = CellType.Water;
 
             //Launch move
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.GetCoordinatesUpRight(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 1 && listPossibilities[0].Y == 6);
-            Assert.IsTrue(listPossibilities[1].X == 1 && listPossibilities[1].Y == 5);
+            move.GetCoordinatesUpRight(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 1 && move.Possibilities[0].Y == 6);
+            Assert.IsTrue(move.Possibilities[1].X == 1 && move.Possibilities[1].Y == 5);
         }
 
         /// <summary>
@@ -449,14 +450,14 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellAfter.CellType = CellType.Water;
 
             //Launch move
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.GetCoordinatesDownLeft(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 6 && listPossibilities[0].Y == 1);
-            Assert.IsTrue(listPossibilities[1].X == 6 && listPossibilities[1].Y == 2);
-            Assert.IsTrue(listPossibilities[2].X == 5 && listPossibilities[2].Y == 3);
+            move.GetCoordinatesDownLeft(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 6 && move.Possibilities[0].Y == 1);
+            Assert.IsTrue(move.Possibilities[1].X == 6 && move.Possibilities[1].Y == 2);
+            Assert.IsTrue(move.Possibilities[2].X == 5 && move.Possibilities[2].Y == 3);
         }
 
         /// <summary>
@@ -493,13 +494,13 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellAfter.CellType = CellType.Water;
 
             // Launch move
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.GetCoordinatesUpLeft(result["origin"]);
-            Assert.IsTrue(listPossibilities[0].X == 7 && listPossibilities[0].Y == 6);
-            Assert.IsTrue(listPossibilities[1].X == 6 && listPossibilities[1].Y == 5);
+            move.GetCoordinatesUpLeft(result["origin"]);
+            Assert.IsTrue(move.Possibilities[0].X == 7 && move.Possibilities[0].Y == 6);
+            Assert.IsTrue(move.Possibilities[1].X == 6 && move.Possibilities[1].Y == 5);
         }
 
         /// <summary>
@@ -537,13 +538,13 @@ namespace Game.Penguins.Game.UnitTests.Move
             cellAfter.CellType = CellType.Water;
 
             // Launch function 
-            Movements moveOfHuman = new Movements(cellOrigin, cellDestination, customGame.Board);
-            var result = moveOfHuman.GetCoordinates();
+            Movements move = new Movements(cellOrigin, cellDestination, customGame.Board);
+            var result = move.GetCoordinates();
 
             // Tests
-            var listPossibilities = moveOfHuman.CheckMove(result["origin"]);
-            Assert.IsTrue(listPossibilities[7].X == 1 && listPossibilities[7].Y == 6);
-            Assert.IsTrue(listPossibilities[8].X == 1 && listPossibilities[8].Y == 5);
+            move.CheckMove(result["origin"]);
+            Assert.IsTrue(move.Possibilities[7].X == 1 && move.Possibilities[7].Y == 6);
+            Assert.IsTrue(move.Possibilities[8].X == 1 && move.Possibilities[8].Y == 5);
         }
 
 
