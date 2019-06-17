@@ -25,9 +25,9 @@ namespace Game.Penguins.AI
             Board = board;
             this.random = random;
             CurrentPlayer = currentPlayer;
-            FishCoefficient = 1;
+            FishCoefficient = 0;
             BlockOthersCoefficient = 1;
-            BlockSelfCoefficient = 0;
+            BlockSelfCoefficient = 2;
         }
     }
 }
