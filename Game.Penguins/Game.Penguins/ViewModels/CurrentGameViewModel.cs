@@ -303,11 +303,11 @@ namespace Game.Penguins.ViewModels
 
             // Autoplay with AI
             // Auto-place penguins
-            //if (IsPlacePenguinAIAction)
-            //    PlayAICommand.Execute(null);
-            //// Auto-move penguins
-            //if (IsMovePenguinAIAction)
-            //    PlayAICommand.Execute(null);
+            if (IsPlacePenguinAIAction)
+                PlayAICommand.Execute(null);
+            // Auto-move penguins
+            if (IsMovePenguinAIAction)
+                PlayAICommand.Execute(null);
         }
 
         public IApplicationContentView GetPreviousView()

@@ -290,7 +290,6 @@ namespace Game.Penguins.Helper.CustomGame
             }
         }
 
-        // TODO: Fix OutOfBound origin variable when playing with AIEasy (see Glo for details)
         /// <summary>
         /// Move penguin for AI
         /// </summary>
@@ -301,6 +300,8 @@ namespace Game.Penguins.Helper.CustomGame
             {
                 AIEasy aiEasy = new AIEasy(Board, random, CurrentPlayer);
 
+                // TODO: Uncomment if last change in calls of CheckBoard() (now in FindOrigin() and FindDestination() are wrong
+                // Update CellScores values
                 aiEasy.CheckBoard();
 
                 // Get positions of penguins of the current player
@@ -311,40 +312,15 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Get the destination of the penguin
                 Coordinates test = new Coordinates(-1, -1);
-                if (origin.X != test.X)
-                {
-                    Coordinates destination = aiEasy.FindDestination(origin);
 
-                    // Log penguin movement
-                    ILog log = LogManager.GetLogger(GetType().ToString());
-                    log.Info($"{CurrentPlayer.Name} moved a penguin to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
-
-                    // Apply changes
-                    ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
-
-                    AffectedCurrentPlayer(ChangeType.Move);
-                }
-                else
-                {
-                    EndGame();
-                }
-
-                //ChangeStateMove(origin.X, origin.Y, Board.Board[bestCell.Cell.X, bestCell.Cell.Y]);
-
-                // END OF MY CODE
-
-                // Call an AIEasy
-                //AIEasy aiEasy = new AIEasy(Board, random, CurrentPlayer);
                 /*
-                // Get positions of penguins of the current player
-                PossibilitiesOfOrigin();
+                if (origin == null)
+                {
+                    origin = PossibilitiesOrigin[0];
+                }
+                */
 
-                // Get the penguin to move
-                Coordinates origin = aiEasy.FindOrigin(PossibilitiesOrigin);
-
-                // Get the destination of the penguin
-                //Coordinates destination = aiEasy.FindDestination(origin);
-                Coordinates test = new Coordinates(-1, -1);
+                // If coordinates are on the Board
                 if (origin.X != test.X)
                 {
                     Coordinates destination = aiEasy.FindDestination(origin);
@@ -360,8 +336,6 @@ namespace Game.Penguins.Helper.CustomGame
 
                     EndGame();
                     AffectedCurrentPlayer(ChangeType.Move);
-
-                    //RemovePenguin();
                 }
                 else
                 {
@@ -374,15 +348,53 @@ namespace Game.Penguins.Helper.CustomGame
             // If AI is medium
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
             {
-                // Call an AIMedium
-                AIMedium aiMedium = new AIMedium(Board, random, CurrentPlayer);
+                AIEasy aiMedium = new AIEasy(Board, random, CurrentPlayer);
+
+                // TODO: Uncomment if last change in calls of CheckBoard() (now in FindOrigin() and FindDestination() are wrong
+                // Update CellScores values
+                aiMedium.CheckBoard();
 
                 // Get positions of penguins of the current player
                 PossibilitiesOfOrigin();
-                var coordinates = aiMedium.FindOriginDestination();
 
                 // Get the penguin to move
-                Coordinates origin = coordinates["origin"];
+                Coordinates origin = aiMedium.FindOrigin(PossibilitiesOrigin);
+
+                // Get the destination of the penguin
+                Coordinates test = new Coordinates(-1, -1);
+
+                /*
+                if (origin == null)
+                {
+                    origin = PossibilitiesOrigin[0];
+                }
+                */
+
+                // If coordinates are on the Board
+                if (origin.X != test.X)
+                {
+                    Coordinates destination = aiMedium.FindDestination(origin);
+
+                    // Log penguin movement
+                    ILog log = LogManager.GetLogger(GetType().ToString());
+                    log.Info($"{CurrentPlayer.Name} moved a penguin to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+
+                    // Apply changes
+                    ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+
+                    RemovePenguin();
+
+                    EndGame();
+                    AffectedCurrentPlayer(ChangeType.Move);
+                }
+                else
+                {
+                    RemovePenguin();
+                    EndGame();
+                    AffectedCurrentPlayer(ChangeType.Move);
+                }
+
+                /*
                 try
                 {
                     Coordinates destination = coordinates["destination"];
@@ -413,23 +425,38 @@ namespace Game.Penguins.Helper.CustomGame
                     EndGame();
                     AffectedCurrentPlayer(ChangeType.Move);
                 }
-                
+                */
+
             }
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
             {
-                // Call an AIHard
-                AIHard aiHard = new AIHard(Board, random, CurrentPlayer);
+                AIEasy aiHard = new AIEasy(Board, random, CurrentPlayer);
+
+                // TODO: Uncomment if last change in calls of CheckBoard() (now in FindOrigin() and FindDestination() are wrong
+                // Update CellScores values
+                aiHard.CheckBoard();
 
                 // Get positions of penguins of the current player
                 PossibilitiesOfOrigin();
-                var coordinates = aiHard.FindOriginDestination();
 
                 // Get the penguin to move
-                Coordinates origin = coordinates["origin"];
-                try
+                Coordinates origin = aiHard.FindOrigin(PossibilitiesOrigin);
+
+                // Get the destination of the penguin
+                Coordinates test = new Coordinates(-1, -1);
+
+                /*
+                if (origin == null)
                 {
-                    Coordinates destination = coordinates["destination"];
+                    origin = PossibilitiesOrigin[0];
+                }
+                */
+
+                // If coordinates are on the Board
+                if (origin.X != test.X)
+                {
+                    Coordinates destination = aiHard.FindDestination(origin);
 
                     // Log penguin movement
                     ILog log = LogManager.GetLogger(GetType().ToString());
@@ -441,17 +468,10 @@ namespace Game.Penguins.Helper.CustomGame
                     RemovePenguin();
 
                     EndGame();
-
                     AffectedCurrentPlayer(ChangeType.Move);
-                
-                    //RemovePenguin();
                 }
-                catch (Exception e)
+                else
                 {
-                    // Log penguin movement
-                    ILog log = LogManager.GetLogger(GetType().ToString());
-                    log.Warn($"Your penguins can't move : '{e}'");
-
                     RemovePenguin();
                     EndGame();
                     AffectedCurrentPlayer(ChangeType.Move);
