@@ -88,7 +88,7 @@
   <ItemGroup>
     <Compile Include="Easy\UnitTestMovePenguin.cs" />
     <Compile Include="Easy\UnitTestPlacePenguin.cs" />
-    <Compile Include="GlobalFunctions.cs" />
+    <Compile Include="GlobalFunction.cs" />
     <Compile Include="Hard\UnitTestMovePenguin.cs" />
     <Compile Include="Hard\UnitTestPlacePenguin.cs" />
     <Compile Include="Medium\UnitTestMovePenguin.cs" />
