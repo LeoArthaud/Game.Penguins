@@ -127,7 +127,7 @@ namespace Game.Penguins.AI
         /// <returns>Position of the penguin or [-1;-1] if the AI can't move his penguins</returns>
         public Coordinates FindOrigin(List<Coordinates> possibilitiesOrigin)
         {
-            //CheckBoard(); // TODO: Delete if wrong
+            CheckBoard(); // TODO: Delete if wrong
             // List of cell-scores of 1 possible destination per penguin
             List<CellScore> possiblePenguins = new List<CellScore>();
 
@@ -141,18 +141,14 @@ namespace Game.Penguins.AI
             possiblePenguins = possiblePenguins.OrderByDescending(cellScore => cellScore.Value).ToList();
             
             // Return origin of penguin that can reach the best destination cell-score
-            if (possiblePenguins.Count != 0)
+            if (possiblePenguins[0].Origin != null)
             {
                 return possiblePenguins[0].Origin;
             }
-            /*
             else
             {
-                return possibilitiesOrigin[0];
+                return new Coordinates(-1, -1);
             }
-            */
-
-            return new Coordinates(-1, -1);
         }
 
         /// <summary>
@@ -162,7 +158,7 @@ namespace Game.Penguins.AI
         /// <returns>Coordinates of the best destination</returns>
         public Coordinates FindDestination(Coordinates origin)
         {
-            //CheckBoard(); // TODO: Delete if wrong
+            CheckBoard(); // TODO: Delete if wrong
             // Singleton to access Movements functions (CheckMove() in this case)
             Movements move = new Movements(null, null, Board);
 
@@ -479,7 +475,7 @@ namespace Game.Penguins.AI
                 }
             }
 
-            if (freeCellScores.Count == 0) // If == 1 too?
+            if (freeCellScores.Count == 0 || freeCellScores.Count == 1) // If == 1 too?
             {
                 // TODO: Make sure this removal, and the added lines below, are correct
                 // Removed this line because it removes value to the only available cell near destination, not from destination

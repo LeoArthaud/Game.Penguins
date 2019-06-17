@@ -348,7 +348,7 @@ namespace Game.Penguins.Helper.CustomGame
             // If AI is medium
             else if (CurrentPlayer.PlayerType == PlayerType.AIMedium)
             {
-                AIEasy aiMedium = new AIEasy(Board, random, CurrentPlayer);
+                AIMedium aiMedium = new AIMedium(Board, random, CurrentPlayer);
 
                 // TODO: Uncomment if last change in calls of CheckBoard() (now in FindOrigin() and FindDestination() are wrong
                 // Update CellScores values
@@ -431,7 +431,7 @@ namespace Game.Penguins.Helper.CustomGame
             // If AI is hard
             else if (CurrentPlayer.PlayerType == PlayerType.AIHard)
             {
-                AIEasy aiHard = new AIEasy(Board, random, CurrentPlayer);
+                AIHard aiHard = new AIHard(Board, random, CurrentPlayer);
 
                 // TODO: Uncomment if last change in calls of CheckBoard() (now in FindOrigin() and FindDestination() are wrong
                 // Update CellScores values

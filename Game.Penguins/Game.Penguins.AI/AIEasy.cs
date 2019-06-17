@@ -19,7 +19,7 @@ namespace Game.Penguins.AI
             Board = board;
             this.random = random;
             CurrentPlayer = currentPlayer;
-            FishCoefficient = 1;
+            FishCoefficient = 0;
             BlockOthersCoefficient = 0;
             BlockSelfCoefficient = 0;
         }
