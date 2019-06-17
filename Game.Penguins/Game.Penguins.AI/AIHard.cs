@@ -46,7 +46,7 @@ namespace Game.Penguins.AI
         /// Get coordinates where to place the penguin
         /// </summary>
         /// <returns>coordinates</returns>
-        public new Coordinates PlacePenguin()
+        public Coordinates PlacePenguin()
         {
             ThreePoints = GetThreePoints();
             SoloFish = GetFishNear(ThreePoints);
