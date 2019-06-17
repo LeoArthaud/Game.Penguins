@@ -291,7 +291,6 @@ namespace Game.Penguins.Helper.CustomGame
             }
         }
 
-        // TODO: Fix OutOfBound origin variable when playing with AIEasy (see Glo for details)
         /// <summary>
         /// Move penguin for AI
         /// </summary>
@@ -325,7 +324,7 @@ namespace Game.Penguins.Helper.CustomGame
                     // Remove Penguins if they can't move
                     RemovePenguin();
 
-                    // Close the game if the board contain 0 penguis
+                    // Close the game if the board contain 0 penguin
                     EndGame();
 
                     AffectedCurrentPlayer(ChangeType.Move);
@@ -626,7 +625,7 @@ namespace Game.Penguins.Helper.CustomGame
         {
             if (IdPlayer + 1 < Players.Count)
             {
-                IdPlayer = IdPlayer + 1;
+                IdPlayer += 1;
                 CurrentPlayer = Players[IdPlayer];
 
                 // Log player change
