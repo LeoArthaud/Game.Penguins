@@ -12,7 +12,7 @@ namespace Game.Penguins.AI
     /// <summary>
     /// Easy difficulty AI. Subclass of AIGlobal.
     /// </summary>
-    public class AIEasy : AIGlobal
+    public class AIEasy : BetterAIGlobal
     {
         /// <summary>
         /// Constructor

@@ -299,9 +299,43 @@ namespace Game.Penguins.Helper.CustomGame
             // If AI is easy
             if (CurrentPlayer.PlayerType == PlayerType.AIEasy)
             {
-                // Call an AIEasy
                 AIEasy aiEasy = new AIEasy(Board, random, CurrentPlayer);
 
+                aiEasy.CheckBoard();
+
+                // Get positions of penguins of the current player
+                PossibilitiesOfOrigin();
+
+                // Get the penguin to move
+                Coordinates origin = aiEasy.FindOrigin(PossibilitiesOrigin);
+
+                // Get the destination of the penguin
+                Coordinates test = new Coordinates(-1, -1);
+                if (origin.X != test.X)
+                {
+                    Coordinates destination = aiEasy.FindDestination(origin);
+
+                    // Log penguin movement
+                    ILog log = LogManager.GetLogger(GetType().ToString());
+                    log.Info($"{CurrentPlayer.Name} moved a penguin to cell ({destination.X}, {destination.Y}) and gained {Board.Board[origin.X, origin.Y].FishCount}.");
+
+                    // Apply changes
+                    ChangeStateMove(Board.Board[origin.X, origin.Y], Board.Board[destination.X, destination.Y]);
+
+                    AffectedCurrentPlayer(ChangeType.Move);
+                }
+                else
+                {
+                    EndGame();
+                }
+
+                //ChangeStateMove(origin.X, origin.Y, Board.Board[bestCell.Cell.X, bestCell.Cell.Y]);
+
+                // END OF MY CODE
+
+                // Call an AIEasy
+                //AIEasy aiEasy = new AIEasy(Board, random, CurrentPlayer);
+                /*
                 // Get positions of penguins of the current player
                 PossibilitiesOfOrigin();
 
