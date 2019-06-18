@@ -16,10 +16,10 @@ namespace Game.Penguins.Game.UnitTests.Move
         #region Public Functions
 
         /// <summary>
-        /// Test in the function CheckCaseWater(), if cell after is Water returns "true" 
+        /// Test in the function CheckFreeCell(), if cell after is Water returns "true" 
         /// </summary>
         [TestMethod]
-        public void Test_CheckCaseWater_CellTypeWater()
+        public void Test_CheckFreeCell_CellTypeWater()
         {
             //Init Game
             CustomGame customGame = InitGame();
@@ -50,10 +50,10 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// Test in the function CheckCaseWater(), if cell after exceed board returns "true"
+        /// Test in the function CheckFreeCell(), if cell after exceed board returns "true"
         /// </summary>
         [TestMethod]
-        public void Test_CheckCaseWater_CellTypeWater_ExceedBoard()
+        public void Test_CheckFreeCell_CellTypeWater_ExceedBoard()
         {
             //Init Game
             CustomGame customGame = InitGame();
@@ -73,10 +73,10 @@ namespace Game.Penguins.Game.UnitTests.Move
 
 
         /// <summary>
-        /// Test in the function CheckCaseWater(), if cell after is Penguin returns "true" 
+        /// Test in the function CheckFreeCell(), if cell after is Penguin returns "true" 
         /// </summary>
         [TestMethod]
-        public void Test_CheckCaseWater_CellTypePenguin()
+        public void Test_CheckFreeCell_CellTypePenguin()
         {
             //Init Game
             CustomGame customGame = InitGame();
@@ -108,10 +108,10 @@ namespace Game.Penguins.Game.UnitTests.Move
         }
 
         /// <summary>
-        /// Test in the function CheckCaseWater(), if cell after is Fish returns "false" 
+        /// Test in the function CheckFreeCell(), if cell after is Fish returns "false" 
         /// </summary>
         [TestMethod]
-        public void Test_CheckCaseWater_CellTypeFish()
+        public void Test_CheckFreeCell_CellTypeFish()
         {
             //Init Game
             CustomGame customGame = InitGame();
