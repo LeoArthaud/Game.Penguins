@@ -31,21 +31,7 @@ namespace Game.Penguins.Game.UnitTests
             // Test
             Assert.IsTrue(customGame.NextAction == NextActionType.Nothing);
         }
-
-        /// <summary>
-        /// Test EndGame if there is no winner
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void Test_EndGame_WinnerNull()
-        {
-            // Init game
-            CustomGame customGame = new CustomGame(new AppRandom());
-
-            // End Game
-            customGame.EndGame();
-        }
-
+        
         /// <summary>
         /// Test EndGame if there is always penguin on the board
         /// </summary>
@@ -85,6 +71,26 @@ namespace Game.Penguins.Game.UnitTests
             Assert.IsTrue(customGame.NextAction == NextActionType.MovePenguin);
         }
 
+        /// <summary>
+        /// Test if there is an equality between 2 players
+        /// </summary>
+        [TestMethod]
+        public void Test_EndGame_Equality()
+        {
+            // Init game
+            CustomGame customGame = InitGame(null);
+
+            // Set point
+            Player player = (Player)customGame.Players[1];
+            player.Points = 10;
+
+            // End Game
+            customGame.EndGame();
+
+            // Test
+            Assert.IsTrue(customGame.NextAction == NextActionType.Nothing);
+
+        }
         #region Private Functions
 
         /// <summary>

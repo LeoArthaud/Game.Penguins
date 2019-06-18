@@ -465,7 +465,6 @@ namespace Game.Penguins.Helper.CustomGame
 
         }
 
-        // TODO: Implement a draw when two or more player have the same score.
         /// <summary>
         /// End of game function. Called when a player can no longer move penguins.
         /// </summary>
@@ -490,10 +489,8 @@ namespace Game.Penguins.Helper.CustomGame
 
                 // Determining the winner and high score
                 var highScore = 0;
-                Player winner = null;
 
-                List<IPlayer> PlayerName = new List<IPlayer>();
-                List<IPlayer> DrawPlayer = new List<IPlayer>();
+                List<IPlayer> drawPlayer = new List<IPlayer>();
 
 
                 foreach (var player in Players)
@@ -501,32 +498,36 @@ namespace Game.Penguins.Helper.CustomGame
                     if (player.Points > highScore)
                     {
                         highScore = player.Points;
-                        PlayerName.Add(player);
                     }
                 }
 
-                foreach (var player in PlayerName)
+                foreach (var player in Players)
                 {
                     if (player.Points == highScore)
                     {
-                        DrawPlayer.Add(player);
+                        drawPlayer.Add(player);
                     }
                 }
 
                 // Log end of game
                 ILog log = LogManager.GetLogger(GetType().ToString());
                 log.Info("There are no penguin left in play.");
+                log.Info("---");
 
-                try
+                if (drawPlayer.Count >= 2)
                 {
-                    log.Info($"{winner.Name} wins the game with {highScore} points!");
-
+                    log.Info("Equality between : ");
+                    foreach (var player in drawPlayer)
+                    {
+                        log.Info("- "+player.Name);
+                    }
+                    log.Info($"With {highScore} points !");
                 }
-                catch (NullReferenceException e)
+                else
                 {
-                    log.Warn($"winner variable is null : '{e}'");
-                    throw;
+                    log.Info($"{drawPlayer[0].Name} wins the game with {highScore} points!");
                 }
+                log.Info("---");
 
                 log.Info("***** GAME END *****");
             }

@@ -1,9 +1,11 @@
-﻿using Game.Penguins.Core.Classes.App;
+﻿using System.Diagnostics.CodeAnalysis;
+using Game.Penguins.Core.Classes.App;
 using Game.Penguins.Core.Interfaces.Game.Players;
 using Game.Penguins.Helper.CustomGame;
 
 namespace Game.Penguins.Game.UnitTests.Move
 {
+    [ExcludeFromCodeCoverage]
     public abstract class GlobalFunction
     {
         /// <summary>

@@ -56,6 +56,10 @@ namespace Game.Penguins.AI.UnitTests
             // Init Game
             CustomGame customGame = InitGame(null);
 
+            // Set Player Point
+            Player playerEasy = (Player)customGame.Players[0];
+            playerEasy.Points = 10;
+
             // Position of cell with penguin 0;0
             int x = 0;
             int y = 0;
@@ -136,6 +140,9 @@ namespace Game.Penguins.AI.UnitTests
             
             // Set Current player
             customGame.CurrentPlayer = customGame.Players[1];
+            // Set Player Point
+            Player playerMedium = (Player)customGame.Players[1];
+            playerMedium.Points = 10;
 
             // Position of cell with penguin 0;0
             int x = 0;
@@ -217,6 +224,9 @@ namespace Game.Penguins.AI.UnitTests
 
             // Set Current player
             customGame.CurrentPlayer = customGame.Players[2];
+            // Set Player Point
+            Player playerHard = (Player)customGame.Players[2];
+            playerHard.Points = 10;
 
             // Position of cell with penguin 0;0
             int x = 0;
