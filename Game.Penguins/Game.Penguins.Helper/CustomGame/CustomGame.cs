@@ -492,12 +492,24 @@ namespace Game.Penguins.Helper.CustomGame
                 var highScore = 0;
                 Player winner = null;
 
+                List<IPlayer> PlayerName = new List<IPlayer>();
+                List<IPlayer> DrawPlayer = new List<IPlayer>();
+
+
                 foreach (var player in Players)
                 {
                     if (player.Points > highScore)
                     {
                         highScore = player.Points;
-                        winner = (Player)player;
+                        PlayerName.Add(player);
+                    }
+                }
+
+                foreach (var player in PlayerName)
+                {
+                    if (player.Points == highScore)
+                    {
+                        DrawPlayer.Add(player);
                     }
                 }
 
