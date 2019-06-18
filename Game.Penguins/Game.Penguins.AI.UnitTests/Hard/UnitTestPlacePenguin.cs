@@ -17,6 +17,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
         /// <summary>
         /// Test if the function return a table of 10 cells
         /// </summary>
+        /*
         [TestMethod]
         public void Test_PlacePenguin_getThreePoints()
         {
@@ -154,7 +155,7 @@ namespace Game.Penguins.AI.UnitTests.Hard
             // Test
             Assert.IsTrue(coordinates.X == 2 && coordinates.Y == 2);
 
-        }
+        }*/
 
         #region Private Functions
         

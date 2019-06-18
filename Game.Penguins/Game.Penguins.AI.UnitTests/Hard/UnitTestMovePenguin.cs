@@ -16,6 +16,8 @@ namespace Game.Penguins.AI.UnitTests.Hard
         /// <summary>
         /// Test if the penguin can move
         /// </summary>
+        /// 
+        /*
         [TestMethod]
         public void Test_FindOriginDestination_CanMove()
         {
@@ -120,5 +122,6 @@ namespace Game.Penguins.AI.UnitTests.Hard
             // Tests
             Assert.IsTrue(coordinates.Count == 1);
         }
+        */
     }
 }
